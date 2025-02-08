@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>formulaire offre</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<header>
+    <h1> OFFRE </h1>
+
+</header>
+
+<body>
+    <main>
+        <article class="formulaire">
+            <h2>Envoyez votre candidature des maintenant!</h2>
+            <form action="" method="post">
+                <section class="section">
+                <section class="identité">
+                <label for="civilité"> civilité </label>
+                <br>
+                <select name="civilité" id="civilité">
+                    <option value="">choisissez</option>
+                    <option value="femme">femme</option>
+                    <option value="homme">homme</option>
+                    <option value="autre">autre</option>
+                </select>
+                <br>
+                <label for="nom"> Nom</label>
+                <br>
+                <input type="text" name="nom" id="nom">
+                <br>
+
+                <label for="prenom"> Prenom</label>
+                <br>
+                <input type="text" name="prenom" id="prenom">
+                <br>
+
+                <label for="e-mail">adresse e-mail</label>
+                <br>
+                <input type="email" name="e-mail" id="e-mail">
+                <br><br>
+                </section>
+                <section class="option">
+                <label for="Permis">A propos de vous</label>
+                <br><br>
+                <input type="checkbox" name="bonus" id="Permis">
+                Permis
+                <label for="vehicule"></label>
+                <input type="checkbox" name="projet" id="vehicule">
+                Vehicule
+                <label for="certification"></label>
+                <input type="checkbox" name="projet" id="certification">
+                Certification
+                <br><br>
+
+                <div>Etes vous majeur?</div>
+                    <input type="radio" name="majeur" checked value="majeur"> oui
+                    <input type="radio" name="majeur" value="mineur"> non
+                <br><br>
+                </section>
+                </section>
+                <label for="message">Votre message au recruteur:</label>
+                <br>
+                <textarea name="message" id="message" placeholder="Votre message" ></textarea>
+                <br><br>
+
+                <label for="CV">inserer votre cv</label>
+                <br>
+                <input type="file" name="CV" id="CV">
+                <br><br>
+
+                <input type="submit" value="Envoyer">
+                <input type="reset" value="Annuler">
+            </form>
+        </article>
+    </main>
+
+</body>
+</html>

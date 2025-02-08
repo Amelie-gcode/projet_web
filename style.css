@@ -1,0 +1,37 @@
+h1{
+    text-align: center;
+    font-size: 50px;
+    color: #77219a;
+    font-family: anton, sans-serif;
+    margin: 0px;
+
+}
+header{
+    background: #0b0a0a;
+    margin: 0;
+}
+body{
+    background : #e1cfea;
+    margin:0;
+    padding:0;
+}
+main{
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.formulaire {
+    display: inline-block;
+    border: black solid 1px;
+    border-radius: 10px;
+    margin: 50px ;
+    padding: 10px;
+
+}
+.section{
+    display: flex;
+    justify-content: space-between;
+}
+.identité{
+}
