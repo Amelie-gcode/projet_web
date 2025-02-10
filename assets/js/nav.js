@@ -18,3 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const scrollButton = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 105) {
+            scrollButton.style.display = 'block';
+        } else {
+            scrollButton.style.display = 'none';
+        }
+    });
+
+    scrollButton.addEventListener('click', function () {
+        window.scrollTo({
+            top: 105,
+            behavior: 'smooth'
+        });
+        // window.scrollTo(0, 0);
+    })
+});
