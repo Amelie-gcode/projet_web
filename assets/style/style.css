@@ -363,11 +363,14 @@ time {
     top: 100px;
     width: 55%;
     /* Assure que l'élément ne dépasse pas la hauteur de la vue */
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 170px);
     display: flex;
     flex-direction: column;
     background: #fff1f1;
     padding: 25px;
+    border-radius: 30px;
+    box-shadow: 1px 6px 5px rgba(0,0,0,0.1);
+    border: 2.5px solid #801515;
 }
 
 .principal-offer .offer-content {
@@ -375,9 +378,7 @@ time {
     padding-right: 10px;
 }
 
-.principal-offer h2 {
-    margin: 0;
-}
+
 
 .principal-offer .principal-infos-offers {
     display: flex;
@@ -408,14 +409,12 @@ time {
     font-weight: bold;
     font-size: 25px;
     padding: 10px 13px;
-    margin: 20px 0;
-    margin-right: 40px;
+    margin: 0;
+    margin-right: 10px;
+    margin-top: 10px;
     float: right;
     transition: 0.3s;
-
     cursor: pointer;
-
-
 }
 
 .apply-button:hover {
@@ -424,12 +423,14 @@ time {
 }
 
 .favorite-button {
+    position: absolute;
+    top: 24px;
+    right: 30px;
     background: none;
     border: none;
     color: #ef0000;
     font-size: 30px;
     cursor: pointer;
-    margin: 15px 5px;
     transition: 0.25s;
 }
 
@@ -466,9 +467,79 @@ time {
 }
 
 .principal-offer .offer-content {
-    margin: 25px -25px 25px 0px;
+    margin: 0px -25px 25px 0px;
+}
 
+.principal-offer h2 {
+    margin: 0;
+    margin-right: 70px;
+    font-weight: bold;
+}
 
+.principal-offer h3 {
+    margin-top: 55px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    position: relative;
+    font-weight: bold;
+
+}
+
+.principal-offer h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 90%;
+    height: 1.8px;
+    background-color: #801515;
+}
+
+.principal-offer h4 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+footer address h3 {
+    margin-top: 5px !important;
+    margin-bottom: 30px !important;
+    font-weight: bold;
+
+}
+
+.principal-offer p {
+    margin-right: 30px;
+    text-align: justify;
+
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.contact-info p {
+    margin: 0;
+}
+
+.principal-offer footer .date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 10px;
+    font-size: 14px;
 }
 
 
