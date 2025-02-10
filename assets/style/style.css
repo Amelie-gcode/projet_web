@@ -335,12 +335,8 @@ time {
 /*---------------------------------------- OFFRE PRINCIPAL ---------------------------------------------*/
 
 
+
 .principal-offer {
-    position: sticky;
-    top: 100px;
-    width: 55%;
-    /* Assure que l'élément ne dépasse pas la hauteur de la vue */
-    max-height: calc(100vh - 170px);
     display: flex;
     flex-direction: column;
     background: #fff1f1;
@@ -349,6 +345,8 @@ time {
     box-shadow: 1px 6px 5px rgba(0,0,0,0.1);
     border: 2.5px solid #801515;
 }
+
+
 
 .principal-offer .offer-content {
     overflow-y: auto; /* Ajoute la barre de défilement verticale si nécessaire */
@@ -568,6 +566,38 @@ footer address h3 {
 }
 
 
+/*---------------------------------------- FORMULAIRE ---------------------------------------------*/
+
+
+.formulaire {
+    display: inline-block;
+    background-color: #fff1f1;
+    border: #6c0b0b solid 1px;
+    border-radius: 10px;
+    margin-right: 25% ;
+    margin-left: 25% ;
+    padding: 10px;
+
+}
+.section{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*---------------------------------------- FAVORIS PAGE ---------------------------------------------*/
+
+
+.titre_fav{
+    display: flex;
+    color: black;
+    font-weight: bold;
+    justify-content: center;
+    font-size: 50px;
+    font-family: Anton, sans-serif;
+}
+
+
 /*---------------------------------------- PAGE FOOTER ---------------------------------------------*/
 
 body {
@@ -604,4 +634,6 @@ body {
 .media li i{
     font-size: 23px;
 }
+
+
 

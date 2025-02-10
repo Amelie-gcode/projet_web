@@ -1,11 +1,13 @@
-/*---------------------------------------- MAIN ---------------------------------------------*/
+
+/*---------------------------------------- PAGE PRINCIPAL ---------------------------------------------*/
+/*--------------------------------------------- MAIN --------------------------------------------------*/
 
 
 main {
     min-height: 100vh;
 }
 
-.offers-container {
+.offers-container-principal {
     display: flex;
     justify-content: space-between;
     margin: 80px 15%;
@@ -21,4 +23,31 @@ main {
     flex-direction: column;
     gap: 40px;
     width: 40%;
+}
+
+
+/*---------------------------------------- PRINCIPALE OFFRE ---------------------------------------------*/
+
+
+.principal-offer-offer-page {
+    position: sticky;
+    top: 100px;
+    width: 55%;
+    /* Assure que l'élément ne dépasse pas la hauteur de la vue */
+    max-height: calc(100vh - 170px);
+}
+
+.principal-offer-apply-page {
+
+}
+
+
+/*----------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------ PAGE POSTULER -------------------------------------------*/
+
+
+.postuler-main{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
