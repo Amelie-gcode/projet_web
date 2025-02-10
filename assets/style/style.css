@@ -217,30 +217,8 @@ header .nav-user {
 }
 
 
-/*---------------------------------------- MAIN ---------------------------------------------*/
-
-
-main {
-    min-height: 100vh;
-}
-
-.offers-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 80px 15%;
-    gap: 75px;
-}
-
-
 /*---------------------------------------- PETITE OFFRE ---------------------------------------------*/
 
-
-.rapid-offers-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 40%;
-}
 
 .offer {
     display: flex;
