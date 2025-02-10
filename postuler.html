@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>formulaire offre</title>
+  <link rel="stylesheet" href="assets\style\postuler.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<header>
+  <nav class="navbar">
+    <img src="assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
+    <ul class="navbar-nav">
+      <li><a href="" class="nav-items">Entreprise</a></li>
+      <li><a href="index.html" class="nav-items">Offres</a></li>
+      <li><a href="" class="nav-items">Contact</a></li>
+    </ul>
+    <aside class="nav-user">
+      <button class="user-icon" aria-expanded="false" aria-controls="user-menu">
+        <i class="fa-solid fa-user"></i>
+      </button>
+      <ul id="user-menu" class="dropdown-menu">
+        <li><a href="" class="user-items">Profil</a></li>
+        <li><a href="favoris.html" class="user-items">Mes offres</a></li>
+        <li><a href="" class="user-items">Mes candidatures</a></li>
+        <li><a href="" class="user-items">Déconnexion</a></li>
+      </ul>
+    </aside>
+  </nav>
+</header>
+
+<body>
+<main>
+  <article class="principal-offer">
+    <header>
+      <h2>Stage - Administrateur Système et Réseau H/F</h2>
+      <ul class="principal-infos-offers">
+        <li><a href="">CESI - Ecole d'ingénieur</a></li>
+        <div class="company-grade">
+          <li><i class="fas fa-star favoris-icon"></i></li>
+          <li>3.5</li>
+        </div>
+        <li>Strasbourg</li>
+      </ul>
+      <button type="button" class="favorite-button" aria-label="Ajouter aux favoris">
+        <i class="far fa-heart heart-icon"></i>
+      </button>
+      <h3>Déscription du poste</h3>
+    </header>
+    <section class="offer-content">
+      <section class="offer-description">
+        <h4>En quoi cela consiste ?</h4>
+
+        <p>Ergo ego senator inimicus, si ita vultis, homini, amicus esse, sicut semper fui, rei publicae debeo. Quid? si ipsas inimicitias, depono rei publicae causa, quis me tandem iure reprehendet, praesertim cum ego omnium meorum consiliorum atque factorum exempla semper ex summorum hominum consiliis atque factis mihi censuerim petenda.
+
+          Quod si rectum statuerimus vel concedere amicis, quidquid velint, vel impetrare ab iis, quidquid velimus, perfecta quidem sapientia si simus, nihil habeat res vitii; sed loquimur de iis amicis qui ante oculos sunt, quos vidimus aut de quibus memoriam accepimus, quos novit vita communis. Ex hoc numero nobis exempla sumenda sunt, et eorum quidem maxime qui ad sapientiam proxime accedunt.
+
+          Alios autem dicere aiunt multo etiam inhumanius (quem locum breviter paulo ante perstrinxi) praesidii adiumentique causa, non benevolentiae neque caritatis, amicitias esse expetendas; itaque, ut quisque minimum firmitatis haberet minimumque virium, ita amicitias appetere maxime; ex eo fieri ut mulierculae magis amicitiarum praesidia quaerant quam viri et inopes quam opulenti et calamitosi quam ii qui putentur beati.
+
+          Eodem tempore Serenianus ex duce, cuius ignavia populatam in Phoenice Celsen ante rettulimus, pulsatae maiestatis imperii reus iure postulatus ac lege, incertum qua potuit suffragatione absolvi, aperte convictus familiarem suum cum pileo, quo caput operiebat, incantato vetitis artibus ad templum misisse fatidicum, quaeritatum expresse an ei firmum portenderetur imperium, ut cupiebat, et cunctum.</p>
+      </section>
+      <section class="offer-profil">
+        <h4>Profil rechercher</h4>
+        <p>Per hoc minui studium suum existimans Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocque deformi genere mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum.</p>
+      </section>
+    </section>
+    <footer>
+      <address>
+        <h3>Contact</h3>
+        <aside class="contact-container">
+          <div class="contact-info">
+            <p>Email :</p>
+            <p class="offer-email">example@test.com</p>
+          </div>
+          <div class="contact-info">
+            <p>Tel. :</p>
+            <p class="offer-phone">06 76 92 34 40</p>
+          </div>
+        </aside>
+        <div class="date">
+          <p>publié le :</p>
+          <time>09/02/2025</time>
+        </div>
+      </address>
+    </footer>
+  </article>
+  </section>
+
+  <article class="formulaire">
+    <h2>Envoyez votre candidature des maintenant!</h2>
+    <form action="" method="post">
+      <section class="section">
+        <section class="identité">
+          <label for="civilité"> civilité </label>
+          <br>
+          <select name="civilité" id="civilité">
+            <option value="">choisissez</option>
+            <option value="femme">femme</option>
+            <option value="homme">homme</option>
+            <option value="autre">autre</option>
+          </select>
+          <br>
+          <label for="nom"> Nom</label>
+          <br>
+          <input type="text" name="nom" id="nom">
+          <br>
+
+          <label for="prenom"> Prenom</label>
+          <br>
+          <input type="text" name="prenom" id="prenom">
+          <br>
+
+          <label for="e-mail">adresse e-mail</label>
+          <br>
+          <input type="email" name="e-mail" id="e-mail">
+          <br><br>
+        </section>
+        <section class="option">
+          <label for="Permis">A propos de vous</label>
+          <br><br>
+          <input type="checkbox" name="bonus" id="Permis">
+          Permis
+          <label for="vehicule"></label>
+          <input type="checkbox" name="projet" id="vehicule">
+          Vehicule
+          <label for="certification"></label>
+          <input type="checkbox" name="projet" id="certification">
+          Certification
+          <br><br>
+
+          <div>Etes vous majeur?</div>
+          <input type="radio" name="majeur" checked value="majeur"> oui
+          <input type="radio" name="majeur" value="mineur"> non
+          <br><br>
+        </section>
+      </section>
+      <label for="message">Votre message au recruteur:</label>
+      <br>
+      <textarea name="message" id="message" placeholder="Votre message" ></textarea>
+      <br><br>
+
+      <label for="CV">inserer votre cv</label>
+      <br>
+      <input type="file" name="CV" id="CV">
+      <br><br>
+
+      <input type="submit" value="Envoyer">
+      <input type="reset" value="Annuler">
+    </form>
+  </article>
+</main><footer class="page-footer">
+  <ul class="media">
+    <li>
+      <i class="fa-brands fa-instagram"></i>
+      <p>Louison_Le_Dev88</p>
+    </li>
+    <li>
+      <i class="fa-brands fa-facebook"></i>
+      <p>Louison_Le_Dev88</p>
+    </li>
+    <li>
+      <i class="fa-brands fa-github"></i>
+      <p>Louison_Le_Dev88</p>
+    </li>
+    <li>
+      <i class="fa-brands fa-linkedin"></i>
+      <p>Louison_Le_Dev88</p>
+    </li>
+  </ul>
+  <p><i>&copy;Amely 2025 - Tous droits réservés</i></p>
+</footer>
+<button id="scrollToTop" style="display: none;">↑</button>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/button.js"></script>
+
+</body>
+</html>
