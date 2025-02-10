@@ -375,7 +375,26 @@ time {
 
 .principal-offer .offer-content {
     overflow-y: auto; /* Ajoute la barre de défilement verticale si nécessaire */
+
+
     padding-right: 10px;
+}
+
+.principal-offer .offer-content::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+}
+
+.principal-offer .offer-content::-webkit-scrollbar-track {
+    background: none;
+}
+
+.principal-offer .offer-content::-webkit-scrollbar-thumb {
+    background: #801515; /* Couleur du pouce (partie déplaçable) */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+.principal-offer .offer-content::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Couleur au survol */
 }
 
 
@@ -467,7 +486,7 @@ time {
 }
 
 .principal-offer .offer-content {
-    margin: 0px -25px 25px 0px;
+    margin: 0px -10px 25px 0px;
 }
 
 .principal-offer h2 {
@@ -509,7 +528,7 @@ footer address h3 {
 }
 
 .principal-offer p {
-    margin-right: 30px;
+    margin-right: 20px;
     text-align: justify;
 
 }
