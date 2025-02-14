@@ -38,12 +38,45 @@ main {
 }
 
 .principal-offer-apply-page {
+    border:none;
+    border-radius: 0px;
+    width: calc(100% - 800px);
+    margin:50px 0;
+    padding: 30px 600px 30px 200px ;
+    background: none;
+    box-shadow: none;
+}
 
+.offer-title-box {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.offer-title-box h2 {
+    margin-right: 0;
+}
+
+.principal-offer-apply-page .favorite-button{
+    position: static;
+}
+
+.principal-offer-apply-page footer .date{
+    position: static;
+    float: right;
+    margin-right: 40px;
+}
+
+.principal-offer-apply-page p {
+    text-align: left;
 }
 
 
 /*----------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------ PAGE POSTULER -------------------------------------------*/
+
+
 
 
 .postuler-main{

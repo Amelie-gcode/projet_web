@@ -158,7 +158,7 @@ header .nav-user {
     align-items: center;
     position: sticky;
     top: 25px;
-    z-index: 100;
+    z-index: 1;
 }
 
 .search-container i {
@@ -541,6 +541,46 @@ footer address h3 {
 }
 
 
+
+/*---------------------------------------- more offer ---------------------------------------------*/
+
+
+
+.more-offer-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    background-color: #ffdbdb;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.more-offer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+}
+
+
+
+.more-offer .offer {
+    width: 300px;
+}
+
+.big-title {
+    margin: 0;
+    margin-bottom: 50px;
+    font-size: 45px;
+    font-family: Anton ;
+}
+
+
+
+
 /*---------------------------------------- SCROLL BUTTON ---------------------------------------------*/
 
 
@@ -558,30 +598,232 @@ footer address h3 {
     font-weight: bold;
     cursor: pointer;
     display: none;
-    z-index: 1000;
+    z-index: 1;
 }
 
 #scrollToTop:hover {
     background-color: #983636;
 }
 
+#scrolling-form {
+    color: rgba(255, 255, 255);
+    background: #951313;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 13px;
+    float: right;
+    cursor: pointer;
+    width: 90%;
+    transition: 0.3s;
+}
+
+#scrolling-form:hover {
+    transform: scale(1.05);
+}
+
+.scrolling-form-box {
+    position: fixed;
+    top: 150px;
+    right: 150px;
+    width: 300px;
+    height: 150px;
+    flex-direction: column;
+    align-items: center;
+    background: #fff1f1;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 1px 6px 5px rgba(0,0,0,0.1);
+}
+
+.scrolling-form-box h2 {
+    margin-right: 15px;
+    margin-top: 0;
+    font-size: 25px;
+}
+
 
 /*---------------------------------------- FORMULAIRE ---------------------------------------------*/
 
 
-.formulaire {
-    display: inline-block;
-    background-color: #fff1f1;
-    border: #6c0b0b solid 1px;
+.form-container {
+    background: none;
+    padding: 30px;
     border-radius: 10px;
-    margin-right: 25% ;
-    margin-left: 25% ;
-    padding: 10px;
+    width: 80%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff1f1;
+    padding: 20px 10%;
+    width: 80%;
+    margin-top: 60px;
+}
+
+.form h2 {
+    font-size: 40px;
+    font-family: Anton ;
+    text-align: center;
+    margin-bottom: 50px;
 
 }
-.section{
+
+.form-group {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+.form-group input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+}
+.form-group label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-section_personal-info {
+    display: grid;
+    grid-template-columns: 46% 46%;
+    column-gap: 8%;
+    row-gap: 10px;
+    margin-bottom: 15px;
+}
+
+.form-group select {
+    width: 70%;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.form-section_secondary-info {
+    display: grid;
+    grid-template-columns: 43.8% 38%;
+    column-gap: 10%;
+    margin-bottom: 30px;
+}
+
+.form-section_secondary-info legend {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 0;
+}
+
+.form-section_secondary-info .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.form-section_secondary-info fieldset {
+    border: none;
+    padding-left: 0;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 15px;
+}
+
+.message-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-field textarea {
+    width: 100%;
+    height: 80px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 40px;
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.custom-file-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 20%;
+    background: #ff988c;
+    border: 2px solid #801515;
+    color: black;
+    padding: 8px;
+    border-radius: 70px;
+}
+
+.custom-file-label:hover {
+    background-color: #ffb4ab;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: 0px;
+    gap: 20px;
+
+}
+
+.btn-submit {
+    background-color: #801515;
+    color: white;
+    border-radius: 40px;
+    border: none;
+    padding: 8px;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 30%;
+    font-size: 28px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+    scale: 1.05;
+}
+
+.btn-reset {
+    background : none;
+    border: none;
+    color: black;
+    font-size: 17px;
+    border-right: black solid 2px;
+    padding-right: 20px;
+}
+
+.btn-reset:hover {
+    color: #1e1f22;
 }
 
 
@@ -596,6 +838,103 @@ footer address h3 {
     font-size: 50px;
     font-family: Anton, sans-serif;
 }
+
+
+/*---------------------------------------- CONNEXION PAGE ---------------------------------------------*/
+
+
+/* Ajoutez ceci à votre fichier style.css */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.modal-content {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.connexion_box {
+    width: 430px;
+    height: 420px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.4);
+    padding-left: 50px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.titre_connexion {
+    margin-top: 20px;
+    color: black;
+    font-size: 50px;
+    font-family: Anton, sans-serif;
+    text-align: center;
+    margin-left: -50px;
+}
+
+.connexion_box label {
+    font-weight: bold;
+}
+
+.connexion_box input {
+    margin-right: 40px;
+    margin-bottom: 20px;
+    border: none;
+    height: 33px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.connexion_box button {
+    margin-right: 40px;
+    margin-left: 120px;
+    margin-top: 19px;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #6c0b0b;
+    border: none;
+    transition: 0.3s;
+}
+
+.connexion_box button:hover {
+    transform: scale(1.1);
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 
 /*---------------------------------------- PAGE FOOTER ---------------------------------------------*/

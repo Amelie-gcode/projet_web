@@ -38,3 +38,26 @@ document.addEventListener('DOMContentLoaded', function () {
         // window.scrollTo(0, 0);
     })
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const scrollButton = document.querySelector('.scrolling-form-box');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY < 1400) {
+            scrollButton.style.display = 'flex';
+        } else {
+            scrollButton.style.display = 'none';
+        }
+    });
+
+    scrollButton.addEventListener('click', function () {
+        const targetElement = document.getElementById('formulaire');
+
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+
+});
