@@ -12,33 +12,4 @@ document.addEventListener('DOMContentLoaded', function() {
     closeButton.addEventListener('click', function() {
         modal.style.display = 'none';
     });
-
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
 });
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const modal = document.getElementById('modal');
-//     const openModalButtons = document.querySelectorAll('.user-items');
-//     const closeButton = document.querySelector('.close-button');
-//
-//     openModalButtons.forEach(function(button) {
-//         button.addEventListener('click', function(event) {
-//             event.preventDefault();
-//             modal.style.display = 'block';
-//         });
-//     });
-//
-//     closeButton.addEventListener('click', function() {
-//         modal.style.display = 'none';
-//     });
-//
-//     window.addEventListener('click', function(event) {
-//         if (event.target == modal) {
-//             modal.style.display = 'none';
-//         }
-//     });
-// });
