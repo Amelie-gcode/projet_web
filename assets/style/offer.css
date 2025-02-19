@@ -37,14 +37,16 @@ main {
     max-height: calc(100vh - 170px);
 }
 
+/* pour apply page*/
+
 .principal-offer-apply-page {
-    border:none;
-    border-radius: 0px;
-    width: calc(100% - 800px);
-    margin:50px 0;
-    padding: 30px 600px 30px 200px ;
-    background: none;
-    box-shadow: none;
+    border-radius: 15px;
+    width: 700px;
+    margin:50px 200px;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
 }
 
 .offer-title-box {
@@ -83,4 +85,5 @@ main {
     justify-content: center;
     display: flex;
     flex-direction: column;
+    background-color: #fffcfc;
 }
