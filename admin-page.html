@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Admin-Amely</title>
     <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/offer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
-    <title>Amely</title>
 </head>
-<body class="recherche-etudiant">
+<body>
 <header>
     <nav class="navbar">
         <img src="assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
@@ -30,11 +32,11 @@
         </aside>
     </nav>
 </header>
-<h2 class="titre-etudiant">ETUDIANTS </h2>
+<h2 class="titre-etudiant"> GESTION DES COMPTES </h2>
 
 <form class="search-container">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" placeholder="Recherche un étudiant !">
+    <input type="text" placeholder="Recherche un compte">
 </form>
 
 <main class="etudiant">
@@ -59,7 +61,7 @@
                 <th>informatique</th>
                 <th>2</th>
                 <th>etudiant</th>
-                <th> <button class="stats-student " ><a href="stats-etudiant.html"> Stats </a> </button>
+                <th>
                     <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
                     <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
                 </th>
@@ -71,7 +73,19 @@
                 <th>informatique</th>
                 <th>2</th>
                 <th>etudiant</th>
-                <th> <button class="stats-student " ><a href="stats-etudiant.html"> Stats </a> </button>
+                <th>
+                    <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
+                    <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
+                </th>
+            </tr>
+            <tr>
+                <th>Amira</th>
+                <th>ESSAID FARRAHT </th>
+                <th>40</th>
+                <th>informatique</th>
+                <th>8</th>
+                <th>pilote</th>
+                <th>
                     <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
                     <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
                 </th>
@@ -83,7 +97,7 @@
                 <th>informatique</th>
                 <th>2</th>
                 <th>etudiant</th>
-                <th> <button class="stats-student " ><a href="stats-etudiant.html"> Stats </a> </button>
+                <th>
                     <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
                     <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
                 </th>
@@ -95,7 +109,7 @@
                 <th>informatique</th>
                 <th>2</th>
                 <th>etudiant</th>
-                <th> <button class="stats-student " ><a href="stats-etudiant.html"> Stats </a> </button>
+                <th>
                     <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
                     <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
                 </th>
@@ -107,19 +121,7 @@
                 <th>informatique</th>
                 <th>2</th>
                 <th>etudiant</th>
-                <th> <button class="stats-student " ><a href="stats-etudiant.html"> Stats </a> </button>
-                    <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
-                    <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
-                </th>
-            </tr>
-            <tr>
-                <th>Amélie</th>
-                <th>GAME </th>
-                <th>19</th>
-                <th>informatique</th>
-                <th>2</th>
-                <th>etudiant</th>
-                <th> <button class="stats-student " ><a href="stats-etudiant.html"> Stats </a> </button>
+                <th>
                     <button class="action-bouton" onclick="modifierEtudiant()">Modifier</button>
                     <button class="action-bouton" onclick="supprimerEtudiant()">Supprimer</button>
                 </th>
@@ -130,7 +132,9 @@
     <button class="action-bouton" onclick="ajouterEtudiant()">Ajouter un Étudiant</button>
 </main>
 </body>
+
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/button.js"></script>
 <script src="assets/js/modal.js"></script>
+
 </html>

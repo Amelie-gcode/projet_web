@@ -1023,7 +1023,7 @@ body {
 .etudiant tbody tr:hover {
     background-color: #f6eded;
 }
-.stats-student {
+.stats-student  {
     background-color: #bd4545;
     color: white;
     border: 2px solid #dd7676;
@@ -1063,5 +1063,79 @@ body {
     color: black;
     border: 2px solid #631313;
 }
+.stats-student a {
+    color: black;
+    text-decoration: none;
+}
 
+/* --------------------- Stats ETUDAINT-------------------------------------*/
 
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-header {
+    background-color: #bd4545;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-header img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.profile-header h1 {
+    margin: 10px 0;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+}
+
+.profile-stats div {
+    text-align: center;
+}
+
+.profile-stats h3 {
+    margin: 5px 0;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #bd4545;
+    color: white;
+    border: 2px solid #bd4545;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+}
+
+.back-button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #631313;
+}
+.back-button a {
+    color: black;
+    text-decoration: none;
+}
