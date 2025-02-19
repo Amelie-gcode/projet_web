@@ -37,7 +37,8 @@ main {
     max-height: calc(100vh - 170px);
 }
 
-/* pour apply page*/
+/*---------------------------------------- APPLY PAGE ---------------------------------------------*/
+/*---------------------------------------- PRINCIPALE OFFRE ---------------------------------------------*/
 
 .principal-offer-apply-page {
     border-radius: 15px;
@@ -79,11 +80,25 @@ main {
 /*------------------------------------------------ PAGE POSTULER -------------------------------------------*/
 
 
-
-
 .postuler-main{
     justify-content: center;
     display: flex;
     flex-direction: column;
     background-color: #fffcfc;
+}
+
+
+/*---------------------------------------- FAVORISE PAGE ---------------------------------------------*/
+/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+
+.favoris-offer-container{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+.offer-favoris {
+    width: 80%;
+    margin: auto 10%;
 }
