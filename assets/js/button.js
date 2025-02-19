@@ -7,3 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
         heartIcon.classList.toggle('liked');
     })
 })
+
+/* bouton page etudiants*/
+
+
+function modifierEtudiant() {
+    alert('Modifier l\'étudiant');
+    // Logique pour modifier un étudiant
+}
+
+function supprimerEtudiant() {
+    alert('Supprimer l\'étudiant');
+    // Logique pour supprimer un étudiant
+}
+
+function ajouterEtudiant() {
+    alert('Ajouter un nouvel étudiant');
+    // Logique pour ajouter un nouvel étudiant
+}

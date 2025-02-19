@@ -975,4 +975,93 @@ body {
 }
 
 
+/* --------------------- RECHERCHE ETUDIANT -------------------------------------*/
+.recherche-etudiant{
+    background-color: #e3dddd;
+}
+.titre-etudiant{
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-family: Anton, sans-serif;
+}
+
+.etudiant{
+
+    margin: 100px;
+}
+
+.etudiant table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.etudiant th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.etudiant thead {
+    background-color: #aa2020;
+    color: white;
+}
+
+.etudiant tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.etudiant tbody tr:nth-child(odd) {
+    background-color: #e3dcdc;
+}
+
+.etudiant tbody tr:hover {
+    background-color: #f6eded;
+}
+.stats-student {
+    background-color: #bd4545;
+    color: white;
+    border: 2px solid #dd7676;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.stats-student:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #631313;
+}
+
+.action-bouton {
+    background-color: #bd4545;
+    color: white;
+    border: 2px solid #bd4545;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+}
+
+.action-bouton:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #631313;
+}
+
 
