@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/style/style.css">
+  <link rel="stylesheet" href="assets/style/offer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+  <title>Amely</title>
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <img src="assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
+    <ul class="navbar-nav">
+      <li><a href="entreprise.html" class="nav-items">Entreprise</a></li>
+      <li><a href="index.html" class="nav-items">Offres</a></li>
+      <li><a href="" class="nav-items">Contact</a></li>
+    </ul>
+    <aside class="nav-user">
+      <button class="user-icon" aria-expanded="false" aria-controls="user-menu">
+        <i class="fa-solid fa-user"></i>
+      </button>
+      <ul id="user-menu" class="dropdown-menu">
+        <li><a href="" class="user-items">Profil</a></li>
+        <li><a href="etudiant.html" class="user-items">Etudiant</a></li>
+        <li><a href="admin-page.html" class="user-items">Admin page</a></li>
+        <li><a href="favoris.html" class="user-items">Mes offres</a></li>
+        <li><a href="gerer-offre.html" class="user-items">gerer offre</a></li>
+        <li><a href="" class="user-items">Déconnexion</a></li>
+      </ul>
+    </aside>
+  </nav>
+</header>
+<section class="form" id="formulaire">
+  <h2>Créer une offre !</h2>
+  <div class="form-container">
+
+    <form method="POST" action="">
+      <div class="form-section_personal-info">
+        <div class="form-group">
+          <label for="nom-offre">Nom de l'offre</label>
+          <input type="text" id="nom-offre" name="nom-offre">
+          <span id="nom-offreError" style="color: red;"></span><br>
+        </div>
+
+        <div class="form-group">
+          <label for="entreprise">Entreprise</label>
+          <input type="text" id="entreprise" name="entreprise">
+          <span id="entrepriseError" style="color: red;"></span><br>
+        </div>
+
+        <div class="form-group">
+          <label for="lieu">lieu</label>
+          <input type="text" id="lieu" name="lieu">
+          <span id="lieuError" style="color: red;"></span><br>
+        </div>
+
+        <div class="form-group">
+          <label for="prix">prix</label>
+          <input type="number" id="prix" name="prix">
+          <span id="prixError" style="color: red;"></span><br>
+        </div>
+
+        <div class="form-group">
+          <label for="duree">durée</label>
+          <input type="text" id="duree" name="duree">
+          <span id="dureeError" style="color: red;"></span><br>
+        </div>
+
+        <div class="form-group">
+          <label for="domaine">domaine</label>
+          <input type="text" id="domaine" name="domaine">
+          <span id="domaineError" style="color: red;"></span><br>
+        </div>
+        <div class="form-group">
+          <label for="notion">notion</label>
+          <input type="text" id="notion" name="notion">
+          <span id="notionError" style="color: red;"></span><br>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+          <span id="emailError" style="color: red;"></span><br>
+        </div>
+        <div class="form-group">
+          <label for="telephone">telephone</label>
+          <input type="number" id="telephone" name="telephone">
+          <span id="telephoneError" style="color: red;"></span><br>
+        </div>
+      </div>
+
+      <div class="form-section_secondary-info">
+
+        <fieldset>
+          <legend>type</legend>
+          <div class="checkbox-group">
+            <label for="stage">
+              <input type="checkbox" name="aPropos" id="stage"> Stage
+            </label>
+            <label for="alternance">
+              <input type="checkbox" name="aPropos" id="alternance"> alternance
+            </label>
+            <label for="formation">
+              <input type="checkbox" name="aPropos" id="formation"> formation
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="message-group">
+        <div class="form-field">
+          <label for="detail-offre">Details de l'offre</label>
+          <textarea id="detail-offre" name="detail-offre" rows="4"></textarea>
+        </div>
+        <div class="form-field">
+          <label for="profile recherché">Profil recherché</label>
+          <textarea id="profile recherché" name="profile recherché" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <input type="reset" value="Réinitialiser" class="btn-reset">
+        <input type="submit" value="Poster" class="btn-submit">
+      </div>
+
+    </form>
+
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/button.js"></script>
+    <script src="assets/js/modal.js"></script>
+
+
+</body>
+</html>

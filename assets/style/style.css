@@ -830,21 +830,42 @@ input[type="file"] {
 /*---------------------------------------- FAVORIS PAGE ---------------------------------------------*/
 
 
-.titre_fav{
+.titre_fav {
     display: flex;
     color: black;
     font-weight: bold;
     justify-content: center;
+    align-items: center; /* Pour aligner verticalement l'icône avec le texte */
+    gap: 25px; /* Espace entre le texte et l'icône */
     font-size: 50px;
     margin: 60px auto;
     font-family: Anton, sans-serif;
+}
+
+.title-heart {
+    color: #ef0000; /* Rouge pour le cœur */
+    font-size: 50px; /* Taille légèrement plus petite que le titre */
+}
+
+.favoris-offer-container{
+    margin: auto 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row !important;
+    max-width: calc(100% - 400px);
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+.favoris-offer {
+    width: 294px;
 }
 
 
 /*---------------------------------------- CONNEXION PAGE ---------------------------------------------*/
 
 
-/* Ajoutez ceci à votre fichier style.css */
 .modal {
     display: none;
     position: fixed;
@@ -978,7 +999,7 @@ body {
 
 
 
-/* --------------------- RECHERCHE ETUDIANT -------------------------------------*/
+/* --------------------- RECHERCHE COMPTE -------------------------------------*/
 .recherche-etudiant{
     background-color: #e3dddd;
 }
@@ -1030,11 +1051,11 @@ body {
     background-color: #bd4545;
     color: white;
     border: 2px solid #dd7676;
-    padding: 5px 20px;
+    padding: 3px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px;
@@ -1050,11 +1071,11 @@ body {
     background-color: #bd4545;
     color: white;
     border: 2px solid #bd4545;
-    padding: 5px 20px;
+    padding: 3px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px;
@@ -1141,4 +1162,16 @@ body {
 .back-button a {
     color: black;
     text-decoration: none;
+}
+/* --------------------- GERER OFFRES-------------------------------------*/
+
+.ajout-offre{
+    display: flex;
+    margin-left: 200px;
+    margin-top: 50px;
+    font-size: 30px;
+}
+.gerer-offre a{
+    text-decoration: none;
+    color: black;
 }
