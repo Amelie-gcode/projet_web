@@ -421,9 +421,6 @@ time {
 }
 
 .favorite-button {
-    position: absolute;
-    top: 24px;
-    right: 30px;
     background: none;
     border: none;
     color: #ef0000;
@@ -431,6 +428,20 @@ time {
     cursor: pointer;
     transition: 0.25s;
 }
+
+.fav-button-container {
+    position: absolute;
+    right: 14px;
+    top: 22px;
+    display: flex;
+    align-items: center;
+    background: none;
+}
+
+.nb-fav {
+    margin: 0;
+}
+
 
 .favorite-button:hover {
     transform: scale(1.2);
@@ -830,21 +841,42 @@ input[type="file"] {
 /*---------------------------------------- FAVORIS PAGE ---------------------------------------------*/
 
 
-.titre_fav{
+.titre_fav {
     display: flex;
     color: black;
     font-weight: bold;
     justify-content: center;
+    align-items: center; /* Pour aligner verticalement l'icône avec le texte */
+    gap: 25px; /* Espace entre le texte et l'icône */
     font-size: 50px;
     margin: 60px auto;
     font-family: Anton, sans-serif;
+}
+
+.title-heart {
+    color: #ef0000; /* Rouge pour le cœur */
+    font-size: 50px; /* Taille légèrement plus petite que le titre */
+}
+
+.favoris-offer-container{
+    margin: auto 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row !important;
+    max-width: calc(100% - 400px);
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+.favoris-offer {
+    width: 294px;
 }
 
 
 /*---------------------------------------- CONNEXION PAGE ---------------------------------------------*/
 
 
-/* Ajoutez ceci à votre fichier style.css */
 .modal {
     display: none;
     position: fixed;
@@ -973,4 +1005,184 @@ body {
 
 .media li i{
     font-size: 23px;
+}
+
+
+
+
+/* --------------------- RECHERCHE COMPTE -------------------------------------*/
+.recherche-etudiant{
+    background-color: #e3dddd;
+}
+.titre-etudiant{
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-family: Anton, sans-serif;
+}
+
+.etudiant{
+
+    margin: 100px;
+}
+
+.etudiant table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.etudiant th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.etudiant thead {
+    background-color: #aa2020;
+    color: white;
+}
+
+.etudiant tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.etudiant tbody tr:nth-child(odd) {
+    background-color: #e3dcdc;
+}
+
+.etudiant tbody tr:hover {
+    background-color: #f6eded;
+}
+.stats-student  {
+    background-color: #bd4545;
+    color: white;
+    border: 2px solid #dd7676;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.stats-student:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #631313;
+}
+
+.action-bouton {
+    background-color: #bd4545;
+    color: white;
+    border: 2px solid #bd4545;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+}
+
+.action-bouton:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #631313;
+}
+.stats-student a {
+    color: black;
+    text-decoration: none;
+}
+
+/* --------------------- Stats ETUDAINT-------------------------------------*/
+
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-header {
+    background-color: #bd4545;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-header img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.profile-header h1 {
+    margin: 10px 0;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+}
+
+.profile-stats div {
+    text-align: center;
+}
+
+.profile-stats h3 {
+    margin: 5px 0;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #bd4545;
+    color: white;
+    border: 2px solid #bd4545;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+}
+
+.back-button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #631313;
+}
+.back-button a {
+    color: black;
+    text-decoration: none;
+}
+/* --------------------- GERER OFFRES-------------------------------------*/
+
+.ajout-offre{
+    display: flex;
+    margin-left: 200px;
+    margin-top: 50px;
+    font-size: 30px;
+}
+.gerer-offre a{
+    text-decoration: none;
+    color: black;
 }
