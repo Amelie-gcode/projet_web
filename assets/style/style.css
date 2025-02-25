@@ -862,18 +862,18 @@ input[type="file"] {
 }
 
 .favoris-offer-container{
-    margin: auto 200px;
+    margin: auto 250px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: row !important;
-    max-width: calc(100% - 400px);
+    max-width: calc(100% - 500px);
     gap: 10px;
 
     flex-wrap: wrap;
 }
 .favoris-offer {
-    width: 294px;
+    width: 299px;
 }
 
 .fav_page_button{
@@ -882,6 +882,7 @@ input[type="file"] {
     background-color: #ffdbdb;
     border-radius: 10px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 .subtitre_fav{
     margin-left: 10%;
@@ -1312,4 +1313,336 @@ body {
 .gerer-offre a{
     text-decoration: none;
     color: black;
+}
+
+
+/* --------------------- creation acount -------------------------------------*/
+
+
+.account-signup {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fff1f1 0%, #ffd4ce 100%);
+    font-family: 'Nunito', sans-serif;
+}
+
+.account-form {
+    background: white;
+    padding: 40px;
+    padding-right: 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.account-form h1 {
+    margin: 0 0 40px 0;
+    color: #801515;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5em;
+}
+
+.account-form-group {
+    margin-bottom: 25px;
+}
+
+.account-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.account-form-group input[type="text"],
+.account-form-group input[type="email"],
+.account-form-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.account-form-group input[type="text"]:focus,
+.account-form-group input[type="email"]:focus,
+.account-form-group input[type="password"]:focus{
+    border-color: #801515;
+    outline: none;
+}
+
+.account-role-options {
+    display: flex;
+    gap: 20px;
+}
+
+.account-role-choice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.account-role-choice input[type="radio"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.account-role-choice span {
+    font-size: 16px;
+}
+
+.account-submit {
+    width: 100%;
+    padding: 15px;
+    background: #801515;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.account-submit:hover {
+    background: #631313;
+}
+
+.account-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.account-back {
+    padding: 15px 30px;
+    background: #cfcfcf;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.account-back:hover {
+    background: #e0e0e0;
+}
+
+.account-submit {
+    flex: 1;
+}
+
+
+
+/* --------------------- creation offer -------------------------------------*/
+
+
+
+fieldset {
+    border: none;
+}
+
+.offer-creation {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fff1f1 0%, #ffd4ce 100%);
+    font-family: 'Nunito', sans-serif;
+    padding: 40px 0;
+}
+
+.offer-form {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.offer-form h1 {
+    margin: 0 0 70px 0;
+    color: #801515;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5em;
+}
+
+.offer-form h2 {
+    color: #801515;
+    font-size: 1.5em;
+    margin: 30px 0 20px 0;
+}
+
+.offer-form-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 50px;
+    margin-bottom: 25px;
+}
+
+.offer-form-group {
+    margin-bottom: 25px;
+}
+
+.offer-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.offer-form-group input[type="text"],
+.offer-form-group input[type="number"],
+.offer-form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.offer-form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.3s ease;
+}
+
+.offer-form-group input:focus,
+.offer-form-group select:focus,
+.offer-form-group textarea:focus {
+    border-color: #801515;
+    outline: none;
+}
+
+.type-options {
+    display: flex;
+    gap: 20px;
+}
+
+.type-choice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.type-choice input[type="radio"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.domains-section {
+    margin-bottom: 25px;
+}
+
+.domain-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.domain-input input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.add-domain,
+.remove-domain {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.add-domain {
+    background: #801515;
+    color: white;
+}
+
+.add-domain:hover {
+    background: #631313;
+}
+
+.remove-domain {
+    background: #ff4444;
+    color: white;
+}
+
+.remove-domain:hover {
+    background: #cc0000;
+}
+
+.char-count {
+    float: right;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.offer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.offer-back {
+    padding: 15px 30px;
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.offer-back:hover {
+    background: #e0e0e0;
+}
+
+.offer-submit {
+    flex: 1;
+    padding: 15px;
+    background: #801515;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.offer-submit:hover {
+    background: #631313;
 }

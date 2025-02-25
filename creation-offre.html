@@ -1,137 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="assets/style/style.css">
-  <link rel="stylesheet" href="assets/style/offer.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/offer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
-  <title>Amely</title>
+    <title>Amely</title>
 </head>
 <body>
-<header>
-  <nav class="navbar">
-    <img src="assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
-    <ul class="navbar-nav">
-      <li><a href="entreprise.html" class="nav-items">Entreprise</a></li>
-      <li><a href="index.html" class="nav-items">Offres</a></li>
-      <li><a href="" class="nav-items">Contact</a></li>
-    </ul>
-    <aside class="nav-user">
-      <button class="user-icon" aria-expanded="false" aria-controls="user-menu">
-        <i class="fa-solid fa-user"></i>
-      </button>
-      <ul id="user-menu" class="dropdown-menu">
-        <li><a href="" class="user-items">Profil</a></li>
-        <li><a href="etudiant.html" class="user-items">Etudiant</a></li>
-        <li><a href="admin-page.html" class="user-items">Admin page</a></li>
-        <li><a href="favoris.html" class="user-items">Mes offres</a></li>
-        <li><a href="gerer-offre.html" class="user-items">gerer offre</a></li>
-        <li><a href="" class="user-items">Déconnexion</a></li>
-      </ul>
-    </aside>
-  </nav>
-</header>
-<section class="form" id="formulaire">
-  <h2>Créer une offre !</h2>
-  <div class="form-container">
+<main class="offer-creation">
+    <form class="offer-form">
+        <header>
+            <h1>Créer une offre</h1>
+        </header>
+        <section class="offer-form-section">
+            <div class="offer-form-group">
+                <label for="titre">Titre de l'offre</label>
+                <input type="text" id="titre" name="titre" required>
+            </div>
 
-    <form method="POST" action="">
-      <div class="form-section_personal-info">
-        <div class="form-group">
-          <label for="nom-offre">Nom de l'offre</label>
-          <input type="text" id="nom-offre" name="nom-offre">
-          <span id="nom-offreError" style="color: red;"></span><br>
-        </div>
+            <div class="offer-form-group">
+                <label for="entreprise">Entreprise</label>
+                <select id="entreprise" name="entreprise" required>
+                    <option value="">Sélectionnez une entreprise</option>
+                    <option value="cesi">CESI</option>
+                    <option value="sopra">Sopra Steria</option>
+                    <option value="capgemini">Capgemini</option>
+                    <option value="atos">Atos</option>
+                    <option value="ibm">IBM</option>
+                </select>
+            </div>
+        </section>
 
-        <div class="form-group">
-          <label for="entreprise">Entreprise</label>
-          <input type="text" id="entreprise" name="entreprise">
-          <span id="entrepriseError" style="color: red;"></span><br>
-        </div>
+        <section class="additional-info">
+            <h2>Informations supplémentaires</h2>
 
-        <div class="form-group">
-          <label for="lieu">lieu</label>
-          <input type="text" id="lieu" name="lieu">
-          <span id="lieuError" style="color: red;"></span><br>
-        </div>
+            <fieldset class="offer-form-section">
+                <div class="offer-form-group">
+                    <label for="salaire">Salaire (€/mois)</label>
+                    <input type="number" id="salaire" name="salaire" min="0" required>
+                </div>
 
-        <div class="form-group">
-          <label for="prix">prix</label>
-          <input type="number" id="prix" name="prix">
-          <span id="prixError" style="color: red;"></span><br>
-        </div>
+                <div class="offer-form-group">
+                    <label for="duree">Durée (semaines)</label>
+                    <input type="number" id="duree" name="duree" min="1" required>
+                </div>
 
-        <div class="form-group">
-          <label for="duree">durée</label>
-          <input type="text" id="duree" name="duree">
-          <span id="dureeError" style="color: red;"></span><br>
-        </div>
+                <div class="offer-form-group type-container">
+                    <fieldset>
+                        <legend>Type de contrat</legend>
+                        <div class="type-options">
+                            <label class="type-choice">
+                                <input type="radio" name="type" value="stage" required>
+                                <span>Stage</span>
+                            </label>
+                            <label class="type-choice">
+                                <input type="radio" name="type" value="alternance">
+                                <span>Alternance</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
 
-        <div class="form-group">
-          <label for="domaine">domaine</label>
-          <input type="text" id="domaine" name="domaine">
-          <span id="domaineError" style="color: red;"></span><br>
-        </div>
-        <div class="form-group">
-          <label for="notion">notion</label>
-          <input type="text" id="notion" name="notion">
-          <span id="notionError" style="color: red;"></span><br>
-        </div>
+            <fieldset class="domains-section">
+                <legend>Domaines</legend>
+                <div id="domains-container">
+                    <div class="domain-input">
+                        <input type="text" name="domaines[]" required aria-label="Domaine 1">
+                        <button type="button" class="remove-domain" style="display: none;" aria-label="Supprimer ce domaine">-</button>
+                    </div>
+                </div>
+                <button type="button" id="add-domain" class="add-domain" aria-label="Ajouter un domaine">+</button>
+            </fieldset>
+        </section>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email">
-          <span id="emailError" style="color: red;"></span><br>
-        </div>
-        <div class="form-group">
-          <label for="telephone">telephone</label>
-          <input type="number" id="telephone" name="telephone">
-          <span id="telephoneError" style="color: red;"></span><br>
-        </div>
-      </div>
+        <section class="descriptions-section">
+            <h2>Descriptions</h2>
+            <fieldset>
+                <div class="offer-form-group">
+                    <label for="description-courte">Description courte (max 250 caractères)</label>
+                    <textarea id="description-courte" name="description-courte" maxlength="250" required></textarea>
+                    <span class="char-count" aria-live="polite">0/250</span>
+                </div>
 
-      <div class="form-section_secondary-info">
+                <div class="offer-form-group">
+                    <label for="description-longue">Description détaillée de l'offre</label>
+                    <textarea id="description-longue" name="description-longue" required></textarea>
+                </div>
 
-        <fieldset>
-          <legend>type</legend>
-          <div class="checkbox-group">
-            <label for="stage">
-              <input type="checkbox" name="aPropos" id="stage"> Stage
-            </label>
-            <label for="alternance">
-              <input type="checkbox" name="aPropos" id="alternance"> alternance
-            </label>
-            <label for="formation">
-              <input type="checkbox" name="aPropos" id="formation"> formation
-            </label>
-          </div>
-        </fieldset>
-      </div>
+                <div class="offer-form-group">
+                    <label for="profil">Profil recherché</label>
+                    <textarea id="profil" name="profil" required></textarea>
+                </div>
+            </fieldset>
+        </section>
 
-      <div class="message-group">
-        <div class="form-field">
-          <label for="detail-offre">Details de l'offre</label>
-          <textarea id="detail-offre" name="detail-offre" rows="4"></textarea>
-        </div>
-        <div class="form-field">
-          <label for="profile recherché">Profil recherché</label>
-          <textarea id="profile recherché" name="profile recherché" rows="4"></textarea>
-        </div>
-      </div>
-      <div class="form-actions">
-        <input type="reset" value="Réinitialiser" class="btn-reset">
-        <input type="submit" value="Poster" class="btn-submit">
-      </div>
-
+        <footer class="offer-buttons">
+            <a href="gerer-offre.html" class="offer-back" role="button">Retour</a>
+            <button type="submit" class="offer-submit">Créer l'offre</button>
+        </footer>
     </form>
+</main>
 
-    <script src="assets/js/nav.js"></script>
-    <script src="assets/js/button.js"></script>
-    <script src="assets/js/modal.js"></script>
-
-
+<script src="assets/js/creationOffer.js"></script>
 </body>
 </html>
