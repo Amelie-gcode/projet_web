@@ -1134,6 +1134,10 @@ body {
     border-radius: 12px;
     transition-duration: 0.4s;
 }
+.action-bouton a{
+    text-decoration: none;
+    color: black;
+}
 
 .action-bouton:hover {
     background-color: white;
@@ -1215,6 +1219,19 @@ body {
 .back-button a {
     color: black;
     text-decoration: none;
+}
+
+.student-offer{
+    margin:100px ;
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row !important;
+    max-width: calc(100% - 400px);
+    gap: 30px;
+
+    flex-wrap: wrap;
 }
 /* --------------------- GERER OFFRES-------------------------------------*/
 
