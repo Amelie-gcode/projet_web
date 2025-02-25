@@ -290,6 +290,8 @@ header .nav-user {
 .offer h1 {
     margin: 0;
     font-size: 25px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 550;
 }
 
 .offer p {
@@ -482,7 +484,8 @@ time {
 .principal-offer h2 {
     margin: 0;
     margin-right: 70px;
-    font-weight: bold;
+    font-family: "Oswald", sans-serif;
+    font-weight: 550;
 }
 
 .principal-offer h3 {
