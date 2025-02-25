@@ -11,18 +11,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* bouton page etudiants*/
 
-
-function modifierEtudiant() {
-    alert('Modifier l\'étudiant');
-    // Logique pour modifier un étudiant
-}
-
 function supprimerEtudiant() {
     alert('Supprimer l\'étudiant');
     // Logique pour supprimer un étudiant
 }
 
-function ajouterEtudiant() {
-    alert('Ajouter un nouvel étudiant');
-    // Logique pour ajouter un nouvel étudiant
-}
+/* bouton page fav*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.fav-btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Désactive tous les boutons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            // Active le bouton cliqué
+            this.classList.add('active');
+        });
+    });
+});
+

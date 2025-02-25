@@ -861,7 +861,47 @@ input[type="file"] {
 .favoris-offer {
     width: 294px;
 }
+.fav_page_button{
+    display: flex;
+    justify-content: center;
+    background-color: #ffdbdb;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.subtitre_fav{
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 30px;
+}
+.separation{
+    font-size: 40px;
+    margin: 5px;
+}
+.favoris{
+    margin-bottom: 50px;
+}
+.fav-btn{
+    background-color: #ffdbdb;
+    color: #0b0a0a;
+    border: none;
+    font-size: 30px;
+    text-decoration: none;
+    cursor: pointer;
 
+}
+.subtitre_fav :hover{
+    opacity: 0.8;
+    color: #1e1f22;
+    border-color: #1e1f22;
+}
+.fav-btn.active  {
+    text-decoration: underline;
+
+}
+.see-more a{
+    text-decoration: none;
+    color: #0b0a0a;
+}
 
 /*---------------------------------------- CONNEXION PAGE ---------------------------------------------*/
 
