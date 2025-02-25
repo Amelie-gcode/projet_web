@@ -1,20 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const heartIcon = document.querySelector('.heart-icon');
+    const heartIcons = document.querySelectorAll('.heart-icon');
 
-    heartIcon.addEventListener('click', function () {
-        heartIcon.classList.toggle('far');
-        heartIcon.classList.toggle('fas');
-        heartIcon.classList.toggle('liked');
-    })
-})
-
-
-/* bouton page etudiants*/
-
-function supprimerEtudiant() {
-    alert('Supprimer l\'étudiant');
-    // Logique pour supprimer un étudiant
-}
+    heartIcons.forEach(heartIcon => {
+        heartIcon.addEventListener('click', function () {
+            this.classList.toggle('far');
+            this.classList.toggle('fas');
+            this.classList.toggle('liked');
+        });
+    });
+});
 
 /* bouton page fav*/
 
