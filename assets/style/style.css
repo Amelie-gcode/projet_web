@@ -1012,6 +1012,71 @@ input[type="file"] {
 
 
 
+/*---------------------------------------- valid suppr ---------------------------------------------*/
+
+
+
+.confirm-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.confirm-modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 30px;
+    width: 400px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-modal-content h3 {
+    margin: 0 0 20px;
+    color: #801515;
+}
+
+.confirm-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.confirm-modal-buttons button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#confirmYes {
+    background-color: #801515;
+    color: white;
+}
+
+#confirmYes:hover {
+    background-color: #631313;
+}
+
+#confirmNo {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#confirmNo:hover {
+    background-color: #e0e0e0;
+}
+
+
+
 /*---------------------------------------- PAGE FOOTER ---------------------------------------------*/
 
 body {
