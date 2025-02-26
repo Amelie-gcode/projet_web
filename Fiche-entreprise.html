@@ -33,31 +33,41 @@
     </nav>
 </header>
 <body>
-<div class="profile-container">
-    <div class="profile-header">
-        <img src="assets/image/user-profile.jpg" alt="Photo de profil">
-        <h1>EDF - energie de france</h1>
-    </div>
-    <div class="profile-stats">
-        <div>
-            <h3>5</h3>
-            <p>Candidatures</p>
+<h1 class="principal-title">Fiche entreprise</h1>
+<div class="company-profile">
+    <!-- Section 1: Company Info -->
+    <section class="company-info">
+        <div class="company-header">
+            <img src="assets/image/company-logo.png" alt="Logo entreprise">
+            <h2>EDF - Énergie de France</h2>
         </div>
-        <div>
-            <h3>20h</h3>
-            <p>Temps passé</p>
+        <div class="company-description">
+            <p>EDF est le premier électricien mondial et un leader de la transition énergétique. Le groupe est présent sur l'ensemble des métiers de l'électricité, de la production jusqu'au commerce et aux services d'efficacité énergétique.</p>
         </div>
-        <div>
-            <h3>recherche</h3>
-            <p>Statut</p>
+        <div class="company-stats">
+            <div class="stat-item">
+                <span class="stat-value">156</span>
+                <span class="stat-label">Candidatures reçues</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">4.2/5</span>
+                <span class="rating-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+            </div>
         </div>
-    </div>
-    <button class="back-button"> <a href="admin-page.html" >Retour </a></button>
+    </section>
 </div>
-<section class="more-offer-container">
-    <h1 class="big-title">Candidatures :</h1>
-    <section class="more-offer student-offer">
-        <article class="offer">
+
+<!-- Section 2: Company Offers -->
+
+<h2 class="principal-title">Offres de l'entreprise</h2>
+<section class="company-offer-container">
+    <section class="company-offers">
+        <article class="offer offer-company-offer">
             <header>
                 <h1>Stage - Administrateur Système et Réseau H/F</h1>
             </header>
@@ -84,7 +94,7 @@
                 </footer>
             </section>
         </article>
-        <article class="offer">
+        <article class="offer offer-company-offer">
             <header>
                 <h1>Stage - Administrateur Système et Réseau H/F</h1>
             </header>
@@ -111,7 +121,7 @@
                 </footer>
             </section>
         </article>
-        <article class="offer">
+        <article class="offer offer-company-offer">
             <header>
                 <h1>Stage - Administrateur Système et Réseau H/F</h1>
             </header>
@@ -138,7 +148,7 @@
                 </footer>
             </section>
         </article>
-        <article class="offer">
+        <article class="offer offer-company-offer">
             <header>
                 <h1>Stage - Administrateur Système et Réseau H/F</h1>
             </header>
@@ -165,34 +175,7 @@
                 </footer>
             </section>
         </article>
-        <article class="offer">
-            <header>
-                <h1>Stage - Administrateur Système et Réseau H/F</h1>
-            </header>
-            <section class="offer-content">
-                <ul class="principal-infos-offers">
-                    <li>Entreprise</li>
-                    <li>Lieu</li>
-                </ul>
-                <ul class="secondary-infos-offers">
-                    <li>Prix 20000€</li>
-                    <li>info 2</li>
-                    <li>info 3</li>
-                    <li>info 4</li>
-                    <li>info 5</li>
-                </ul>
-                <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                <footer>
-                    <div class="date">
-                        <p>publié le :</p>
-                        <time>09/02/2025</time>
-                    </div>
-
-                    <button class="see-more">détails de l'offre</button>
-                </footer>
-            </section>
-        </article>
-        <article class="offer">
+        <article class="offer offer-company-offer">
             <header>
                 <h1>Stage - Administrateur Système et Réseau H/F</h1>
             </header>
@@ -221,6 +204,30 @@
         </article>
     </section>
 </section>
+
+
+<!-- Section 3: Rating Form -->
+<h2 class="principal-title">Évaluer l'entreprise</h2>
+<section class="rating-section">
+    <form class="rating-form">
+        <div class="rating-stars-input">
+            <span>Votre note :</span>
+            <div class="stars">
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+        </div>
+        <div class="comment-input">
+            <label for="comment">Votre commentaire :</label>
+            <textarea id="comment" rows="4" placeholder="Partagez votre expérience..."></textarea>
+        </div>
+        <button type="submit" class="submit-rating">Envoyer</button>
+    </form>
+</section>
+</div>
 
 
 </body>

@@ -44,9 +44,6 @@ main {
     width: 700px;
     margin:50px 200px;
     padding: 30px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
 }
 
 .offer-title-box {
@@ -104,4 +101,13 @@ main {
 .offer-favoris {
     width: 80%;
     margin: auto 10%;
+}
+
+
+/*---------------------------------------- COMPANIE PAGE ---------------------------------------------*/
+/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+
+
+.offer-company-offer {
+    width: 277px;
 }
