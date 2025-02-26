@@ -442,9 +442,12 @@ time {
 
 .nb-fav {
     margin: 0;
+    font-family: "Anton";
 }
 
-
+.nb-candidats{
+    font-weight: bold;
+}
 .favorite-button:hover {
     transform: scale(1.2);
 }
@@ -1645,4 +1648,29 @@ fieldset {
 
 .offer-submit:hover {
     background: #631313;
+}
+
+
+/* --------------------- gerer entreprise -------------------------------------*/
+
+.entreprise-case{
+
+    width: 1000px;
+
+}
+.entreprise-list{
+    margin: auto 250px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row !important;
+    max-width: calc(100% - 500px);
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.titre-entreprise {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-family: Anton, sans-serif;
 }
