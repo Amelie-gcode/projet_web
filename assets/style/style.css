@@ -1702,3 +1702,17 @@ fieldset {
     background-color: #631313;
     color: white;
 }
+
+
+/* --------------------- Responsive -------------------------------------*/
+
+/* --------------------- Responsive page acceuil -------------------------------------*/
+
+@media screen and (max-width: 768px){
+    .principal-offer{
+        display: none;
+    }
+    .rapid-offers-container{
+        width: 80%; !important;
+    }
+}
