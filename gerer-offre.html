@@ -64,7 +64,7 @@
                         <time>09/02/2025</time>
                     </div>
                     <button class="see-more gerer-offre"> <a href="creation-offre.html">modifier</a> </button>
-                    <button class="see-more gerer-offre"> <a href="creation-offre.html">supprimer</a> </button>
+                    <button class="action-bouton" onclick="supprimer()">Supprimer</button>
                 </footer>
             </section>
         </article>
@@ -91,7 +91,7 @@
                         <time>09/02/2025</time>
                     </div>
                     <button class="see-more gerer-offre"> <a href="creation-offre.html">modifier</a> </button>
-                    <button class="see-more gerer-offre"> <a href="creation-offre.html">supprimer</a> </button>
+                    <button class="action-bouton" onclick="supprimer()">Supprimer</button>
                 </footer>
             </section>
         </article>
@@ -118,7 +118,7 @@
                         <time>09/02/2025</time>
                     </div>
                     <button class="see-more gerer-offre"> <a href="creation-offre.html">modifier</a> </button>
-                    <button class="see-more gerer-offre"> <a href="creation-offre.html">supprimer</a> </button>
+                    <button class="action-bouton" onclick="supprimer()">Supprimer</button>
                 </footer>
             </section>
         </article>
@@ -145,7 +145,7 @@
                         <time>09/02/2025</time>
                     </div>
                     <button class="see-more gerer-offre"> <a href="creation-offre.html">modifier</a> </button>
-                    <button class="see-more gerer-offre"> <a href="creation-offre.html">supprimer</a> </button>
+                    <button class="action-bouton" onclick="supprimer()">Supprimer</button>
                 </footer>
             </section>
         </article>
@@ -172,7 +172,7 @@
                         <time>09/02/2025</time>
                     </div>
                     <button class="see-more gerer-offre"> <a href="creation-offre.html">modifier</a> </button>
-                    <button class="see-more gerer-offre"> <a href="creation-offre.html">supprimer</a> </button>
+                    <button class="action-bouton" onclick="supprimer()">Supprimer</button>
                 </footer>
             </section>
         </article>
@@ -209,6 +209,17 @@
     <p><i>&copy;Amely 2025 - Tous droits réservés</i></p>
 </footer>
 <button id="scrollToTop" style="display: none;">↑</button>
+
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'offre ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/button.js"></script>
 <script src="assets/js/modal.js"></script>
