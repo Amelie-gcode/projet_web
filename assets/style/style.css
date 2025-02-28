@@ -865,18 +865,18 @@ input[type="file"] {
 }
 
 .favoris-offer-container{
-    margin: auto 250px;
+    margin: auto 200px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: row !important;
-    max-width: calc(100% - 500px);
+    max-width: calc(100% - 400px);
     gap: 10px;
 
     flex-wrap: wrap;
 }
 .favoris-offer {
-    width: 299px;
+    width: 294px;
 }
 
 .fav_page_button{
@@ -2047,4 +2047,18 @@ fieldset {
 .pagination a:hover {
     background-color: #631313;
     color: white;
+}
+
+
+/* --------------------- Responsive -------------------------------------*/
+
+/* --------------------- Responsive page acceuil -------------------------------------*/
+
+@media screen and (max-width: 768px){
+    .principal-offer{
+        display: none;
+    }
+    .rapid-offers-container{
+        width: 80%; !important;
+    }
 }
