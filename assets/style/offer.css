@@ -104,19 +104,33 @@ main {
 }
 
 
-@media screen and (max-width: 768px){
-    .principal-offer{
+
+/*---------------------------------------- COMPANIE PAGE ---------------------------------------------*/
+/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+
+
+.offer-company-offer {
+    width: 277px!important;
+}
+
+
+@media screen and (max-width: 768px) {
+    .principal-offer {
         display: none;
     }
-    .rapid-offers-container{
-        width: 80%; !important;
+
+    .rapid-offers-container {
+        width: 80%;
+    !important;
     }
-    .offers-container-principal{
+
+    .offers-container-principal {
         margin: auto;
         margin-left: 20px;
         justify-content: center;
     }
-    .filters-container{
+
+    .filters-container {
         width: 100%;
         margin: 10px;
         display: flex;
@@ -125,14 +139,8 @@ main {
         align-items: center;
         max-width: none;
     }
+
     .filter label {
         font-size: 10px;
     }
-
-/*---------------------------------------- COMPANIE PAGE ---------------------------------------------*/
-/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
-
-
-.offer-company-offer {
-    width: 277px;
 }
