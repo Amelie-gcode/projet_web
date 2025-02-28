@@ -103,11 +103,26 @@ main {
     margin: auto 10%;
 }
 
+/*---------------------------------------- COMPANIE PAGE ---------------------------------------------*/
+/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+
+.offer-company-offer {
+    width: 277px;
+}
+
 
 @media screen and (max-width: 768px){
-    .principal-offer{
+    .principal-offer-offer-page {
         display: none;
     }
+    .principal-offer-apply-page{
+        display: flex;
+        border-radius: 15px;
+        width: 700px;
+        margin:50px 200px;
+        padding: 30px;
+    }
+
     .rapid-offers-container{
         width: 80%; !important;
     }
@@ -129,10 +144,23 @@ main {
         font-size: 10px;
     }
 
-/*---------------------------------------- COMPANIE PAGE ---------------------------------------------*/
-/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+    /*---------------------------------------- postuler PAGE ---------------------------------------------*/
 
+    .scrolling-form-box{
+        display: none;
+   }
 
-.offer-company-offer {
-    width: 277px;
+    /*---------------------------------------- admin PAGE ---------------------------------------------*/
+
+    .etudiant{
+        margin: 30px;
+    }
+    .etudiant th, td{
+        padding: 3px;
+    }
+    .action-bouton .stats-student{
+        padding: 2px 5px;
+        margin: 2px 1px;
+    }
+
 }

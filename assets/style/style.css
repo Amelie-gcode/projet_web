@@ -2054,11 +2054,65 @@ fieldset {
 
 /* --------------------- Responsive page acceuil -------------------------------------*/
 
+
 @media screen and (max-width: 768px){
-    .principal-offer{
+    .principal-offer-offer-page {
         display: none;
     }
+    .principal-offer-apply-page{
+        display: flex;
+        border-radius: 15px;
+        width: 700px;
+        margin:50px 200px;
+        padding: 30px;
+    }
+
     .rapid-offers-container{
         width: 80%; !important;
+    }
+    .offers-container-principal{
+        margin: auto;
+        margin-left: 20px;
+        justify-content: center;
+    }
+    .filters-container{
+        width: 100%;
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        max-width: none;
+    }
+    .filter label {
+        font-size: 10px;
+    }
+
+    /*---------------------------------------- postuler PAGE ---------------------------------------------*/
+
+    .scrolling-form-box{
+        display: none;
+    }
+
+    /*---------------------------------------- admin PAGE ---------------------------------------------*/
+
+    .etudiant{
+        margin: 30px;
+    }
+    .etudiant th, td{
+        padding: 3px;
+    }
+    .stats-student , .action-bouton{
+        padding: 2px 5px;
+        margin: 2px 1px;
+        font-size: 10px;
+    }
+    /*---------------------------------------- entreprise PAGE ---------------------------------------------*/
+
+
+    .entreprise-list{
+        margin: 50px;
+        width:90% ;
+        max-width: calc(100% - 50px);
     }
 }
