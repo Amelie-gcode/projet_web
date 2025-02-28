@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Delete confirmation modal functionality
-function supprimerEtudiant() {
+function supprimer() {
     const modal = document.getElementById('deleteConfirmModal');
     const confirmYes = document.getElementById('confirmYes');
     const confirmNo = document.getElementById('confirmNo');
