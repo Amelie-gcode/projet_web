@@ -2235,8 +2235,11 @@ fieldset {
 
     /*---------------------------------------- admin PAGE ---------------------------------------------*/
 
+    .titre-etudiant{
+        font-size: 30px;
+    }
     .etudiant{
-        margin: 30px;
+        margin: 20px;
     }
     .etudiant th, td{
         padding: 3px;
@@ -2244,6 +2247,12 @@ fieldset {
     .stats-student , .action-bouton{
         padding: 2px 5px;
         margin: 2px 1px;
+        font-size: 10px;
+        border: none;
+        color: white;
+    }
+
+    .etudiant table{
         font-size: 10px;
     }
     /*---------------------------------------- entreprise PAGE ---------------------------------------------*/
@@ -2255,9 +2264,70 @@ fieldset {
         max-width: calc(100% - 50px);
     }
 
+
     .dropdown-menu {
         top: 120%;
         z-index: 10000;
+    /*---------------------------------------- creation offre PAGE ---------------------------------------------*/
+
+    .offer-form-section {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 15px; /* Réduction de l'espacement */
+        margin-bottom: 15px; /* Ajustement de la marge */
+    }
+    /*---------------------------------------- creation entreprise PAGE ---------------------------------------------*/
+
+    .compagny-creation {
+        margin: 20px 0;
+        padding: 20px 0;
+    }
+    .company-buttons{
+        font-size: 10px;
+    }
+    .contact-form-section{
+        grid-template-columns: 1fr;
+    }
+
+    /*---------------------------------------- gerer entreprise PAGE ---------------------------------------------*/
+
+    .entreprise-list{
+        margin: 20px 20px;
+    }
+    .titre-entreprise{
+        text-align: center;
+        font-size: 30px;
+    }
+    .ajout-offre{
+        font-size: 20px;
+        margin: 20px;
+        padding: 10px;
+    }
+    /*---------------------------------------- admin PAGE ---------------------------------------------*/
+
+    .account-signup{
+        margin: 0px;
+    }
+    .account-form{
+        padding: 30px;
+    }
+    .account-form-group{
+        width: 90%;
+    }
+    .account-form h1{
+        font-size: 30px ;
+    }
+    main {
+        min-height: 20vh !important;
+    }
+
+
+    .favoris-offer-container{
+        margin: 20px;
+        max-width: 100%;
+    }
+
+    .titre_fav{
+        font-size: 30px;
     }
 }
 
@@ -2295,3 +2365,4 @@ fieldset {
         margin: 100px 50px !important;
     }
 }
+
