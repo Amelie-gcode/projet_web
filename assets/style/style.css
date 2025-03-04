@@ -2254,6 +2254,11 @@ fieldset {
         width:90% ;
         max-width: calc(100% - 50px);
     }
+
+    .dropdown-menu {
+        top: 120%;
+        z-index: 10000;
+    }
 }
 
 
@@ -2275,6 +2280,11 @@ fieldset {
 
     .navbar-nav {
         left: 220px !important;
+    }
+
+    .dropdown-menu {
+        top: 120%;
+        z-index: 10000;
     }
 }
 
