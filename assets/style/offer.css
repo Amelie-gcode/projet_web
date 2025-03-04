@@ -127,18 +127,4 @@ main {
         margin-left: 20px;
         justify-content: center;
     }
-
-    .filters-container {
-        width: 100%;
-        margin: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        max-width: none;
-    }
-
-    .filter label {
-        font-size: 10px;
-    }
 }

@@ -7,7 +7,6 @@ header .navbar {
     border: 3px solid #6c0b0b;
     margin: 10px;
     display: flex;
-    position: relative;
     padding: 10px 30px 10px 20px;
     border-radius: 20px;
     align-items: center;
@@ -2098,10 +2097,64 @@ fieldset {
 
 /* --------------------- Responsive -------------------------------------*/
 
-/* --------------------- Responsive page acceuil -------------------------------------*/
+/* --------------------- Responsive -------------------------------------*/
 
+.btn-hamburger {
+    display: none;
+}
+
+.btn-cross {
+    display: none;
+}
+
+@media screen and (max-width: 550px) {
+    .offers-container-principal {
+        margin: 100px 0 0 !important;
+        justify-content: flex-start !important;
+    }
+
+    .offer {
+        width: calc(100vw - 50px);
+        box-shadow: none;
+    }
+
+    .offer:hover {
+        transform: none;
+    }
+
+    /* --------------------- HAMBURGER MENU -------------------------------------*/
+
+
+}
 
 @media screen and (max-width: 768px){
+    /* --------------------- HEADER RESPONSIVE -------------------------------------*/
+    .search-container {
+        width: 90%;
+    }
+
+    .filter input {
+        transform: scale(0.8); /* Ajustez l'échelle selon vos besoins */
+        -webkit-transform: scale(0.8); /* Pour compatibilité avec les anciens navigateurs */
+    }
+
+    .filters-container{
+        max-width: calc(100% - 30px);
+        width: calc(100% - 30px);
+        margin: 15px;
+    }
+    .filter label {
+        font-size: 10px;
+    }
+
+    .filter {
+        padding: 3px;
+        padding-right: 7px;
+        gap: 2px;
+    }
+
+
+
     .principal-offer-offer-page {
         display: none;
     }
@@ -2116,24 +2169,6 @@ fieldset {
     .rapid-offers-container{
         width: 80%; !important;
     }
-    .offers-container-principal{
-        margin: auto;
-        margin-left: 20px;
-        justify-content: center;
-    }
-    .filters-container{
-        width: 100%;
-        margin: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        max-width: none;
-    }
-    .filter label {
-        font-size: 10px;
-    }
-
     /*---------------------------------------- postuler PAGE ---------------------------------------------*/
 
     .scrolling-form-box{
@@ -2160,5 +2195,35 @@ fieldset {
         margin: 50px;
         width:90% ;
         max-width: calc(100% - 50px);
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .page-footer {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        text-align: center;
+        gap: 50px
+    }
+
+    .media li {
+        justify-content: center;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .navbar-nav {
+        left: 220px !important;
+    }
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 550px) {
+
+    .offers-container-principal {
+        margin: 100px 50px !important;
     }
 }
