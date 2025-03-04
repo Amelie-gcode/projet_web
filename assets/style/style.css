@@ -2124,6 +2124,64 @@ fieldset {
 
     /* --------------------- HAMBURGER MENU -------------------------------------*/
 
+    .btn-hamburger {
+        display: block;
+        margin-left: 20px;
+        background: none;
+        color: black;
+        border: none;
+        font-size: 20px;
+    }
+
+    .navbar-nav {
+        display: none!important;
+    }
+
+    .btn-cross.active {
+        display: block;
+        position: fixed;
+        background: none;
+        color: white;
+        border: none;
+        font-size: 28px;
+        top: 30px;
+        left: 53px;
+        z-index: 101;
+    }
+
+    .navbar-nav.active {
+        display: flex!important;
+        position: fixed;
+        top: 0!important;
+        left: 65px!important;
+        margin: 0;
+        padding: 20px;
+        height: 100%;
+        opacity: 0.98;
+        flex-direction: column;
+        gap: 10px;
+        background-color: #1e1f22;
+        z-index: 100;
+        animation: hamburger-dropdown 0.2s ease-in-out;
+    }
+
+    @keyframes hamburger-dropdown {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(-70px);
+        }
+    }
+
+    .nav-items {
+        color: white!important;
+    }
+
+    .dropdown-menu {
+        top: 120%;
+        z-index: 10000;
+    }
 
 }
 
