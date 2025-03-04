@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function () {
     const hamburger = document.querySelector('.btn-hamburger');
     const cross = document.querySelector('.btn-cross');
-    const navBar = document.querySelector('.nav-bar');
+    const navBar = document.querySelector('.navbar-nav');
 
     hamburger.addEventListener('click', function () {
         navBar.classList.add('active');
@@ -40,10 +40,5 @@ document.addEventListener('DOMContentLoaded', function () {
         cross.classList.remove('active');
     })
 
-    document.addEventListener('click', function(event) {
-        if (!navbar.contains(event.target) && !event.target.matches('.nav-item')) {
-            closeNavbar();
-        }
-    });
 
 })
