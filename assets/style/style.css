@@ -2268,6 +2268,7 @@ fieldset {
     .dropdown-menu {
         top: 120%;
         z-index: 10000;
+    }
     /*---------------------------------------- creation offre PAGE ---------------------------------------------*/
 
     .offer-form-section {

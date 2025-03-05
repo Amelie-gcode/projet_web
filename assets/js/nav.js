@@ -1,3 +1,5 @@
+// dropdown menu
+
 document.addEventListener('DOMContentLoaded', function() {
     const userIcon = document.querySelector('.user-icon');
     const dropdownMenu = document.querySelector('.dropdown-menu');
@@ -19,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+//scroll to top
+
 document.addEventListener('DOMContentLoaded', function () {
     const scrollButton = document.getElementById('scrollToTop');
 
@@ -38,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // window.scrollTo(0, 0);
     })
 });
+
+//scroll form
 
 document.addEventListener('DOMContentLoaded', function () {
     const scrollButton = document.querySelector('.scrolling-form-box');
@@ -61,3 +67,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+// menu burger
+
+document.addEventListener('DOMContentLoaded', function () {
+    const hamburger = document.querySelector('.btn-hamburger');
+    const cross = document.querySelector('.btn-cross');
+    const navBar = document.querySelector('.navbar-nav');
+
+    hamburger.addEventListener('click', function () {
+        navBar.classList.add('active');
+        cross.classList.add('active');
+    })
+
+    cross.addEventListener('click', function () {
+        navBar.classList.remove('active');
+        cross.classList.remove('active');
+    })
+})

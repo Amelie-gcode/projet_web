@@ -20,12 +20,12 @@
         <section class="offer-form-section">
             <div class="offer-form-group">
                 <label for="titre">Titre de l'offre</label>
-                <input type="text" id="titre" name="titre" required>
+                <input type="text" id="titre" name="titre" >
             </div>
 
             <div class="offer-form-group">
                 <label for="entreprise">Entreprise</label>
-                <select id="entreprise" name="entreprise" required>
+                <select id="entreprise" name="entreprise" >
                     <option value="">Sélectionnez une entreprise</option>
                     <option value="cesi">CESI</option>
                     <option value="sopra">Sopra Steria</option>
@@ -42,12 +42,12 @@
             <fieldset class="offer-form-section">
                 <div class="offer-form-group">
                     <label for="salaire">Salaire (€/mois)</label>
-                    <input type="number" id="salaire" name="salaire" min="0" required>
+                    <input type="number" id="salaire" name="salaire" min="0" >
                 </div>
 
                 <div class="offer-form-group">
                     <label for="duree">Durée (semaines)</label>
-                    <input type="number" id="duree" name="duree" min="1" required>
+                    <input type="number" id="duree" name="duree" min="1" >
                 </div>
 
                 <div class="offer-form-group type-container">
@@ -55,7 +55,7 @@
                         <legend>Type de contrat</legend>
                         <div class="type-options">
                             <label class="type-choice">
-                                <input type="radio" name="type" value="stage" required>
+                                <input type="radio" name="type" value="stage" >
                                 <span>Stage</span>
                             </label>
                             <label class="type-choice">
@@ -71,7 +71,7 @@
                 <legend>Domaines</legend>
                 <div id="domains-container">
                     <div class="domain-input">
-                        <input type="text" name="domaines[]" required aria-label="Domaine 1">
+                        <input type="text" name="domaines[]"  aria-label="Domaine 1">
                         <button type="button" class="remove-domain" style="display: none;" aria-label="Supprimer ce domaine">-</button>
                     </div>
                 </div>
@@ -84,18 +84,18 @@
             <fieldset>
                 <div class="offer-form-group">
                     <label for="description-courte">Description courte (max 250 caractères)</label>
-                    <textarea id="description-courte" name="description-courte" maxlength="250" required></textarea>
+                    <textarea id="description-courte" name="description-courte" maxlength="250" ></textarea>
                     <span class="char-count" aria-live="polite">0/250</span>
                 </div>
 
                 <div class="offer-form-group">
                     <label for="description-longue">Description détaillée de l'offre</label>
-                    <textarea id="description-longue" name="description-longue" required></textarea>
+                    <textarea id="description-longue" name="description-longue" ></textarea>
                 </div>
 
                 <div class="offer-form-group">
                     <label for="profil">Profil recherché</label>
-                    <textarea id="profil" name="profil" required></textarea>
+                    <textarea id="profil" name="profil" ></textarea>
                 </div>
             </fieldset>
         </section>
@@ -107,6 +107,8 @@
     </form>
 </main>
 
-<script src="assets/js/creationOffer.js"></script>
+<script src="assets/js/button.js"></script>
+<script src="assets/js/validate.js"></script>
+<script src="assets/js/button.js"></script>
 </body>
 </html>

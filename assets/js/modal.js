@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // First modal (original)
+    // First modal page connexion
     const modal = document.getElementById('modal');
     const openModalButton = document.querySelector('.user-items');
     const closeButton = document.querySelector('.close-button');
