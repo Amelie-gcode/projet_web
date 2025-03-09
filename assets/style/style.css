@@ -2089,6 +2089,77 @@ fieldset {
     background-color: #631313;
     color: white;
 }
+/* --------------------- Contact page -------------------------------------*/
+
+.titre-contact {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    font-family: Anton, sans-serif;
+}
+.info-contact {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-family: "Oswald", sans-serif;
+    font-weight: normal;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 30px;
+}
+.contact-form-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 0 50px;
+}
+.contact-form {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+.contact-form-group {
+    margin-bottom: 25px;
+    gap: 30px;
+    max-width: 300px;
+    justify-content: center;
+}
+.contact-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+}
+.contact-form-group input,  .message-contact , .btn-contact {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.btn-contact{
+    flex: 1;
+    padding: 15px;
+    background: #801515;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30% ;
+}
+
+
+
+
+
+
 
 
 /* --------------------- Responsive -------------------------------------*/
