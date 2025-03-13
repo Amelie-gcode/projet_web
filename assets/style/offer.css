@@ -1,0 +1,130 @@
+
+/*---------------------------------------- PAGE PRINCIPAL ---------------------------------------------*/
+/*--------------------------------------------- MAIN --------------------------------------------------*/
+
+
+main {
+    min-height: 100vh;
+}
+
+.offers-container-principal {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 15%;
+    gap: 75px;
+}
+
+
+/*---------------------------------------- PETITE OFFRE ---------------------------------------------*/
+
+
+.rapid-offers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 40%;
+}
+
+/*---------------------------------------- PRINCIPALE OFFRE ---------------------------------------------*/
+
+
+.principal-offer-offer-page {
+    position: sticky;
+    top: 100px;
+    width: 55%;
+    /* Assure que l'élément ne dépasse pas la hauteur de la vue */
+    max-height: calc(100vh - 170px);
+}
+
+/*---------------------------------------- APPLY PAGE ---------------------------------------------*/
+/*---------------------------------------- PRINCIPALE OFFRE ---------------------------------------------*/
+
+.principal-offer-apply-page {
+    border-radius: 15px;
+    width: 700px;
+    margin:50px 200px;
+    padding: 30px;
+}
+
+.offer-title-box {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.offer-title-box h2 {
+    margin-right: 0;
+}
+
+.principal-offer-apply-page .favorite-button{
+    position: static;
+}
+
+.principal-offer-apply-page footer .date{
+    position: static;
+    float: right;
+    margin-right: 40px;
+}
+
+.principal-offer-apply-page p {
+    text-align: left;
+}
+
+.fav-button-container-apply-page {
+    position: static;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------ PAGE POSTULER -------------------------------------------*/
+
+
+.postuler-main{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #fffcfc;
+}
+
+
+/*---------------------------------------- FAVORISE PAGE ---------------------------------------------*/
+/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+
+.favoris-offer-container{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+.offer-favoris {
+    width: 80%;
+    margin: auto 10%;
+}
+
+/*---------------------------------------- COMPANIE PAGE ---------------------------------------------*/
+/*---------------------------------------- LITTLE OFFER ---------------------------------------------*/
+
+.offer-company-offer {
+    width: 277px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .principal-offer {
+        display: none;
+    }
+
+    .rapid-offers-container {
+        width: 80%;
+    !important;
+    }
+
+    .offers-container-principal {
+        margin: auto;
+        margin-left: 20px;
+        justify-content: center;
+    }
+}
