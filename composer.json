@@ -1,3 +1,5 @@
+
+
 {
   "name": "vendor_name/projet_web",
   "description": "description",
@@ -10,5 +12,14 @@
     }
   ],
   "require": {
+    "twig/twig": "^3.16"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
   }
 }
