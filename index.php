@@ -12,6 +12,7 @@ error_reporting(E_ALL);
 require "vendor/autoload.php";
 
 use App\controllers\CompanyController;
+use App\controllers\ApplyController;
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
@@ -24,33 +25,61 @@ if (isset($_GET['uri'])) {
     $uri = 'company';
 }
 
+$parts = explode('/', $uri);
+$controllerName = isset($parts[0]) ? $parts[0] : 'company';
+$action = isset($parts[1]) ? $parts[1] : 'index';
 
-$controller = new CompanyController($twig);
-switch ($uri) {
+// Déterminer quel contrôleur utiliser en fonction de l'URI
+switch ($controllerName) {
     case 'company':
-        $controller->showAllCompany();
+        $controller = new CompanyController($twig);
 
+        // Gestion des actions pour le contrôleur Company
+        switch ($action) {
+            case 'index':
+                $controller->showAllCompany();
+                break;
+            case 'add':
+                $controller->addCompany();
+                break;
+            case 'update':
+                $controller->updateCompany();
+                break;
+            case 'delete':
+                $controller->deleteCompany();
+                break;
+            case 'show':
+                $controller->showCompany();
+                break;
+            default:
+                echo '404 Not Found - Action inconnue';
+                break;
+        }
         break;
-    case 'add_company':
-        $controller->addCompany();
-        echo 'Add Company action';
+
+    case 'application':
+        $controller = new ApplyController($twig);
+
+        switch ($action) {
+            case 'index':
+                $controller->showAllApply();
+                break;
+            case 'add':
+                $controller->addApply();
+                break;
+            case 'delete':
+                $controller->deleteApply();
+                break;
+            case 'show':
+                $controller->showApply();
+                break;
+            default:
+                echo '404 Not Found - Action inconnue';
+                break;
+        }
         break;
-    case 'update_company':
-        // TODO : call the checkTask method of the controller
-        $controller->updateCompany();
-        echo 'Update Company action';
-        break;
-    case 'delete_company':
-        // TODO : call the historyPage method of the controller
-        $controller->deleteCompany();
-        echo 'Delete Company';
-        break;
-    case 'get_company':
-        // TODO : call the aboutPage method of the controller
-        $controller->showCompany();
-        break;
+
     default:
-        // TODO : return a 404 error
-        echo '404 Not Found';
+        echo '404 Not Found - Contrôleur inconnu';
         break;
 }
