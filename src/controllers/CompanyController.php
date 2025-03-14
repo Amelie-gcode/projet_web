@@ -16,21 +16,24 @@ class CompanyController extends Controller
     }
     public function showCompany()
     {
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $company= $this->model->getCompany($id);
+            echo $this->templateEngine->render('companyInfo.twig.html', ['company' => $company]);
+        } else {
+            header('Location: /company');
         }
-        return $this->model->getCompany($id);
     }
 
     public function addCompany() {
-        if (isset($_POST['name']) &&
-            isset($_POST['email']) &&
-            isset($_POST['telephone']) &&
-            isset($_POST['description'])) {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['telephone'];
-            $description = $_POST['description'];
+        if (isset($_GET['name']) &&
+            isset($_GET['email']) &&
+            isset($_GET['telephone']) &&
+            isset($_GET['description'])) {
+            $name = $_GET['name'];
+            $email = $_GET['email'];
+            $phone = $_GET['telephone'];
+            $description = $_GET['description'];
             $this->model->addCompany($name, $email, $phone, $description);
             header('Location: /company');
         } else {
@@ -39,16 +42,16 @@ class CompanyController extends Controller
     }
 
     public function updateCompany() {
-        if (isset($_POST['id']) &&
-            isset($_POST['name']) &&
-            isset($_POST['email']) &&
-            isset($_POST['telephone']) &&
-            isset($_POST['description'])) {
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['telephone'];
-            $description = $_POST['description'];
+        if (isset($_GET['id']) &&
+            isset($_GET['name']) &&
+            isset($_GET['email']) &&
+            isset($_GET['telephone']) &&
+            isset($_GET['description'])) {
+            $id = $_GET['id'];
+            $name = $_GET['name'];
+            $email = $_GET['email'];
+            $phone = $_GET['telephone'];
+            $description = $_GET['description'];
             $this->model->updateCompany($id, $name, $email, $phone, $description);
             header('Location: /company');
         } else {
@@ -57,8 +60,8 @@ class CompanyController extends Controller
     }
 
     public function deleteCompany() {
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
             $this->model->deleteCompany($id);
             header('Location: /company');
         } else {

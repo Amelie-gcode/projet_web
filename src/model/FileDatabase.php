@@ -97,17 +97,16 @@ class FileDatabase implements Database {
      * @return array|null The record if found, null otherwise.
      */
     public function getRecord($id) {
-
-        if (!file_exists($this->path) or !is_readable($this->path)) {
+        if (!file_exists($this->path) || !is_readable($this->path)) {
             return null;
         }
 
         $file = fopen($this->path, 'r');
-        $header = fgetcsv($file);
+        $header = fgetcsv($file, 0, ',', '"', '\\');
 
-        while ($row = fgetcsv($file)) {
-            $record = array_combine($header, $row);
-            if ($record['id'] == $id) {
+        while ($row = fgetcsv($file, 0, ',', '"', '\\')) {
+            if (isset($row[0]) && $row[0] == $id) {
+                $record = array_combine($header, $row);
                 fclose($file);
                 return $record;
             }
@@ -141,37 +140,34 @@ class FileDatabase implements Database {
      * @return bool True if the record was updated successfully, false otherwise.
      */
     public function updateRecord($id, $record) {
-        if (!file_exists($this->path) or !is_readable($this->path)) {
+        if (!file_exists($this->path) || !is_readable($this->path)) {
             return false;
         }
 
         $file = fopen($this->path, 'r');
-        $header = fgetcsv($file);
+        $header = fgetcsv($file, 0, ',', '"', '\\');
         $data = [];
-        $new_record = array_unshift($record, $id);
-        $updated = false; // flag to check if the record was updated
+        $updated = false;
 
-        //Append header first
+        // Add header to data
         $data[] = $header;
 
-        while ($row = fgetcsv($file)) {
+        // Add ID to the beginning of the record
+        array_unshift($record, $id);
 
+        while ($row = fgetcsv($file, 0, ',', '"', '\\')) {
             if ($row[0] == $id) {
-                $row = $record;
+                $data[] = $record;
                 $updated = true;
+            } else {
+                $data[] = $row;
             }
-            $data[] = $row;
         }
 
         fclose($file);
 
         if ($updated) {
-            $file = fopen($this->path, 'w');
-            fputcsv($file, $header);
-            foreach ($data as $row) {
-                fputcsv($file, $row);
-            }
-            fclose($file);
+            $this->write($data);
         }
 
         return $updated;
@@ -183,20 +179,19 @@ class FileDatabase implements Database {
      * @return bool True if the record was deleted successfully, false otherwise.
      */
     public function deleteRecord($id) {
-        if (!file_exists($this->path) or !is_readable($this->path)) {
+        if (!file_exists($this->path) || !is_readable($this->path)) {
             return false;
         }
 
         $file = fopen($this->path, 'r');
-        $header = fgetcsv($file);
+        $header = fgetcsv($file, 0, ',', '"', '\\');
         $data = [];
-        $deleted = false; // flag to check if the record was deleted
+        $deleted = false;
 
-        //Append header first
+        // Add header first
         $data[] = $header;
 
-        while ($row = fgetcsv($file)) {
-
+        while ($row = fgetcsv($file, 0, ',', '"', '\\')) {
             if ($row[0] == $id) {
                 $deleted = true;
                 continue;
@@ -207,12 +202,7 @@ class FileDatabase implements Database {
         fclose($file);
 
         if ($deleted) {
-            $file = fopen($this->path, 'w');
-            fputcsv($file, $header);
-            foreach ($data as $row) {
-                fputcsv($file, $row);
-            }
-            fclose($file);
+            $this->write($data);
         }
 
         return $deleted;

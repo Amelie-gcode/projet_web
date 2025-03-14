@@ -70,8 +70,8 @@
                 Les entreprises
             </h1>
         </section>
-        {% for company in company %}
         <section class="offers-container entreprise-list">
+        {% for company in company %}
             <article class="offer entreprise-case">
                 <header>
                     <h1>{{company.name}}</h1>
@@ -83,14 +83,20 @@
                     </ul>
                     <p> Description : {{company.description}}</p>
                     <footer>
-                        <section class="btn-entreprise">
-                            <button class="see-more"> <a href="../Fiche-entreprise.html">voir plus</a> </button>
-                        </section>
+                        <div class="date">
+                            <p>publié le :</p>
+                            <time>09/02/2025</time>
+                        </div>
+                        <form class="btn-entreprise" action="#" method="get">
+                            <input name="uri" type="hidden" value="get_company">
+                            <input name="id" type="hidden" value="{{company.id}}">
+                            <button class="see-more" type="submit">voir plus</button>
+                        </form>
                     </footer>
                 </section>
             </article>
-        </section>
         {% endfor %}
+        </section>
         <section>
             <ul class="pagination">
                 <li><a href="?page=1">Page 1</a></li>
@@ -106,9 +112,9 @@
             <h3>À propos d'Amely</h3>
             <ul class="footer-list">
                 <li><a href="#">Qui sommes-nous</a></li>
-                <li><a href="#">Notre<li><a href="#">Mentions légales</a></li>
-                    <li><a href="#">Politique de confidentialité</a></li>
-                    <li><a href="#">CGU</a></li>
+                <li><a href="#">Notre Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">CGU</a></li>
             </ul>
         </section>
 
@@ -161,10 +167,10 @@
     </div>
 
 
-    <script src="assets/js/nav.js"></script>
-    <script src="assets/js/button.js"></script>
-    <script src="assets/js/modal.js"></script>
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/button.js"></script>
+    <script src="../assets/js/modal.js"></script>
 
-
+</main>
 </body>
 </html>

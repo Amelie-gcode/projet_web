@@ -4,6 +4,7 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -23,12 +24,12 @@ if (isset($_GET['uri'])) {
     $uri = 'company';
 }
 
-echo 'saffiche';
+
 $controller = new CompanyController($twig);
 switch ($uri) {
     case 'company':
         $controller->showAllCompany();
-        echo 'Welcome page';
+
         break;
     case 'add_company':
         $controller->addCompany();
@@ -47,7 +48,6 @@ switch ($uri) {
     case 'get_company':
         // TODO : call the aboutPage method of the controller
         $controller->showCompany();
-        echo 'the Company';
         break;
     default:
         // TODO : return a 404 error
