@@ -1,3 +1,25 @@
-2,1,annee.mois.jour,exemple de motivation
-3,1,annee.mois.jour,exemple de motivation
-5,2,annee.mois.jour,exemple de motivation
+id,id_offer,id_user,date,motivation
+0,2,1,2016,"exempledemotivation"
+1,2,1,2016,"exempledemotivation"
+2,3,1,2016,"exempledemotivation"
+3,5,2,2016,"exempledemotivation6"
+4,3,0,2024,"bla bla bla oui je veux"
+5,2,,2024,"bla bla bla oui je veux "
+6,2,,2024,"bla oula encore"
+7,2,,2024,"bla oula encore"
+8,2,,2024,"on test"
+9,2,,2024,"on test"
+10,2,,2024,"on test"
+11,2,,2024,"on test"
+12,2,,2024,"fzj,azs"
+13,2,,2024,"fzj,azs"
+14,2,,2024,"fzj,azs"
+15,2,,2024,"fzj,azs"
+16,2,,2024,"fzj,azs"
+17,2,,2024,"fzj,azs"
+18,2,,2024,"fzj,azs"
+19,2,,2024,"fzj,azs"
+20,2,,2024,"fzj,azs"
+21,2,,2024,"fzj,azs"
+22,2,,2024,"fzj,azs"
+23,2,,2024,"fzj,azs"

@@ -1,0 +1,5 @@
+id,name,forname,email,password,role
+0,game,amelie,"email@viacesi.fr",0000,etudiant
+1,game,amelie,"email@viacesi.fr",0000,admin
+2,game,amelie,"email@viacesi.fr",0000,pilote
+3,game,amelie,"email@viacesi.fr",0000,etudiant

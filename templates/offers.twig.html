@@ -164,7 +164,11 @@
                         <p>publié le :</p>
                         <time>{{offerI.offerDate}}</time>
                     </div>
-                    <button type="button" class="apply-button user-items"><a href="postuler.html">Postuler</a></button>
+                    <form action="#" method="get">
+                        <input type="hidden" name="uri" value="offer/show">
+                        <input type="hidden" name="id" value="{{offerI.id}}">
+                        <button type="submit" class="apply-button user-items">Postuler</button>
+                    </form>
                 </address>
             </footer>
         </article>

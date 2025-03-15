@@ -128,7 +128,7 @@ class FileDatabase implements Database {
         $file = fopen($this->path, 'a');
         $record = array('id' => $this->nextId) + $record;
         $this->nextId++;
-        fputcsv($file, $record);
+        fputcsv($file, $record, ',', '"', '\\');
         fclose($file);
         return $record['id'];
     }
