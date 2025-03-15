@@ -67,16 +67,19 @@
                 <th>{{user.email}}</th>
                 <th>{{user.role}}</th>
                 <th>
-                    <button class="action-bouton " ><a href="/?uri=user/show"> STATS </a> </button>
-                    <button class="action-bouton" ><a href="/?uri=user/modify"> MODIFIER </a> </button>
-                    <button class="action-bouton" onclick="supprimer()"><a href="/?uri=user/delete" >SUPPRIMER</a> </button>
+                    <form method="get" action="#">
+                        <input type="hidden" name="id" value="{{user.id}}">
+                        <button class="action-bouton" type="submit" name="uri" value="user/show">STATS</button>
+                        <button class="action-bouton" type="submit" name="uri" value="user/modify">MODIFIER</button>
+                        <button class="action-bouton" type="submit" name="uri" value="user/delete">SUPPRIMER</button>
+                    </form>
                 </th>
             </tr>
             {% endfor %}
             </tbody>
         </table>
     </section>
-    <button class="action-bouton"><a href="/?uri=user/add">Ajouter un compte </a></button>
+    <button class="action-bouton"><a href="../index.php/?uri=user/showForm">Ajouter un compte </a></button>
     <section>
         <ul class="pagination">
             <li><a href="?page=1">Page 1</a></li>

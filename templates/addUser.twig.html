@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Création de compte</title>
+    <link rel="stylesheet" href="../assets/style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body class="body-creation-compte">
+<section class="account-signup">
+    <form class="account-form" action="index.php/?uri=user/add" method="post">
+        <h1>Création de compte</h1>
+
+        <div class="account-form-group">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name">
+        </div>
+
+        <div class="account-form-group">
+            <label for="forname">Prénom</label>
+            <input type="text" id="forname" name="forname">
+        </div>
+
+        <div class="account-form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+        </div>
+
+        <div class="account-form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <div class="account-form-group">
+            <label class="account-role-label">Statut</label>
+            <div class="account-role-options">
+                <label class="account-role-choice">
+                    <input type="radio" name="role" value="etudiant">
+                    <span>Étudiant</span>
+                </label>
+                <label class="account-role-choice">
+                    <input type="radio" name="role" value="pilote">
+                    <span>Pilote</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="account-buttons">
+            <a href="../index.php/?uri=user/index" class="account-back">Retour</a>
+            <button type="submit" class="account-submit">Créer le compte</button>
+        </div>
+    </form>
+</section>
+<script src="../assets/js/validate.js"></script>
+</body>
+</html>

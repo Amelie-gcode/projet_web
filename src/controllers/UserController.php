@@ -30,7 +30,8 @@ class UserController extends Controller
             $this->model->deleteUser($id);
         }
     }
-    public function addUser(){
+    public function addUser(): void
+    {
         if (isset($_GET['name']) &&
             isset($_GET['forname']) &&
             isset($_GET['email']) &&
@@ -43,6 +44,8 @@ class UserController extends Controller
             $role = $_GET['role'];
             $this->model->addUser($name,$forname, $email, $password, $role);
             }
+        header('Location: index.php/?uri=user/index');
+
 
     }
     public function updateUser(){
@@ -60,6 +63,16 @@ class UserController extends Controller
             $role = $_GET['role'];
             $this->model->updateUser($id, $name, $forname, $email, $password, $role);
             }
+    }
+    public function showForm(){
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $user= $this->model->getUser($id);
+            echo $this->templateEngine->render('addUser.twig.html', ['user' => $user]);
+        }
+        else{
+            echo $this->templateEngine->render('addUser.twig.html');
+        }
     }
 
 }

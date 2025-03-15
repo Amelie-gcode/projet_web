@@ -4,6 +4,9 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 
+echo "<pre>";
+print_r($_GET);
+echo "</pre>";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -122,7 +125,9 @@ switch ($controllerName) {
                 break;
             case 'update':
                 $controller->updateUser();
-
+                break;
+            case 'showForm':
+                $controller->showForm();
             default:
                 echo '404 Not Found - Action inconnue';
                 break;

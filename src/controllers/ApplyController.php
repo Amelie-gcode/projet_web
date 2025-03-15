@@ -42,7 +42,7 @@ class ApplyController extends Controller
             $motivation = $_GET['motivation'];
             $this->model->addApply($id_offer, $id_user, $date, $motivation);
             }
-        header('Location: index.php');
+        header('Location: index.php/?uri=offer/index');
     }
 
 
