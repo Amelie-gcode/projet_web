@@ -13,6 +13,7 @@ require "vendor/autoload.php";
 
 use App\controllers\CompanyController;
 use App\controllers\ApplyController;
+use App\controllers\OfferController;
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
@@ -22,7 +23,7 @@ $twig = new \Twig\Environment($loader, [
 if (isset($_GET['uri'])) {
     $uri = $_GET['uri'];
 } else {
-    $uri = 'company';
+    $uri = 'offer/index';
 }
 
 $parts = explode('/', $uri);
@@ -57,7 +58,7 @@ switch ($controllerName) {
         }
         break;
 
-    case 'application':
+    case 'apply':
         $controller = new ApplyController($twig);
 
         switch ($action) {
@@ -78,8 +79,33 @@ switch ($controllerName) {
                 break;
         }
         break;
+    case 'offer':
+        $controller = new OfferController($twig);
+
+        switch ($action) {
+            case 'index':
+                $controller->showAllOffers();
+                break;
+            case 'add':
+                $controller->addOffer();
+                break;
+            case 'delete':
+                $controller->deleteOffer();
+                break;
+            case 'show':
+                $controller->showOffer();
+                break;
+            case 'update':
+                $controller->updateOffer();
+                break;
+            default:
+                echo '404 Not Found - Action inconnue';
+                break;
+        }
+        break;
 
     default:
         echo '404 Not Found - Contrôleur inconnu';
         break;
+
 }

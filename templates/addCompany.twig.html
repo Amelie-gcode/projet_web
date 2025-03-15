@@ -11,7 +11,7 @@
 </head>
 <body>
 <main class="company-creation">
-    <form class="company-form" action="/?uri=add_company" method="post">
+    <form class="company-form" action="#" method="get">
         <h1>Créer une entreprise</h1>
 
         <div class="company-form-group">
@@ -38,10 +38,10 @@
                 </div>
             </div>
         </section>
-
         <footer class="company-buttons">
             <a href="gerer-entreprise.html" class="company-back">Retour</a>
             <button type="submit" class="company-submit">Créer l'entreprise</button>
+            <input name="uri" type="hidden" value="company/add">
         </footer>
     </form>
 </main>

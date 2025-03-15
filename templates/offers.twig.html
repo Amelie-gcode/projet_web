@@ -81,11 +81,11 @@
             {% for offer in offers %}
             <article class="offer">
                 <header>
-                    <h1>offer.offer-title</h1>
+                    <h1>{{offer.offerTitle}}</h1>
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
-                        <li>offer.id_company</li>
+                        <li>{{offer.id_company}}</li>
                         <li>Strasbourg</li>
                     </ul>
                     <ul class="secondary-infos-offers">
@@ -97,294 +97,30 @@
                         <li>html</li>
                         <li>css</li>
                     </ul>
-                    <p>Rejoignez notre équipe pour un stage de 6 mois. Développez des fonctionnalités web avec React et Node.js sous la supervision de développeurs expérimentés. Idéal pour un étudiant motivé avec des compétences en HTML, CSS, et JavaScript.</p>
-                    <footer>
+                    <p>{{offer.offerDescription}}</p>
+                    <section>
                         <div class="date">
                             <p>publié le :</p>
-                            <time>09/02/2025</time>
+                            <time>{{offer.offerDate}}</time>
                         </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
+                        <form action="#" method="get">
+                            <input type="hidden" name="uri" value="offer/index">
+                            <input type="hidden" name="id" value="{{offer.id}}">
+                            <button type="submit" class="see-more">détails de l'offre</button>
+                        </form>
+                    </section>
                 </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
 
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
             </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>20000€</li>
-                        <li>stage</li>
-                        <li>avantage nature</li>
-                        <li>6 mois</li>
-                        <li>web</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
-            <article class="offer">
-                <header>
-                    <h1>Stage - Administrateur Système et Réseau H/F</h1>
-                </header>
-                <section class="offer-content">
-                    <ul class="principal-infos-offers">
-                        <li>Entreprise</li>
-                        <li>Lieu</li>
-                    </ul>
-                    <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
-                    </ul>
-                    <p>description très rapide dsfgdfgdt ezh rthy rteuh rfythureyhrth er eryuetry etryu etyty utyu</p>
-                    <footer>
-                        <div class="date">
-                            <p>publié le :</p>
-                            <time>09/02/2025</time>
-                        </div>
-
-                        <button class="see-more">détails de l'offre</button>
-                    </footer>
-                </section>
-            </article>
+            {% endfor %}
         </section>
+
 
         <article class="principal-offer principal-offer-offer-page">
             <header>
-                <h2>Stage - Administrateur Système et Réseau H/F</h2>
+                <h2>{{offerI.offerTitle}}</h2>
                 <ul class="principal-infos-offers">
-                    <li><a href="Fiche-entreprise.html">CESI - Ecole d'ingénieur</a></li>
+                    <li><a href="Fiche-entreprise.html">{{offerI.id_company}}</a></li>
                     <div class="company-grade">
                         <li><i class="fas fa-star favoris-icon"></i></li>
                         <li>3.5</li>
@@ -404,13 +140,7 @@
                 <section class="offer-description">
                     <h4>En quoi cela consiste ?</h4>
 
-                    <p>Ergo ego senator inimicus, si ita vultis, homini, amicus esse, sicut semper fui, rei publicae debeo. Quid? si ipsas inimicitias, depono rei publicae causa, quis me tandem iure reprehendet, praesertim cum ego omnium meorum consiliorum atque factorum exempla semper ex summorum hominum consiliis atque factis mihi censuerim petenda.
-
-                        Quod si rectum statuerimus vel concedere amicis, quidquid velint, vel impetrare ab iis, quidquid velimus, perfecta quidem sapientia si simus, nihil habeat res vitii; sed loquimur de iis amicis qui ante oculos sunt, quos vidimus aut de quibus memoriam accepimus, quos novit vita communis. Ex hoc numero nobis exempla sumenda sunt, et eorum quidem maxime qui ad sapientiam proxime accedunt.
-
-                        Alios autem dicere aiunt multo etiam inhumanius (quem locum breviter paulo ante perstrinxi) praesidii adiumentique causa, non benevolentiae neque caritatis, amicitias esse expetendas; itaque, ut quisque minimum firmitatis haberet minimumque virium, ita amicitias appetere maxime; ex eo fieri ut mulierculae magis amicitiarum praesidia quaerant quam viri et inopes quam opulenti et calamitosi quam ii qui putentur beati.
-
-                        Eodem tempore Serenianus ex duce, cuius ignavia populatam in Phoenice Celsen ante rettulimus, pulsatae maiestatis imperii reus iure postulatus ac lege, incertum qua potuit suffragatione absolvi, aperte convictus familiarem suum cum pileo, quo caput operiebat, incantato vetitis artibus ad templum misisse fatidicum, quaeritatum expresse an ei firmum portenderetur imperium, ut cupiebat, et cunctum.</p>
+                    <p>{{offerI.offerDescription}}</p>
                 </section>
                 <section class="offer-profil">
                     <h4>Profil rechercher</h4>
@@ -432,7 +162,7 @@
                     </aside>
                     <div class="date">
                         <p>publié le :</p>
-                        <time>09/02/2025</time>
+                        <time>{{offerI.offerDate}}</time>
                     </div>
                     <button type="button" class="apply-button user-items"><a href="postuler.html">Postuler</a></button>
                 </address>
@@ -454,7 +184,7 @@
         <h3>À propos d'Amely</h3>
         <ul class="footer-list">
             <li><a href="#">Qui sommes-nous</a></li>
-            <li><a href="#">Notre<li><a href="#">Mentions légales</a></li>
+            <li><a href="#">Notre Mentions légales</a></li>
                 <li><a href="#">Politique de confidentialité</a></li>
                 <li><a href="#">CGU</a></li>
         </ul>

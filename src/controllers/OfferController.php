@@ -11,10 +11,17 @@ class  OfferController extends Controller
         $this->model = new OfferModel();
         $this->templateEngine = $templateEngine;
     }
-    public function showAllApply()
+    public function showAllOffers()
     {
+        if(isset($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+        else {
+            $id = 1;
+        }
         $offers = $this->model->getAllOffers();
-        echo $this->templateEngine->render('offers.twig.html', ['offers' => $offers]);
+        $offerI = $this->model->getOffer($id);
+        echo $this->templateEngine->render('offers.twig.html', ['offers' => $offers, 'offerI' => $offerI]);
     }
     public function showOffer()
     {
@@ -34,14 +41,14 @@ class  OfferController extends Controller
     }
     public function addOffer() {
         if (isset($_GET['id_company']) &&
-            isset($_GET['offer-title']) &&
-            isset($_GET['offer-description']) &&
-            isset($_GET['offer-date']))
+            isset($_GET['offerTitle']) &&
+            isset($_GET['offerDescription']) &&
+            isset($_GET['offerDate']))
             {
                 $idcompany = $_GET['id_company'];
-                $title = $_GET['offer-title'];
-                $description = $_GET['offer-description'];
-                $date = $_GET['offer-date'];
+                $title = $_GET['offerTitle'];
+                $description = $_GET['offerDescription'];
+                $date = $_GET['offerDate'];
                 $this->model->addOffer($idcompany, $title, $description, $date);
                 header('Location: /offer');
             }
@@ -49,15 +56,15 @@ class  OfferController extends Controller
     public function updateOffer() {
         if (isset($_GET['id']) &&
             isset($_GET['id_company']) &&
-            isset($_GET['offer-title']) &&
-            isset($_GET['offer-description']) &&
-            isset($_GET['offer-date']))
+            isset($_GET['offerTitle']) &&
+            isset($_GET['offerDescription']) &&
+            isset($_GET['offerDate']))
             {
                 $id = $_GET['id'];
                 $idcompany = $_GET['id_company'];
-                $title = $_GET['offer-title'];
-                $description = $_GET['offer-description'];
-                $date = $_GET['offer-date'];
+                $title = $_GET['offerTitle'];
+                $description = $_GET['offerDescription'];
+                $date = $_GET['offerDate'];
                 $this->model->updateOffer($id, $idcompany, $title, $description, $date);
                 header('Location: /offer');
             }
