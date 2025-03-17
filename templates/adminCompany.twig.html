@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Admin-Amely</title>
     <link rel="stylesheet" href="../assets/style/style.css">
     <link rel="stylesheet" href="../assets/style/offer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Amely</title>
 </head>
 <body>
 <header>
     <nav class="navbar">
-        <img src="../assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
+        <img src="assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
         <button class="btn-hamburger"><i class="fa-solid fa-bars"></i></button>
         <button class="btn-cross"><i class="fa-solid fa-xmark"></i></button>
         <ul class="navbar-nav">
@@ -40,46 +37,43 @@
         </aside>
     </nav>
 </header>
-<h2 class="titre-etudiant"> GESTION DES COMPTES </h2>
-
-<form class="search-container">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" placeholder="Recherche un compte">
-</form>
-
-<main class="etudiant">
-    <section class="etudiant-tableau">
-        <table class ="tableau">
-            <thead>
-            <tr>
-                <th>PRENOM</th>
-                <th>NOM</th>
-                <th>E-MAIL</th>
-                <th>STATUT</th>
-                <th>ACTION</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-            <tr>
-                <th>{{user.forname}}</th>
-                <th>{{user.name}} </th>
-                <th>{{user.email}}</th>
-                <th>{{user.role}}</th>
-                <th>
-                    <form method="get" action="#">
-                        <input type="hidden" name="id" value="{{user.id}}">
-                        <button class="action-bouton" type="submit" name="uri" value="user/show">STATS</button>
-                        <button class="action-bouton" type="submit" name="uri" value="user/showForm">MODIFIER</button>
-                        <button class="action-bouton" type="submit" name="uri" value="user/delete">SUPPRIMER</button>
-                    </form>
-                </th>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+<main class="gerer-entreprise">
+    <section class="titre-entreprise">
+        <h1 class="titre-entreprise">
+            Gerer les entreprises
+        </h1>
     </section>
-    <button class="action-bouton"><a href="../index.php/?uri=user/showForm">Ajouter un compte </a></button>
+    <section class="offers-container entreprise-list">
+        {% for company in company %}
+            <article class="offer entreprise-case">
+                <header>
+                    <h1>{{company.name}}</h1>
+                </header>
+                <section class="offer-content">
+                    <ul class="principal-infos-offers">
+                        <li>{{company.email}}</li>
+                        <li>{{company.phone}}</li>
+                    </ul>
+                    <p> Description : {{company.description}}</p>
+                    <footer>
+                        <div class="date">
+                            <p>publié le :</p>
+                            <time>09/02/2025</time>
+                        </div>
+
+                    <form class="btn-entreprise" action="#" method="get">
+                        <input type="hidden" name="id" value="{{company.id}}">
+                        <button class="see-more " type="submit" name="uri" value="company/showForm">modifier</button>
+                        <button class="action-bouton" onclick="supprimer()" type="submit" name="uri" value="company/delete">Supprimer</button>
+                    </form>
+                </footer>
+            </section>
+        </article>
+        {% endfor %}
+    </section>
+    <form>
+    <button class="action-bouton ajout-offre" type="submit" name="uri" value="company/showForm"> +</button>
+    </form>
     <section>
         <ul class="pagination">
             <li><a href="?page=1">Page 1</a></li>
@@ -89,7 +83,6 @@
         </ul>
     </section>
 </main>
-</body>
 <footer class="page-footer">
     <section class="footer-section">
         <h3>À propos d'Amely</h3>
@@ -133,11 +126,11 @@
         </ul>
     </section>
 </footer>
-
+<button id="scrollToTop" style="display: none;">↑</button>
 <div id="deleteConfirmModal" class="confirm-modal">
     <div class="confirm-modal-content">
         <h3>Confirmation</h3>
-        <p>Souhaitez-vous supprimer le compte ?</p>
+        <p>Souhaitez-vous supprimer l'entreprise ?</p>
         <div class="confirm-modal-buttons">
             <button id="confirmYes">Oui</button>
             <button id="confirmNo">Non</button>
@@ -149,4 +142,7 @@
 <script src="assets/js/button.js"></script>
 <script src="assets/js/modal.js"></script>
 
+
+
+</body>
 </html>

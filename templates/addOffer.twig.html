@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/offer.css">
+    <link rel="stylesheet" href="../https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Amely</title>
+</head>
+<body>
+<main class="offer-creation">
+    <form class="offer-form" action="#" method="get">
+        <header>
+            <h1>Créer une offre</h1>
+        </header>
+        <section class="offer-form-section">
+            <div class="offer-form-group">
+                <label for="titre">Titre de l'offre</label>
+                <input type="text" id="titre" name="offerTitle" >
+            </div>
+
+            <div class="offer-form-group">
+                <label for="entreprise">Entreprise</label>
+                <select id="entreprise" name="id_company" >
+                    <option value="">Sélectionnez une entreprise</option>
+                    <option value="cesi">CESI</option>
+                    <option value="sopra">Sopra Steria</option>
+                    <option value="capgemini">Capgemini</option>
+                    <option value="atos">Atos</option>
+                    <option value="ibm">IBM</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="additional-info">
+            <h2>Informations supplémentaires</h2>
+
+            <fieldset class="offer-form-section">
+                <div class="offer-form-group">
+                    <label for="salaire">Salaire (€/mois)</label>
+                    <input type="number" id="salaire" name="salaire" min="0" >
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="duree">Durée (semaines)</label>
+                    <input type="number" id="duree" name="offerDate" min="1" >
+                </div>
+
+                <div class="offer-form-group type-container">
+                    <fieldset>
+                        <legend>Type de contrat</legend>
+                        <div class="type-options">
+                            <label class="type-choice">
+                                <input type="radio" name="type" value="stage" >
+                                <span>Stage</span>
+                            </label>
+                            <label class="type-choice">
+                                <input type="radio" name="type" value="alternance">
+                                <span>Alternance</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+
+            <fieldset class="domains-section">
+                <legend>Domaines</legend>
+                <div id="domains-container">
+                    <div class="domain-input">
+                        <input type="text" name="domaines[]"  aria-label="Domaine 1">
+                        <button type="button" class="remove-domain" style="display: none;" aria-label="Supprimer ce domaine">-</button>
+                    </div>
+                </div>
+                <button type="button" id="add-domain" class="add-domain" aria-label="Ajouter un domaine">+</button>
+            </fieldset>
+        </section>
+
+        <section class="descriptions-section">
+            <h2>Descriptions</h2>
+            <fieldset>
+                <div class="offer-form-group">
+                    <label for="description-courte">Description courte (max 250 caractères)</label>
+                    <textarea id="description-courte" name="description-courte" maxlength="250" ></textarea>
+                    <span class="char-count" aria-live="polite">0/250</span>
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="description-longue">Description détaillée de l'offre</label>
+                    <textarea id="description-longue" name="offerDescription" ></textarea>
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="profil">Profil recherché</label>
+                    <textarea id="profil" name="profil" ></textarea>
+                </div>
+            </fieldset>
+        </section>
+
+        <footer class="offer-buttons">
+            <a href="../gerer-offre.html" class="offer-back" role="button">Retour</a>
+            <input name="uri" type="hidden" value="offer/add">
+            <button type="submit" class="offer-submit" value="">Créer l'offre</button>
+        </footer>
+    </form>
+</main>
+
+<script src="../assets/js/button.js"></script>
+<script src="../assets/js/validate.js"></script>
+<script src="../assets/js/button.js"></script>
+</body>
+</html>

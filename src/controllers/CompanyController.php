@@ -5,14 +5,33 @@ use App\model\CompanyModel;
 
 class CompanyController extends Controller
 {
-    public function __construct($templateEngine) {
+    public function __construct($templateEngine)
+    {
         $this->model = new CompanyModel();
         $this->templateEngine = $templateEngine;
     }
+
     public function showAllCompany()
     {
         $company = $this->model->getAllCompany();
         echo $this->templateEngine->render('company.twig.html', ['company' => $company]);
+    }
+
+    public function showAdminCompany()
+    {
+        $company = $this->model->getAllCompany();
+        echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company]);
+    }
+    public function showForm()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $company= $this->model->getCompany($id);
+            echo $this->templateEngine->render('addCompany.twig.html', ['company' => $company]);
+        }
+        else{
+            echo $this->templateEngine->render('addCompany.twig.html');
+        }
     }
     public function showCompany()
     {
@@ -35,7 +54,9 @@ class CompanyController extends Controller
             $phone = $_GET['telephone'];
             $description = $_GET['description'];
             $this->model->addCompany($name, $email, $phone, $description);
-            header('Location: /company');
+            $company=$this->model->getAllCompany();
+            echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company]);
+
         } else {
             header('Location: /company');
         }

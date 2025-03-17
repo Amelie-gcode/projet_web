@@ -31,7 +31,7 @@ if (isset($_GET['uri'])) {
 }
 
 $parts = explode('/', $uri);
-$controllerName = isset($parts[0]) ? $parts[0] : 'company';
+$controllerName = isset($parts[0]) ? $parts[0] : 'offer';
 $action = isset($parts[1]) ? $parts[1] : 'index';
 
 // Déterminer quel contrôleur utiliser en fonction de l'URI
@@ -44,6 +44,9 @@ switch ($controllerName) {
             case 'index':
                 $controller->showAllCompany();
                 break;
+            case 'admin':
+                $controller->showAdminCompany();
+                break;
             case 'add':
                 $controller->addCompany();
                 break;
@@ -55,6 +58,9 @@ switch ($controllerName) {
                 break;
             case 'show':
                 $controller->showCompany();
+                break;
+            case 'showForm':
+                $controller->showForm();
                 break;
             default:
                 echo '404 Not Found - Action inconnue';
@@ -102,6 +108,8 @@ switch ($controllerName) {
             case 'update':
                 $controller->updateOffer();
                 break;
+            case 'showForm':
+                $controller->showForm();
             default:
                 echo '404 Not Found - Action inconnue';
                 break;

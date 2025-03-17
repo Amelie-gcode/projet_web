@@ -50,8 +50,8 @@ class  OfferController extends Controller
                 $description = $_GET['offerDescription'];
                 $date = $_GET['offerDate'];
                 $this->model->addOffer($idcompany, $title, $description, $date);
-                header('Location: /offer');
             }
+
     }
     public function updateOffer() {
         if (isset($_GET['id']) &&
@@ -68,6 +68,10 @@ class  OfferController extends Controller
                 $this->model->updateOffer($id, $idcompany, $title, $description, $date);
                 header('Location: /offer');
             }
+    }
+
+    public function showForm() {
+        echo $this->templateEngine->render('addOffer.twig.html');
     }
 
 }

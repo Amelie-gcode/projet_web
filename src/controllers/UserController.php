@@ -32,19 +32,18 @@ class UserController extends Controller
     }
     public function addUser(): void
     {
-        if (isset($_GET['name']) &&
-            isset($_GET['forname']) &&
-            isset($_GET['email']) &&
-            isset($_GET['password']) &&
-            isset($_GET['role'])) {
-            $name = $_GET['name'];
-            $forname = $_GET['forname'];
-            $email = $_GET['email'];
-            $password = $_GET['password'];
-            $role = $_GET['role'];
+        if (isset($_POST['name']) &&
+            isset($_POST['forname']) &&
+            isset($_POST['email']) &&
+            isset($_POST['password']) &&
+            isset($_POST['role'])) {
+            $name = $_POST['name'];
+            $forname = $_POST['forname'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $role = $_POST['role'];
             $this->model->addUser($name,$forname, $email, $password, $role);
             }
-        header('Location: index.php/?uri=user/index');
 
 
     }
