@@ -11,12 +11,12 @@
 </head>
 <body>
 <main class="company-creation">
-    <form class="company-form" action="/?uri=add_company" method="post">
+    <form class="company-form" action="#" method="get">
         <h1>Créer une entreprise</h1>
 
         <div class="company-form-group">
-            <label for="nom">Nom de l'entreprise</label>
-            <input type="text" id="nom" name="nom">
+            <label for="name">Nom de l'entreprise</label>
+            <input type="text" id="name" name="name">
         </div>
 
         <div class="company-form-group">
@@ -38,10 +38,11 @@
                 </div>
             </div>
         </section>
-
         <footer class="company-buttons">
-            <a href="gerer-entreprise.html" class="company-back">Retour</a>
+            <a href="../index.php/uri=company/index" class="company-back">Retour</a>
+            <input name="uri" type="hidden" value="company/add">
             <button type="submit" class="company-submit">Créer l'entreprise</button>
+
         </footer>
     </form>
 </main>

@@ -1,0 +1,151 @@
+{# templates/offers.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Offres{% endblock %}
+
+{% block content %}
+
+
+<form class="search-container">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" name="search" placeholder="Recherche un stage !">
+</form>
+<form class="filters-container">
+    <div class="filter">
+        <input type="checkbox" id="filter1" name="filter1" value="filter1">
+        <label for="filter1">Stage</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter2" name="filter2" value="filter2">
+        <label for="filter2">Alternance</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter3" name="filter3" value="filter3">
+        <label for="filter3">- 3 mois</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter4" name="filter4" value="filter4">
+        <label for="filter4">+ 3 mois</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter5" name="filter5" value="filter5">
+        <label for="filter5">réseaux</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter6" name="filter6" value="filter6">
+        <label for="filter6">web</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter7" name="filter7" value="filter7">
+        <label for="filter7">big data</label>
+    </div>
+</form>
+<main class ="page_offre">
+    <section class="offers-container-principal">
+        <section class="rapid-offers-container">
+            {% for offer in offers %}
+            <article class="offer">
+                <header>
+                    <h1>{{offer.offerTitle}}</h1>
+                </header>
+                <section class="offer-content">
+                    <ul class="principal-infos-offers">
+                        <li>{{offer.id_company}}</li>
+                        <li>Strasbourg</li>
+                    </ul>
+                    <ul class="secondary-infos-offers">
+                        <li>20000€</li>
+                        <li>stage</li>
+                        <li>avantage nature</li>
+                        <li>6 mois</li>
+                        <li>web</li>
+                        <li>html</li>
+                        <li>css</li>
+                    </ul>
+                    <p>{{offer.offerDescription}}</p>
+                    <section>
+                        <div class="date">
+                            <p>publié le :</p>
+                            <time>{{offer.offerDate}}</time>
+                        </div>
+                        <form action="#" method="get">
+                            <input type="hidden" name="uri" value="offer/index">
+                            <input type="hidden" name="id" value="{{offer.id}}">
+                            <button type="submit" class="see-more">détails de l'offre</button>
+                        </form>
+                    </section>
+                </section>
+
+            </article>
+            {% endfor %}
+        </section>
+
+
+        <article class="principal-offer principal-offer-offer-page">
+            <header>
+                <h2>{{offerI.offerTitle}}</h2>
+                <ul class="principal-infos-offers">
+                    <li><a href="Fiche-entreprise.html">{{offerI.id_company}}</a></li>
+                    <div class="company-grade">
+                        <li><i class="fas fa-star favoris-icon"></i></li>
+                        <li>3.5</li>
+                    </div>
+                    <li>Strasbourg</li>
+                    <li class="nb-candidats" >46 candidats</li>
+                </ul>
+                <div class="fav-button-container">
+                    <button type="button" class="favorite-button" aria-label="Ajouter aux favoris">
+                        <i class="far fa-heart heart-icon"></i>
+                    </button>
+                    <p class="nb-fav">53</p>
+                </div>
+                <h3>Déscription du poste</h3>
+            </header>
+            <section class="offer-content">
+                <section class="offer-description">
+                    <h4>En quoi cela consiste ?</h4>
+
+                    <p>{{offerI.offerDescription}}</p>
+                </section>
+                <section class="offer-profil">
+                    <h4>Profil rechercher</h4>
+                    <p>Per hoc minui studium suum existimans Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocque deformi genere mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum.</p>
+                </section>
+            </section>
+            <footer>
+                <address>
+                    <h3>Contact</h3>
+                    <aside class="contact-container">
+                        <div class="contact-info">
+                            <p>Email :</p>
+                            <p class="offer-email">example@test.com</p>
+                        </div>
+                        <div class="contact-info">
+                            <p>Tel. :</p>
+                            <p class="offer-phone">06 76 92 34 40</p>
+                        </div>
+                    </aside>
+                    <div class="date">
+                        <p>publié le :</p>
+                        <time>{{offerI.offerDate}}</time>
+                    </div>
+                    <form action="#" method="get">
+                        <input type="hidden" name="uri" value="offer/show">
+                        <input type="hidden" name="id" value="{{offerI.id}}">
+                        <button type="submit" class="apply-button user-items">Postuler</button>
+                    </form>
+                </address>
+            </footer>
+        </article>
+    </section>
+    <section>
+        <ul class="pagination">
+            <li><a href="?page=1">Page 1</a></li>
+            <li><a href="?page=2">Page 2</a></li>
+            <li><a href="?page=3">Page 3</a></li>
+            <!-- Ajoutez plus de liens de pagination ici -->
+        </ul>
+    </section>
+
+</main>
+{% endblock %}

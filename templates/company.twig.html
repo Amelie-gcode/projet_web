@@ -1,42 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../assets/style/style.css">
-    <link rel="stylesheet" href="../assets/style/offer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{# templates/company.twig.html #}
+{% extends 'base.twig.html' %}
 
-    <title>Amely/entreprise</title>
-</head>
+{% block title %}Entreprises{% endblock %}
+
+{% block content %}
 <body>
-<header>
-    <nav class="navbar">
-        <img src="../assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
-        <button class="btn-hamburger"><i class="fa-solid fa-bars"></i></button>
-        <button class="btn-cross"><i class="fa-solid fa-xmark"></i></button>
-        <ul class="navbar-nav">
-            <li><a href="../entreprise.html" class="nav-items">Entreprise</a></li>
-            <li><a href="../index.html" class="nav-items">Offres</a></li>
-            <li><a href="../contact.html" class="nav-items">Contact</a></li>
-        </ul>
-        <aside class="nav-user">
-            <button class="user-icon" aria-expanded="false" aria-controls="user-menu">
-                <i class="fa-solid fa-user"></i>
-            </button>
-            <ul id="user-menu" class="dropdown-menu">
-                <li><a href="" class="user-items">Profil</a></li>
-                <li><a href="../favoris.html" class="user-items">Mes offres</a></li>
-                <li><a href="../admin-page.html" class="user-items">Gestion compte</a></li>
-                <li><a href="../gerer-offre.html" class="user-items">Gestion offre</a></li>
-                <li><a href="../gerer-entreprise.html" class="user-items">Gestion entreprise</a></li>
-                <li><a href="" class="user-items">Déconnexion</a></li>
-            </ul>
-        </aside>
-    </nav>
-</header>
 <form class="search-container">
     <i class="fa-solid fa-magnifying-glass"></i>
     <input type="text" placeholder="Recherche une entreprise !">
@@ -88,7 +56,7 @@
                             <time>09/02/2025</time>
                         </div>
                         <form class="btn-entreprise" action="#" method="get">
-                            <input name="uri" type="hidden" value="get_company">
+                            <input name="uri" type="hidden" value="company/show">
                             <input name="id" type="hidden" value="{{company.id}}">
                             <button class="see-more" type="submit">voir plus</button>
                         </form>
@@ -173,4 +141,4 @@
 
 </main>
 </body>
-</html>
+{% endblock %}
