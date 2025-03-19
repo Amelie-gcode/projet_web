@@ -887,25 +887,37 @@ input[type="file"] {
     margin-right: 10px;
 }
 .subtitre_fav{
-    margin-left: 10%;
-    margin-right: 10%;
-    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3%;
 }
-.separation{
-    font-size: 40px;
-    margin: 5px;
+#separation{
+    display: flex;
+    height: 60px;
+    color: #0b0a0a;
+    border-left:3px solid black;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .favoris{
     margin-bottom: 50px;
 }
-.fav-btn{
+.fav-btn1{
     background-color: #ffdbdb;
     color: #0b0a0a;
     border: none;
-    font-size: 30px;
+    font-size: 200%;
     text-decoration: none;
     cursor: pointer;
-
+}
+.fav-btn2{
+    background-color: #ffdbdb;
+    color: #0b0a0a;
+    border: none;
+    font-size: 200%;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: -75px;
 }
 .subtitre_fav :hover{
     opacity: 0.8;
