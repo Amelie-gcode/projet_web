@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Création</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+{# templates/addCompany.twig.html #}
+{% extends 'baseForm.twig.html' %}
+
+{% block title %}Nouvelle entreprise{% endblock %}
+
+{% block content %}
+
 <main class="company-creation">
     <form class="company-form" action="#" method="get">
         <h1>Créer une entreprise</h1>
@@ -46,6 +41,4 @@
         </footer>
     </form>
 </main>
-<script src="../assets/js/validate.js"></script>
-</body>
-</html>
+{% endblock %}

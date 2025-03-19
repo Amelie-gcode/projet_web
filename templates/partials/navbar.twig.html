@@ -1,12 +1,12 @@
 {# templates/partials/navbar.twig.html #}
 <header>
     <nav class="navbar">
-        <img src="../assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
+        <img src="/assets/image/logo.png" alt="Logo de l'entreprise" class="logo">
         <button class="btn-hamburger"><i class="fa-solid fa-bars"></i></button>
         <button class="btn-cross"><i class="fa-solid fa-xmark"></i></button>
         <ul class="navbar-nav">
-            <li><a href="/?uri=company" class="nav-items">Entreprise</a></li>
-            <li><a href="/?uri=offer" class="nav-items">Offres</a></li>
+            <li><a href="index.php?uri=company/index" class="nav-items">Entreprise</a></li>
+            <li><a href="index.php?uri=offer/index" class="nav-items">Offres</a></li>
             <li><a href="/?uri=contact" class="nav-items">Contact</a></li>
         </ul>
         <aside class="nav-user">
@@ -16,8 +16,8 @@
             <ul id="user-menu" class="dropdown-menu">
                 <li><a href="" class="user-items">Profil</a></li>
                 <li><a href="favoris.html" class="user-items">Mes offres</a></li>
-                <li><a href="/?uri=user/index" class="user-items">Gestion compte</a></li>
-                <li><a href="/?uri=offer/admin" class="user-items">Gestion offre</a></li>
+                <li><a href="index.php?uri=user/index" class="user-items">Gestion compte</a></li>
+                <li><a href="index.php?uri=offer/admin" class="user-items">Gestion offre</a></li>
                 <li><a href="/?uri=company/admin" class="user-items">Gestion entreprise</a></li>
                 <li><a href="" class="user-items">Déconnexion</a></li>
             </ul>

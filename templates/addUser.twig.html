@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Création de compte</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{# templates/addCompany.twig.html #}
+{% extends 'baseForm.twig.html' %}
 
-</head>
-<body class="body-creation-compte">
+{% block title %}Nouvelle entreprise{% endblock %}
+
+{% block content %}
+<!-- <body class="body-creation-compte"> -->
 <section class="account-signup">
     <form class="account-form" action="../index.php/?uri=user/add" method="post">
         <h1>Création de compte</h1>
@@ -54,5 +50,5 @@
     </form>
 </section>
 <script src="../assets/js/validate.js"></script>
-</body>
-</html>
+<!-- </body> -->
+{% endblock %}

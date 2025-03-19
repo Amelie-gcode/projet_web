@@ -110,6 +110,7 @@ switch ($controllerName) {
                 break;
             case 'showForm':
                 $controller->showForm();
+                break;
             default:
                 echo '404 Not Found - Action inconnue';
                 break;
@@ -136,6 +137,7 @@ switch ($controllerName) {
                 break;
             case 'showForm':
                 $controller->showForm();
+                break;
             default:
                 echo '404 Not Found - Action inconnue';
                 break;
