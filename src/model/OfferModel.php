@@ -1,52 +1,96 @@
 <?php
 
 namespace App\model;
+use PDO;
+
 
 class OfferModel extends Model
 {
     public function __construct($connection = null) {
         if(is_null($connection)) {
-            $this->connection = new FileDatabase('offers', ['id_company','offerTitle','offerDescription', 'offerDate']);
+            $this->connection = new DatabaseSQL();
         } else {
             $this->connection = $connection;
         }
     }
-    public function getAllOffers() {
-        return $this->connection->getAllRecords();
+    public function getAllOffers(){
+        $query="SELECT * FROM Offers";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
+
+
     }
-    public function getOffer($id) {
-        return $this->connection->getRecord($id);
+    function getOfferById($id) {
+        $query = "SELECT * FROM Offers WHERE offer_id = :id";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
-    public function addOffer($id_company, $offerTitle, $offerDescription, $offerDate) {
-        $offer = [
-            'id_company' => $id_company,
-            'offerTitle' => $offerTitle,
-            'offer-description' => $offerDescription,
-            'offer-date' => $offerDate
-        ];
-        return $this->connection->insertRecord($offer);
+    public function addOffer($id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate) {
+        $query = "INSERT INTO Offers (company_id, offer_title, offer_long_description,offer_short_description,offer_profile_description,offer_salary, offer_type,offer_start_date,offer_end_date) VALUES (:id_company, :offerTitle, :offerLongDescription,:offerShortDescription,:offerProfileDescription, :offerSalary, :offerType,:offerStartDate,:offerEndDate)";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
+        $stmt->bindValue(":offerTitle", $offerTitle, PDO::PARAM_STR);
+        $stmt->bindValue(":offerLongDescription", $offerLongDescription, PDO::PARAM_STR);
+        $stmt->bindValue(":offerShortDescription", $offerShortDescription, PDO::PARAM_STR);
+        $stmt->bindValue(":offerProfileDescription", $offerProfileDescription, PDO::PARAM_STR);
+        $stmt->bindValue(":offerSalary", $offerSalary, PDO::PARAM_STR);
+        $stmt->bindValue(":offerType", $offerType, PDO::PARAM_STR);
+        $stmt->bindValue(":offerStartDate", $offerStartDate, PDO::PARAM_STR);
+        $stmt->bindValue(":offerEndDate", $offerEndDate, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt;
+
     }
     public function deleteOffer($id) {
-        return $this->connection->deleteRecord($id);
+        $query= "DELETE  FROM Offers WHERE offer_id = :id";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
     }
-    public function updateOffer($id, $id_company, $offerTitle, $offerDescription, $offerDate) {
-        $offer = [
-            'id_company' => $id_company,
-            'offer-title' => $offerTitle,
-            'offer-description' => $offerDescription,
-            'offer-date' => $offerDate
-        ];
-            return $this->connection->updateRecord($id, $offer);
+    public function updateOffer($offer_id,$id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate) {
+        $query = (
+            "UPDATE Offers SET
+                  company_id = :id_company,
+                  offer_title = :offerTitle,
+                  offer_long_description = :offerLongDescription,
+                  offer_short_description = :offerShortDescription,
+                  offer_profile_description = :offerProfileDescription,
+                  offer_salary = :offerSalary,
+                  offer_type = :offerType,
+                  offer_start_date = :offerStartDate,
+                  offer_end_date = :offerEndDate
+              WHERE offer_id = :id"
+        );
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
+        $stmt->bindValue(":offerTitle", $offerTitle, PDO::PARAM_STR);
+        $stmt->bindValue(":offerLongDescription", $offerLongDescription, PDO::PARAM_STR);
+        $stmt->bindValue(":offerShortDescription", $offerShortDescription, PDO::PARAM_STR);
+        $stmt->bindValue(":offerProfileDescription", $offerProfileDescription, PDO::PARAM_STR);
+        $stmt->bindValue(":offerSalary", $offerSalary, PDO::PARAM_STR);
+        $stmt->bindValue(":offerType", $offerType, PDO::PARAM_STR);
+        $stmt->bindValue(":offerStartDate", $offerStartDate, PDO::PARAM_STR);
+        $stmt->bindValue(":offerEndDate", $offerEndDate, PDO::PARAM_STR);
+        $stmt->bindValue(":id", $offer_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
     }
     public function getOfferByCompany($id_company) {
-        $data = [];
-        $data = $this->getAllOffers();
-        foreach($data as $offer) {
-            if($offer['id_company'] != $id_company) {
-                unset($offer);
-            }
-        }
-        return $data;
+        $query = (
+            "SELECT * FROM Offers WHERE company_id = :id_company"
+        );
+
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
 

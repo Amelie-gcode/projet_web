@@ -24,8 +24,8 @@ class CompanyController extends Controller
     }
     public function showForm()
     {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['company_id'])) {
+            $id = $_GET['company_id'];
             $company= $this->model->getCompany($id);
             echo $this->templateEngine->render('addCompany.twig.html', ['company' => $company]);
         }
@@ -35,8 +35,8 @@ class CompanyController extends Controller
     }
     public function showCompany()
     {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['company_id'])) {
+            $id = $_GET['company_id'];
             $company= $this->model->getCompany($id);
             echo $this->templateEngine->render('companyInfo.twig.html', ['company' => $company]);
         } else {
@@ -81,8 +81,8 @@ class CompanyController extends Controller
     }
 
     public function deleteCompany() {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['company_id'])) {
+            $id = $_GET['company_id'];
             $this->model->deleteCompany($id);
             header('Location: /company');
         } else {

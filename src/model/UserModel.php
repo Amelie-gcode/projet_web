@@ -1,56 +1,76 @@
 <?php
 
 namespace App\model;
-
+use PDO;
 
 class UserModel extends Model
 {
     public function __construct($connection = null) {
         if(is_null($connection)) {
-            $this->connection = new FileDatabase('users', ['name','forname','email', 'password','role']);
+            $this->connection = new DatabaseSQL();
         } else {
             $this->connection = $connection;
         }
     }
     public function getAllUsers() {
-        return $this->connection->getAllRecords();
+        $query="SELECT * FROM Users";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
     public function getUser($id) {
-        return $this->connection->getRecord($id);
+        $query = "SELECT * FROM Users WHERE user_id = :id";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
     public function addUser($name, $forname, $email, $password, $role) {
-        $user = [
-            'name' => $name,
-            'forname' => $forname,
-            'email' => $email,
-            'password' => $password,
-            'role' => $role
-        ];
-        return $this->connection->insertRecord($user);
+        $query="INSERT INTO Users (user_lastname,user_firstname,user_email,user_password,user_status) VALUES (:name, :forname, :email, :password, :role)";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmt->bindValue(":forname", $forname, PDO::PARAM_STR);
+        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+        $stmt->bindValue(":password", $password, PDO::PARAM_STR);
+        $stmt->bindValue(":role", $role, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt;
     }
     public function deleteUser($id) {
-        return $this->connection->deleteRecord($id);
+        $query= "DELETE  FROM Users WHERE user_id = :id";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
     }
     public function updateUser($id, $name, $forname, $email, $password, $role) {
-        $user = [
-            'name' => $name,
-            'forname' => $forname,
-            'email' => $email,
-            'password' => $password,
-            'role' => $role
-        ];
-        return $this->connection->updateRecord($id, $user);
+        $query = (
+            "UPDATE Users SET
+                  user_lastname = :name,
+                  user_firstname = :forname,
+                  user_email = :email,
+                  user_password = :password,
+                  user_status = :role
+              WHERE user_id = :id"
+        );
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmt->bindValue(":forname", $forname, PDO::PARAM_STR);
+        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+        $stmt->bindValue(":password", $password, PDO::PARAM_STR);
+        $stmt->bindValue(":role", $role, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt;
 
     }
     public function getUserByRole($role) {
-        $data = [];
-        $data = $this->getAllUsers();
-        foreach($data as $user) {
-            if($user['role'] != $role) {
-                unset($user);
-            }
-        }
-        return $data;
+        $query = "SELECT * FROM Users WHERE user_status = :role";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":role", $role, PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
 

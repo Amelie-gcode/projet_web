@@ -2,6 +2,9 @@
 
 namespace App\model;
 
+use PDO;
+use PDOException;
+
 class DatabaseSQL {
     private $host = "20.229.240.117"; // Adresse du serveur MySQL
     private $dbname = "projet_web"; // Nom de la base de données

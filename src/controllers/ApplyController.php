@@ -15,22 +15,25 @@ class ApplyController extends Controller
         $apply = $this->model->getAllApply();
         echo $this->templateEngine->render('Apply.twig.html', ['apply' => $apply]);
     }
-    public function showApply()
+    public function showApplyByOffer()
     {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $apply= $this->model->getApply($id);
+        if (isset($_GET['offer_id'])) {
+            $id = $_GET['offer_id'];
+            $apply= $this->model->getApplyByOffer($id);
             echo $this->templateEngine->render('applyInfo.twig.html', ['apply' => $apply]);
         } else {
             header('Location: /apply');
         }
     }
-    public function deleteApply() {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $this->model->deleteApply($id);
+    public function showApplyByUser()
+    {
+        if (isset($_GET['user_id'])) {
+            $id = $_GET['user_id'];
+            $apply= $this->model->getApplyByUser($id);
+            echo $this->templateEngine->render('Likes.twig.html', ['apply' => $apply]);
         }
     }
+
     public function addApply() {
         if (isset($_GET['id_offer']) &&
             isset($_GET['id_user']) &&
@@ -43,6 +46,15 @@ class ApplyController extends Controller
             $this->model->addApply($id_offer, $id_user, $date, $motivation);
             }
         header('Location: index.php/?uri=offer/index');
+    }
+    public function nbApplyByCompany()
+    {
+        if (isset($_GET['id_company'])) {
+            $id = $_GET['id_company'];
+            $apply=$this->model->getNumberApplyByCompany($id);
+            echo $apply;
+        }
+
     }
 
 

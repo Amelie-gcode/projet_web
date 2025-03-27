@@ -16,8 +16,8 @@ class UserController extends Controller
 
     }
     public function showUser(){
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['user_id'])) {
+            $id = $_GET['user_id'];
             $user= $this->model->getUser($id);
             echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user]);
         } else {
@@ -25,8 +25,8 @@ class UserController extends Controller
         }
     }
     public function deleteUser(){
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['user_id'])) {
+            $id = $_GET['user_id'];
             $this->model->deleteUser($id);
         }
     }

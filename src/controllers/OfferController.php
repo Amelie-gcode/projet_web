@@ -13,21 +13,21 @@ class  OfferController extends Controller
     }
     public function showAllOffers()
     {
-        if(isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if(isset($_GET['offer_id'])) {
+            $id = $_GET['offer_id'];
         }
         else {
             $id = 1;
         }
         $offers = $this->model->getAllOffers();
-        $offerI = $this->model->getOffer($id);
+        $offerI = $this->model->getOfferById($id);
         echo $this->templateEngine->render('offers.twig.html', ['offers' => $offers, 'offerI' => $offerI]);
     }
     public function showOffer()
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $offer= $this->model->getOffer($id);
+            $offer= $this->model->getOfferById($id);
             echo $this->templateEngine->render('offerInfo.twig.html', ['offer' => $offer]);
         } else {
             header('Location: /offer');
@@ -57,21 +57,50 @@ class  OfferController extends Controller
         if (isset($_GET['id']) &&
             isset($_GET['id_company']) &&
             isset($_GET['offerTitle']) &&
-            isset($_GET['offerDescription']) &&
-            isset($_GET['offerDate']))
+            isset($_GET['offerLongDescription']) &&
+            isset($_GET['offerShortDescription']) &&
+            isset($_GET['offerProfileDescription']) &&
+            isset($_GET['offerSalary'])&&
+            isset($_GET['offerType'])&&
+            isset($_GET['offerStartDate'])&&
+            isset($_GET['offerEndDate'])
+
+        )
             {
-                $id = $_GET['id'];
-                $idcompany = $_GET['id_company'];
-                $title = $_GET['offerTitle'];
-                $description = $_GET['offerDescription'];
-                $date = $_GET['offerDate'];
-                $this->model->updateOffer($id, $idcompany, $title, $description, $date);
+                $offer_id = $_GET['id'];
+                $id_company = $_GET['id_company'];
+                $offerTitle = $_GET['offerTitle'];
+                $offerLongDescription = $_GET['offerLongDescription'];
+                $offerShortDescription = $_GET['offerShortDescription'];
+                $offerProfileDescription = $_GET['offerProfileDescription'];
+                $offerSalary = $_GET['offerSalary'];
+                $offerType = $_GET['offerType'];
+                $offerStartDate = $_GET['offerStartDate'];
+                $offerEndDate = $_GET['offerEndDate'];
+                $this->model->updateOffer( $offer_id,$id_company,
+                    $offerTitle,
+                    $offerLongDescription,
+                    $offerShortDescription,
+                    $offerProfileDescription,
+                    $offerSalary,
+                    $offerType,
+                    $offerStartDate,
+                    $offerEndDate);
                 header('Location: /offer');
             }
     }
 
     public function showForm() {
         echo $this->templateEngine->render('addOffer.twig.html');
+    }
+    public function showOfferByCompany() {
+        if (isset($_GET['company_id'])) {
+            $id = $_GET['company_id'];
+            $offers = $this->model->getOfferByCompany($id);
+            echo $this->templateEngine->render('companyInfo.twig.html', ['offers' => $offers]);
+        } else {
+            header('Location: /offer');
+        }
     }
 
 }
