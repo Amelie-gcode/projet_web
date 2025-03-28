@@ -18,6 +18,12 @@ use App\controllers\CompanyController;
 use App\controllers\ApplyController;
 use App\controllers\OfferController;
 use App\controllers\UserController;
+use App\controllers\EvaluationsController;
+use App\controllers\LikesController;
+use App\controllers\RequiresController;
+use App\controllers\SkillsController;
+use App\controllers\StudentsController;
+
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
@@ -30,6 +36,8 @@ if (isset($_GET['uri'])) {
     $uri = 'offer/index';
 }
 
+$templateEngine = $twig;
+
 $parts = explode('/', $uri);
 $controllerName = isset($parts[0]) ? $parts[0] : 'offer';
 $action = isset($parts[1]) ? $parts[1] : 'index';
@@ -38,6 +46,9 @@ $action = isset($parts[1]) ? $parts[1] : 'index';
 switch ($controllerName) {
     case 'company':
         $controller = new CompanyController($twig);
+        $evalController = new EvaluationsController($twig);
+        $applyController = new ApplyController($twig);
+        $offerController = new OfferController($twig);
 
         // Gestion des actions pour le contrôleur Company
         switch ($action) {
@@ -57,7 +68,11 @@ switch ($controllerName) {
                 $controller->deleteCompany();
                 break;
             case 'show':
-                $controller->showCompany();
+                $company=$controller->showCompany();
+                $evaluations= $evalController->getEvaluationByCompany();
+                $nbApply=$applyController->nbApplyByCompany();
+                $offers=$offerController->showOfferByCompany();
+                echo $templateEngine->render('companyInfo.twig.html', ['company' => $company, 'evaluations' => $evaluations , 'nbApply' => $nbApply , 'offers' => $offers] );
                 break;
             case 'showForm':
                 $controller->showForm();
@@ -70,6 +85,7 @@ switch ($controllerName) {
 
     case 'apply':
         $controller = new ApplyController($twig);
+        $likesController = new LikesController($twig);
 
         switch ($action) {
             case 'index':
@@ -82,7 +98,10 @@ switch ($controllerName) {
                 $controller->deleteApply();
                 break;
             case 'show':
-                $controller->showApply();
+                $applications=$controller->showApplyByUser();
+                $likes=$likesController->showLikesByStudent();
+
+                echo $this->templateEngine->render('Likes.twig.html', ['applications' => $applications, 'likes' => $likes]);
                 break;
             default:
                 echo '404 Not Found - Action inconnue';
@@ -98,19 +117,25 @@ switch ($controllerName) {
                 break;
             case 'add':
                 $controller->addOffer();
+                header('Location: index.php?uri=offer/admin');
                 break;
             case 'delete':
                 $controller->deleteOffer();
+                header('Location: index.php?uri=offer/admin');
                 break;
             case 'show':
-                $controller->showOffer();
+
                 break;
             case 'update':
                 $controller->updateOffer();
+                header('Location: index.php?uri=offer/admin');
                 break;
             case 'showForm':
-                $controller->showForm();
+
+                $this->templateEngine->render('addOffer.twig.html');
                 break;
+            case 'admin':
+                $controller->showAdminOffer();
             default:
                 echo '404 Not Found - Action inconnue';
                 break;

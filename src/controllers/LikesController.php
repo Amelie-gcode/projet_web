@@ -14,7 +14,7 @@ class LikesController
         if(isset($_GET['user_id'])){
             $user_id=$_GET['user_id'];
             $likes=$this->model->getLikesByUsers($user_id);
-            echo $this->templateEngine->render('likes.twig.html', ['likes' => $likes]);
+            return $likes;
         }
     }
     public function nbLikesByOffer()

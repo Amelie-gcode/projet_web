@@ -30,7 +30,7 @@ class ApplyController extends Controller
         if (isset($_GET['user_id'])) {
             $id = $_GET['user_id'];
             $apply= $this->model->getApplyByUser($id);
-            echo $this->templateEngine->render('Likes.twig.html', ['apply' => $apply]);
+           return $apply;
         }
     }
 
@@ -52,7 +52,7 @@ class ApplyController extends Controller
         if (isset($_GET['id_company'])) {
             $id = $_GET['id_company'];
             $apply=$this->model->getNumberApplyByCompany($id);
-            echo $apply;
+            return $apply;
         }
 
     }

@@ -34,22 +34,40 @@ class  OfferController extends Controller
         }
     }
     public function deleteOffer() {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['offer_id'])) {
+            $id = $_GET['offer_id'];
             $this->model->deleteOffer($id);
         }
     }
     public function addOffer() {
         if (isset($_GET['id_company']) &&
             isset($_GET['offerTitle']) &&
-            isset($_GET['offerDescription']) &&
-            isset($_GET['offerDate']))
+            isset($_GET['offerLongDescription']) &&
+            isset($_GET['offerShortDescription']) &&
+            isset($_GET['offerProfileDescription']) &&
+            isset($_GET['offerSalary'])&&
+            isset($_GET['offerType'])&&
+            isset($_GET['offerStartDate'])&&
+            isset($_GET['offerEndDate']))
             {
-                $idcompany = $_GET['id_company'];
-                $title = $_GET['offerTitle'];
-                $description = $_GET['offerDescription'];
-                $date = $_GET['offerDate'];
-                $this->model->addOffer($idcompany, $title, $description, $date);
+                $id_company = $_GET['id_company'];
+                $offerTitle = $_GET['offerTitle'];
+                $offerLongDescription = $_GET['offerLongDescription'];
+                $offerShortDescription = $_GET['offerShortDescription'];
+                $offerProfileDescription = $_GET['offerProfileDescription'];
+                $offerSalary = $_GET['offerSalary'];
+                $offerType = $_GET['offerType'];
+                $offerStartDate = $_GET['offerStartDate'];
+                $offerEndDate = $_GET['offerEndDate'];
+                $this->model->addOffer($id_company,
+                    $offerTitle,
+                    $offerLongDescription,
+                    $offerShortDescription,
+                    $offerProfileDescription,
+                    $offerSalary,
+                    $offerType,
+                    $offerStartDate,
+                    $offerEndDate);
             }
 
     }
@@ -86,20 +104,24 @@ class  OfferController extends Controller
                     $offerType,
                     $offerStartDate,
                     $offerEndDate);
-                header('Location: /offer');
+
             }
     }
 
     public function showForm() {
         echo $this->templateEngine->render('addOffer.twig.html');
     }
+    public function showAdminoffer(){
+        $offers = $this->model->getAllOffers();
+        echo $this->templateEngine->render('adminOffer.twig.html', ['offers' => $offers]);
+    }
     public function showOfferByCompany() {
         if (isset($_GET['company_id'])) {
             $id = $_GET['company_id'];
             $offers = $this->model->getOfferByCompany($id);
-            echo $this->templateEngine->render('companyInfo.twig.html', ['offers' => $offers]);
+            return $offers;
         } else {
-            header('Location: /offer');
+            return false;
         }
     }
 

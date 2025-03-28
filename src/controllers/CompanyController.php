@@ -38,9 +38,9 @@ class CompanyController extends Controller
         if (isset($_GET['company_id'])) {
             $id = $_GET['company_id'];
             $company= $this->model->getCompany($id);
-            echo $this->templateEngine->render('companyInfo.twig.html', ['company' => $company]);
+            return $company;
         } else {
-            header('Location: /company');
+            return false;
         }
     }
 
