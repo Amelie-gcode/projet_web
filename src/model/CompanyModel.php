@@ -51,7 +51,7 @@ class CompanyModel extends Model
 
     public function addCompany($name, $email, $phone, $description) {
         $query = (
-            "INSERT INTO Companies (name_company, email_company, phone_company, description_company)
+            "INSERT INTO Companies (company_name, company_email,company_phone , company_description)
             VALUES (:name, :email, :phone, :description)"
         );
         $stmt = $this->connection->pdo->prepare($query);

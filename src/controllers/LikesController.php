@@ -4,7 +4,7 @@ namespace App\controllers;
 
 use App\model\LikesModel;
 
-class LikesController
+class LikesController extends controller
 {
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;
