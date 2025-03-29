@@ -4,6 +4,8 @@ namespace App\controllers;
 
 use App\model\ApplyModel;
 use App\model\OfferModel;
+use App\model\SkillsModel;
+use App\model\CompanyModel;
 
 class  OfferController extends Controller
 {
@@ -21,17 +23,32 @@ class  OfferController extends Controller
         }
         $offers = $this->model->getAllOffers();
         $offerI = $this->model->getOfferById($id);
-        echo $this->templateEngine->render('offers.twig.html', ['offers' => $offers, 'offerI' => $offerI]);
+        echo $this->templateEngine->render('offers.twig.html', [
+            'offers' => $offers,
+            'offerI' => $offerI]);
     }
     public function showForm()
     {
+        $companyModel = new CompanyModel();
+        $skillsModel = new SkillsModel();
+
+        $companies = $companyModel->getAllCompany();
+        $skills = $skillsModel->getSkills();
         if (isset($_GET['offer_id'])) {
             $id = $_GET['offer_id'];
             $offer = $this->model->getOfferById($id);
-            echo $this->templateEngine->render('addOffer.twig.html', ['offer' => $offer]);
+
+            echo $this->templateEngine->render('addOffer.twig.html', [
+                'offer' => $offer,
+                'companies' => $companies,
+                'skills' => $skills
+            ]);
         }
         else {
-            echo $this->templateEngine->render('addOffer.twig.html');
+            echo $this->templateEngine->render('addOffer.twig.html', [
+                'companies' => $companies,
+                'skills' => $skills
+            ]);
         }
     }
     public function deleteOffer() {

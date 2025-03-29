@@ -1552,6 +1552,7 @@ fieldset {
 
 .offer-form-group input[type="text"],
 .offer-form-group input[type="number"],
+.date-cre-offer,
 .offer-form-group select {
     width: 100%;
     padding: 12px;

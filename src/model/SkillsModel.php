@@ -18,7 +18,8 @@ class SkillsModel
         $query = "SELECT * FROM Skills";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
     function getSkill($id){
         $query = "SELECT * FROM Skills WHERE skill_id = :id";
