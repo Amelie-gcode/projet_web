@@ -45,7 +45,7 @@ class EvaluationsController extends Controller
     {
         if(isset($_POST['company_id'])){
             $companyId = $_POST['company_id'];
-            $avg=$this->getavgscore($companyId);
+            $avg= $this->model->averageScore($companyId);
             echo $avg;
         }
 

@@ -27,6 +27,19 @@ class  OfferController extends Controller
             'offers' => $offers,
             'offerI' => $offerI]);
     }
+    public function showOffer()
+    {
+        if(isset($_GET['offer_id'])) {
+            $id = $_GET['offer_id'];
+            $offer = $this->model->getOfferById($id);
+            $offers=$this->model->getAllOffers();
+            echo $this->templateEngine->render('offerInfo.twig.html', [
+                'offer' => $offer,
+                'offers' => $offers]);
+        }
+
+
+    }
     public function showForm()
     {
         $companyModel = new CompanyModel();

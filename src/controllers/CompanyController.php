@@ -1,7 +1,10 @@
 <?php
 namespace App\controllers;
 
+use App\model\ApplyModel;
 use App\model\CompanyModel;
+use App\model\EvaluationsModel;
+use App\model\OfferModel;
 
 class CompanyController extends Controller
 {
@@ -35,13 +38,22 @@ class CompanyController extends Controller
     }
     public function showCompany()
     {
+        $evalModel = new EvaluationsModel();
+        $applyModel = new ApplyModel();
+        $offerModel = new OfferModel();
+
         if (isset($_GET['company_id'])) {
             $id = $_GET['company_id'];
-            $company= $this->model->getCompany($id);
-            return $company;
+            $company = $this->model->getCompany($id);
+            $nbApply=$applyModel->getNumberApplyByCompany($id);
+            $evaluations=$evalModel->getEvaluationByCompany($id);
+            $avg=$evalModel->averageScore($id);
+            $offers=$offerModel->getOfferByCompany($id);
+            echo $this->templateEngine->render('companyInfo.twig.html', ['company' => $company, 'evaluations' => $evaluations , 'nbApply' => $nbApply , 'offers' => $offers, 'moyenne' => $avg] );
         } else {
-            return false;
+            header('Location: ?uri=company/index');
         }
+
     }
 
     public function addCompany() {

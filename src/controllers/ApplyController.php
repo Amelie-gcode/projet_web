@@ -35,14 +35,14 @@ class ApplyController extends Controller
     }
 
     public function addApply() {
-        if (isset($_GET['id_offer']) &&
-            isset($_GET['id_user']) &&
-            isset($_GET['date']) &&
-            isset($_GET['motivation'])) {
-            $id_offer = $_GET['id_offer'];
-            $id_user = $_GET['id_user'];
-            $date = $_GET['date'];
-            $motivation = $_GET['motivation'];
+        if (isset($_POST['id_offer']) &&
+            isset($_POST['id_user']) &&
+            isset($_POST['apply_date']) &&
+            isset($_POST['motivation'])) {
+            $id_offer = $_POST['id_offer'];
+            $id_user = $_POST['id_user'];
+            $date = $_POST['apply_date'];
+            $motivation = $_POST['motivation'];
             $this->model->addApply($id_offer, $id_user, $date, $motivation);
             }
         header('Location: index.php/?uri=offer/index');

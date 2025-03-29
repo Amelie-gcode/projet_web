@@ -2,6 +2,8 @@
 
 namespace App\controllers;
 
+use App\model\ApplyModel;
+use App\model\OfferModel;
 use App\model\UserModel;
 
 class UserController extends Controller
@@ -16,10 +18,23 @@ class UserController extends Controller
 
     }
     public function showUser(){
+        $applyModel=new ApplyModel();
+        $offerModel=new OfferModel();
         if (isset($_GET['user_id'])) {
             $id = $_GET['user_id'];
             $user= $this->model->getUser($id);
-            echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user]);
+            $applications=$applyModel->getApplyByUser($id);
+            $offers = [];
+            if (!empty($applications)) {
+                foreach ($applications as $application) {
+                    $offer = $offerModel->getOfferById($application['offer_id']);
+                    if ($offer) { // Vérifier si l'offre existe
+                        $offers[] = $offer;
+                    }
+                }
+            }
+
+            echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user, 'offers' => $offers]);
         } else {
             header('Location: ?uri=user/index');
         }

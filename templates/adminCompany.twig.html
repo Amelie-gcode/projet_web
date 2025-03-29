@@ -1,4 +1,4 @@
-{# templates/company.twig.html #}
+{# templates/adminCompany.twig.html #}
 {% extends 'base.twig.html' %}
 
 {% block title %}Administration Entreprises{% endblock %}
@@ -12,6 +12,7 @@
     </section>
     <section class="offers-container entreprise-list">
         {% for company in company %}
+
             <article class="offer entreprise-case">
                 <header>
                     <h1>{{company.company_name}}</h1>
@@ -28,14 +29,15 @@
                             <time>09/02/2025</time>
                         </div>
                     <form class="btn-entreprise" action="index.php" method="get">
-                        <input type="hidden" name="uri" value="company/showForm">
                         <input type="hidden" name="company_id" value="{{company.company_id}}">
-                        <button class="see-more" type="submit">Modifier</button>
+                        <button class="see-more" type="submit" name="uri" value="company/show">voir plus</button>
+                        <button class="see-more" type="submit" name="uri" value="company/showForm">Modifier</button>
                         <button class="action-bouton" onclick="supprimer('index.php?uri=company/delete&company_id={{company.company_id}}')" type="button">Supprimer</button>
                     </form>
                 </footer>
             </section>
         </article>
+        </form>
         {% endfor %}
     </section>
     <form>

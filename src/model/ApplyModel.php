@@ -21,12 +21,11 @@ class ApplyModel extends Model
 
     }
     public function getApplyByUser($id) {
-        $query="Select *From Applications where user_id=:id";
+        $query="Select * From Applications where user_id=:id";
         $stmt= $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id",$id,PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
     public function getApplyByOffer($id) {
@@ -45,7 +44,7 @@ class ApplyModel extends Model
         return $stmt;
 
     }
-    function getNumberApplyByUser($id) {
+    public function getNumberApplyByUser($id) {
         $query = "SELECT COUNT(*) FROM Applications WHERE user_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
@@ -53,13 +52,14 @@ class ApplyModel extends Model
         $stmt->fetch(PDO::FETCH_ASSOC);
         return $stmt;
     }
-    function getNumberApplyByCompany($id_company) {
-        $query = "SELECT COUNT(*) FROM Applications WHERE offer_id = ( SELECT offer_id from Offers where company_id = :id)";
+    public function getNumberApplyByCompany($id_company) {
+        $query = "SELECT COUNT(*) as count
+                FROM Applications 
+                WHERE offer_id IN (SELECT offer_id FROM Offers WHERE company_id = :id)";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id_company, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch( PDO::FETCH_ASSOC)['count'] ?? 0;
     }
 
 
