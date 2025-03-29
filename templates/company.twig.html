@@ -40,14 +40,14 @@
         {% for company in company %}
             <article class="offer entreprise-case">
                 <header>
-                    <h1>{{company.name}}</h1>
+                    <h1>{{company.company_name}}</h1>
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
-                        <li>{{company.email}}</li>
-                        <li>{{company.phone}}</li>
+                        <li>{{company.company_email}}</li>
+                        <li>{{company.company_phone}}</li>
                     </ul>
-                    <p> Description : {{company.description}}</p>
+                    <p> Description : {{company.company_description}}</p>
                     <footer>
                         <div class="date">
                             <p>publié le :</p>

@@ -4,7 +4,7 @@ namespace App\model;
 
 use PDO;
 
-class   LikesModel
+class   LikesModel extends Model
 {
     public function __construct($connection = null) {
 

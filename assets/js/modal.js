@@ -28,6 +28,8 @@ function supprimer() {
 
     confirmYes.onclick = function() {
         // Add your deletion logic here
+        
+        header('Location: index.php/?uri=offer/index');
         console.log('Compte supprimé');
         modal.style.display = 'none';
     }

@@ -4,7 +4,7 @@ namespace App\controllers;
 
 use App\model\EvaluationsModel;
 
-class EvaluationsController
+class EvaluationsController extends Controller
 {
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;

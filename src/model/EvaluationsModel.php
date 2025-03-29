@@ -3,7 +3,7 @@
 namespace App\model;
 use pdo;
 
-class EvaluationsModel
+class EvaluationsModel extends Model
 {
     function __construct($connection =null){
         if(is_null($connection)){
