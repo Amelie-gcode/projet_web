@@ -21,8 +21,7 @@ class CompanyModel extends Model
 
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetchALL(PDO::FETCH_ASSOC);
     }
 
     public function getCompany($id) {

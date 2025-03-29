@@ -37,11 +37,6 @@
                     <input type="text" id="salaire" name="offerSalary" value="{{ offer.offer_salary|default('') }}">
                 </div>
 
-                <div class="offer-form-group">
-                    <label for="duree">Durée (semaines)</label>
-                    <input type="number" id="duree" name="duree" min="1" value="{{ offer.offer_duration|default('') }}">
-                </div>
-
                 <div class="offer-form-group type-container">
                     <fieldset>
                         <legend>Type de contrat</legend>
@@ -60,12 +55,12 @@
 
                 <div class="offer-form-group">
                     <label for="startDate">Date de début</label>
-                    <input type="date" id="startDate" name="offerStartDate" value="{{ offer.offer_start_date|default('') }}">
+                    <input type="date" id="startDate" name="offerStartDate" value="{{ offer.offer_start_date|default('') }}" class="date-cre-offer">
                 </div>
 
                 <div class="offer-form-group">
                     <label for="endDate">Date de fin</label>
-                    <input type="date" id="endDate" name="offerEndDate" value="{{ offer.offer_end_date|default('') }}">
+                    <input type="date" id="endDate" name="offerEndDate" value="{{ offer.offer_end_date|default('') }}" class="date-cre-offer">
                 </div>
             </fieldset>
 
