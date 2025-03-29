@@ -1,7 +1,7 @@
-{# templates/company.twig.html #}
+{# templates/users.twig.html #}
 {% extends 'base.twig.html' %}
 
-{% block title %}Entreprises{% endblock %}
+{% block title %}Comptes{% endblock %}
 
 {% block content %}
 <h2 class="titre-etudiant"> GESTION DES COMPTES </h2>
@@ -26,16 +26,16 @@
             <tbody>
             {% for user in users %}
             <tr>
-                <th>{{user.forname}}</th>
-                <th>{{user.name}} </th>
-                <th>{{user.email}}</th>
-                <th>{{user.role}}</th>
+                <th>{{user.user_firstname}}</th>
+                <th>{{user.user_lastname}} </th>
+                <th>{{user.user_email}}</th>
+                <th>{{user.user_status}}</th>
                 <th>
-                    <form method="get" action="#">
-                        <input type="hidden" name="id" value="{{user.id}}">
+                    <form action="index.php" method="get">
+                        <input type="hidden" name="user_id" value="{{user.user_id}}">
                         <button class="action-bouton" type="submit" name="uri" value="user/show">STATS</button>
                         <button class="action-bouton" type="submit" name="uri" value="user/showForm">MODIFIER</button>
-                        <button class="action-bouton" type="submit" name="uri" value="user/delete">SUPPRIMER</button>
+                        <button class="action-bouton" onclick="supprimer('index.php?uri=user/delete&user_id={{user.user_id}}')" type="button">Supprimer</button>
                     </form>
                 </th>
             </tr>
@@ -43,7 +43,10 @@
             </tbody>
         </table>
     </section>
-    <button class="action-bouton"><a href="/index.php/?uri=user/showForm">Ajouter un compte </a></button>
+    <form >
+        <button class="action-bouton" type="submit" name="uri" value="user/showForm">Ajouter un compte </button>
+    </form>
+
     <section>
         <ul class="pagination">
             <li><a href="?page=1">Page 1</a></li>
@@ -53,4 +56,14 @@
         </ul>
     </section>
 </main>
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'entreprise ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
 {% endblock %}

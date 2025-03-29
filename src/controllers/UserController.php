@@ -21,7 +21,7 @@ class UserController extends Controller
             $user= $this->model->getUser($id);
             echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user]);
         } else {
-            header('Location: /users');
+            header('Location: ?uri=user/index');
         }
     }
     public function deleteUser(){
@@ -29,6 +29,7 @@ class UserController extends Controller
             $id = $_GET['user_id'];
             $this->model->deleteUser($id);
         }
+        header('Location: ?uri=user/index');
     }
     public function addUser(): void
     {
@@ -41,31 +42,36 @@ class UserController extends Controller
             $forname = $_POST['forname'];
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $role = $_POST['role'];
+            $role = intval($_POST['role']);
             $this->model->addUser($name,$forname, $email, $password, $role);
             }
-
-
+        header('Location: ?uri=user/index');
     }
+
     public function updateUser(){
-        if (isset($_GET['id']) &&
-            isset($_GET['name']) &&
-            isset($_GET['forname']) &&
-            isset($_GET['email']) &&
-            isset($_GET['password']) &&
-            isset($_GET['role'])) {
-            $id = $_GET['id'];
-            $name = $_GET['name'];
-            $forname = $_GET['forname'];
-            $email = $_GET['email'];
-            $password = $_GET['password'];
-            $role = $_GET['role'];
+        if (isset($_POST['user_id']) &&
+            isset($_POST['name']) &&
+            isset($_POST['forname']) &&
+            isset($_POST['email']) &&
+            isset($_POST['password']) &&
+            isset($_POST['role'])) {
+
+            $id = $_POST['user_id'];
+            $name = $_POST['name'];
+            $forname = $_POST['forname'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $role = intval($_POST['role']);
+
             $this->model->updateUser($id, $name, $forname, $email, $password, $role);
-            }
+            header('Location: ?uri=user/index');
+        } else {
+            header('Location: ?uri=user/index');
+        }
     }
     public function showForm(){
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_GET['user_id'])) {
+            $id = $_GET['user_id'];
             $user= $this->model->getUser($id);
             echo $this->templateEngine->render('addUser.twig.html', ['user' => $user]);
         }

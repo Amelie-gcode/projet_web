@@ -54,7 +54,6 @@ class CompanyController extends Controller
             $phone = $_GET['telephone'];
             $description = $_GET['description'];
             $this->model->addCompany($name, $email, $phone, $description);
-            $company=$this->model->getAllCompany();
             header('Location: ?uri=company/admin');
 
         } else {

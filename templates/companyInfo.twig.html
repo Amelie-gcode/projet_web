@@ -1,4 +1,4 @@
-{# templates/company.twig.html #}
+{# templates/companyInfo.twig.html #}
 {% extends 'base.twig.html' %}
 
 {% block title %} Fiche Entreprise {% endblock %}
@@ -11,10 +11,10 @@
     <section class="company-info">
         <div class="company-header">
             <img src="../assets/image/company-logo.png" alt="Logo entreprise">
-            <h2>{{company.name}}</h2>
+            <h2>{{company.company_name}}</h2>
         </div>
         <div class="company-description">
-            <p>{{company.description}}</p>
+            <p>{{company.company_description}}</p>
         </div>
         <div class="company-stats">
             <div class="stat-item">

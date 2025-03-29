@@ -1,51 +1,58 @@
-{# templates/addCompany.twig.html #}
+{# templates/addUser.twig.html #}
 {% extends 'baseForm.twig.html' %}
 
-{% block title %}Nouvelle entreprise{% endblock %}
+{% block title %}{% if user %}Modifier l'utilisateur{% else %}Nouvel utilisateur{% endif %}{% endblock %}
 
 {% block content %}
 <!-- <body class="body-creation-compte"> -->
 <section class="account-signup">
-    <form class="account-form" action="../index.php/?uri=user/add" method="post">
-        <h1>Création de compte</h1>
+    <form class="account-form" action="index.php?uri={% if user %}user/update{% else %}user/add{% endif %}" method="post">
+
+    <h1>{% if user %}Modifier le compte{% else %}Creation Compte{% endif %}</h1>
 
         <div class="account-form-group">
             <label for="name">Nom</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" value="{{ user.user_lastname|default('') }}">
         </div>
 
         <div class="account-form-group">
             <label for="forname">Prénom</label>
-            <input type="text" id="forname" name="forname">
+            <input type="text" id="forname" name="forname" value="{{ user.user_firstname|default('') }}">
         </div>
 
         <div class="account-form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" value="{{ user.user_email|default('') }}">
         </div>
 
         <div class="account-form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" value="{{ user.user_password|default('') }}">
         </div>
 
         <div class="account-form-group">
             <label class="account-role-label">Statut</label>
-            <div class="account-role-options">
+            <div class="account-role-options" >
+                {% set user_status = user.user_status|default(0) %}
                 <label class="account-role-choice">
-                    <input type="radio" name="role" value="etudiant">
+                    <input type="radio" name="role" value="0" {% if user and user_status == 0 %} checked {% endif %}>
                     <span>Étudiant</span>
                 </label>
                 <label class="account-role-choice">
-                    <input type="radio" name="role" value="pilote">
+                    <input type="radio" name="role" value="1" {% if user and user_status == 1 %} checked {% endif %}>
                     <span>Pilote</span>
                 </label>
             </div>
         </div>
 
         <div class="account-buttons">
-            <a href="../index.php/?uri=user/index" class="account-back">Retour</a>
-            <button type="submit" class="account-submit">Créer le compte</button>
+            <a href="index.php/?uri=user/index" class="account-back">Retour</a>
+            {% if user %}
+            <input type="hidden" name="user_id" value="{{ user.user_id }}">
+            <button type="submit" class="account-submit">Modifier le compte</button>
+            {% else %}
+            <button type="submit" class="account-submit">Créer Compte</button>
+            {% endif %}
         </div>
     </form>
 </section>

@@ -16,16 +16,14 @@ class UserModel extends Model
         $query="SELECT * FROM Users";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return  $stmt->fetchall(PDO::FETCH_ASSOC);
     }
     public function getUser($id) {
         $query = "SELECT * FROM Users WHERE user_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function addUser($name, $forname, $email, $password, $role) {
         $query="INSERT INTO Users (user_lastname,user_firstname,user_email,user_password,user_status) VALUES (:name, :forname, :email, :password, :role)";
@@ -36,12 +34,14 @@ class UserModel extends Model
         $stmt->bindValue(":password", $password, PDO::PARAM_STR);
         $stmt->bindValue(":role", $role, PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function deleteUser($id) {
         $query= "DELETE  FROM Users WHERE user_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch( PDO::FETCH_ASSOC);
     }
     public function updateUser($id, $name, $forname, $email, $password, $role) {
         $query = (
@@ -61,7 +61,7 @@ class UserModel extends Model
         $stmt->bindValue(":password", $password, PDO::PARAM_STR);
         $stmt->bindValue(":role", $role, PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
     public function getUserByRole($role) {
@@ -69,8 +69,7 @@ class UserModel extends Model
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":role", $role, PDO::PARAM_STR);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 
