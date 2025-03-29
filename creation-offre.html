@@ -65,6 +65,15 @@
                         </div>
                     </fieldset>
                 </div>
+                <div class="offer-form-group">
+                    <label for="startDate">Date de début</label>
+                    <input type="date" id="startDate" name="offerStartDate" value="{{ offer.offer_start_date|default('') }}">
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="endDate">Date de fin</label>
+                    <input type="date" id="endDate" name="offerEndDate" value="{{ offer.offer_end_date|default('') }}">
+                </div>
             </fieldset>
 
             <fieldset class="domains-section">

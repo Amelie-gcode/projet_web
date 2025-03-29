@@ -135,8 +135,7 @@ switch ($controllerName) {
                 header('Location: index.php?uri=offer/admin');
                 break;
             case 'showForm':
-
-                $this->templateEngine->render('addOffer.twig.html');
+                $offerController->showForm();
                 break;
             case 'admin':
                 $offerController->showAdminOffer();

@@ -1607,7 +1607,7 @@ fieldset {
     margin-bottom: 10px;
 }
 
-.domain-input input {
+.domain-input select {
     flex: 1;
     padding: 12px;
     border: 2px solid #ddd;

@@ -23,14 +23,15 @@ class  OfferController extends Controller
         $offerI = $this->model->getOfferById($id);
         echo $this->templateEngine->render('offers.twig.html', ['offers' => $offers, 'offerI' => $offerI]);
     }
-    public function showOffer()
+    public function showForm()
     {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $offer= $this->model->getOfferById($id);
-            echo $this->templateEngine->render('offerInfo.twig.html', ['offer' => $offer]);
-        } else {
-            header('Location: /offer');
+        if (isset($_GET['offer_id'])) {
+            $id = $_GET['offer_id'];
+            $offer = $this->model->getOfferById($id);
+            echo $this->templateEngine->render('addOffer.twig.html', ['offer' => $offer]);
+        }
+        else {
+            echo $this->templateEngine->render('addOffer.twig.html');
         }
     }
     public function deleteOffer() {
@@ -108,9 +109,6 @@ class  OfferController extends Controller
             }
     }
 
-    public function showForm() {
-        echo $this->templateEngine->render('addOffer.twig.html');
-    }
     public function showAdminoffer(){
         $offers = $this->model->getAllOffers();
         echo $this->templateEngine->render('adminOffer.twig.html', ['offers' => $offers]);

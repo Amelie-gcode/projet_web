@@ -1,30 +1,29 @@
 {# templates/addOffer.twig.html #}
 {% extends 'baseForm.twig.html' %}
 
-{% block title %}Nouvelle entreprise{% endblock %}
+{% block title %}{% if offer %}Modifier l'offre{% else %}Nouvelle offre{% endif %}{% endblock %}
 
 {% block content %}
-
 <main class="offer-creation">
-    <form class="offer-form" action="#" method="get">
+    <form class="offer-form" action="index.php" method="get">
         <header>
-            <h1>Créer une offre</h1>
+            <h1>{% if offer %}Modifier l'offre{% else %}Créer une offre{% endif %}</h1>
         </header>
         <section class="offer-form-section">
             <div class="offer-form-group">
                 <label for="titre">Titre de l'offre</label>
-                <input type="text" id="titre" name="offerTitle" >
+                <input type="text" id="titre" name="offerTitle" value="{{ offer.offer_title|default('') }}">
             </div>
 
             <div class="offer-form-group">
                 <label for="entreprise">Entreprise</label>
-                <select id="entreprise" name="id_company" >
+                <select id="entreprise" name="id_company">
                     <option value="">Sélectionnez une entreprise</option>
-                    <option value="cesi">CESI</option>
-                    <option value="sopra">Sopra Steria</option>
-                    <option value="capgemini">Capgemini</option>
-                    <option value="atos">Atos</option>
-                    <option value="ibm">IBM</option>
+                    {% for company in companies %}
+                    <option value="{{ company.company_id }}" {% if offer and offer.company_id == company.company_id %}selected{% endif %}>
+                        {{ company.company_name }}
+                    </option>
+                    {% endfor %}
                 </select>
             </div>
         </section>
@@ -34,13 +33,13 @@
 
             <fieldset class="offer-form-section">
                 <div class="offer-form-group">
-                    <label for="salaire">Salaire (€/mois)</label>
-                    <input type="number" id="salaire" name="salaire" min="0" >
+                    <label for="salaire">Salaire (€)</label>
+                    <input type="text" id="salaire" name="offerSalary" value="{{ offer.offer_salary|default('') }}">
                 </div>
 
                 <div class="offer-form-group">
                     <label for="duree">Durée (semaines)</label>
-                    <input type="number" id="duree" name="offerDate" min="1" >
+                    <input type="number" id="duree" name="duree" min="1" value="{{ offer.offer_duration|default('') }}">
                 </div>
 
                 <div class="offer-form-group type-container">
@@ -58,17 +57,34 @@
                         </div>
                     </fieldset>
                 </div>
+
+                <div class="offer-form-group">
+                    <label for="startDate">Date de début</label>
+                    <input type="date" id="startDate" name="offerStartDate" value="{{ offer.offer_start_date|default('') }}">
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="endDate">Date de fin</label>
+                    <input type="date" id="endDate" name="offerEndDate" value="{{ offer.offer_end_date|default('') }}">
+                </div>
             </fieldset>
 
             <fieldset class="domains-section">
-                <legend>Domaines</legend>
+                <legend>Compétences requises</legend>
                 <div id="domains-container">
                     <div class="domain-input">
-                        <input type="text" name="domaines[]"  aria-label="Domaine 1">
-                        <button type="button" class="remove-domain" style="display: none;" aria-label="Supprimer ce domaine">-</button>
+                        <select name="domaines[]" required>
+                            <option value="">Sélectionnez une compétence</option>
+                            {% for skill in skills %}
+                            <option value="{{ skill.skill_id }}" {% if offer_skills[0] and offer_skills[0] == skill.skill_id %}selected{% endif %}>
+                                {{ skill.skill_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <button type="button" class="remove-domain" style="display: none;">-</button>
                     </div>
                 </div>
-                <button type="button" id="add-domain" class="add-domain" aria-label="Ajouter un domaine">+</button>
+                <button type="button" id="add-domain" class="add-domain">+</button>
             </fieldset>
         </section>
 
@@ -77,26 +93,31 @@
             <fieldset>
                 <div class="offer-form-group">
                     <label for="description-courte">Description courte (max 250 caractères)</label>
-                    <textarea id="description-courte" name="description-courte" maxlength="250" ></textarea>
+                    <textarea id="description-courte" name="offerShortDescription" maxlength="250">{{ offer.offer_short_description|default('') }}</textarea>
                     <span class="char-count" aria-live="polite">0/250</span>
                 </div>
 
                 <div class="offer-form-group">
                     <label for="description-longue">Description détaillée de l'offre</label>
-                    <textarea id="description-longue" name="offerDescription" ></textarea>
+                    <textarea id="description-longue" name="offerLongDescription">{{ offer.offer_long_description|default('') }}</textarea>
                 </div>
 
                 <div class="offer-form-group">
                     <label for="profil">Profil recherché</label>
-                    <textarea id="profil" name="profil" ></textarea>
+                    <textarea id="profil" name="offerProfileDescription">{{ offer.offer_profile_description|default('') }}</textarea>
                 </div>
             </fieldset>
         </section>
 
         <footer class="offer-buttons">
-            <a href="../gerer-offre.html" class="offer-back" role="button">Retour</a>
-            <input name="uri" type="hidden" value="offer/add">
-            <button type="submit" class="offer-submit" value="">Créer l'offre</button>
+            <a href="index.php?uri=offer/admin" class="offer-back" role="button">Retour</a>
+            <input name="uri" type="hidden" value="{% if offer %}offer/update{% else %}offer/add{% endif %}">
+            {% if offer %}
+            <input type="hidden" name="id" value="{{ offer.offer_id }}">
+            <button type="submit" class="offer-submit">Modifier l'offre</button>
+            {% else %}
+            <button type="submit" class="offer-submit">Créer l'offre</button>
+            {% endif %}
         </footer>
     </form>
 </main>

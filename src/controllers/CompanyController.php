@@ -55,10 +55,10 @@ class CompanyController extends Controller
             $description = $_GET['description'];
             $this->model->addCompany($name, $email, $phone, $description);
             $company=$this->model->getAllCompany();
-            echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company]);
+            header('Location: ?uri=company/admin');
 
         } else {
-            header('Location: /company');
+            header('Location: ?uri=company/admin');
         }
     }
 
@@ -74,9 +74,9 @@ class CompanyController extends Controller
             $phone = $_GET['telephone'];
             $description = $_GET['description'];
             $this->model->updateCompany($id, $name, $email, $phone, $description);
-            header('Location: /company');
+            header('Location: ?uri=company/admin');
         } else {
-            header('Location: /company');
+            header('Location: ?uri=company/admin');
         };
     }
 
@@ -84,9 +84,11 @@ class CompanyController extends Controller
         if (isset($_GET['company_id'])) {
             $id = $_GET['company_id'];
             $this->model->deleteCompany($id);
-            header('Location: /company');
+            header('Location: ?uri=company/admin');
+            exit;
         } else {
-            header('Location: /company');
+            header('Location: ?uri=company/admin');
+            exit;
         }
     }
 

@@ -1,4 +1,4 @@
-{# templates/company.twig.html #}
+{# templates/adminOffer.twig.html #}
 {% extends 'base.twig.html' %}
 
 {% block title %}Administration offres{% endblock %}
@@ -14,37 +14,39 @@
         {% for offer in offers %}
         <article class="offer favoris-offer">
             <header>
-                <h1>{{offer.offer_name}}</h1>
+                <h1>{{offer.offer_title}}</h1>
             </header>
             <section class="offer-content">
                 <ul class="principal-infos-offers">
-                    <li>{{offer.company_id}}</li>
-                    <li>Strasbourg</li>
+                    <li>Entreprise: {{offer.company_id}}</li>
+                    <li>Type: {{offer.offer_type}}</li>
                 </ul>
                 <ul class="secondary-infos-offers">
-                    <li>20000€</li>
-                    <li>stage</li>
-                    <li>avantage nature</li>
-                    <li>6 mois</li>
-                    <li>web</li>
-                    <li>html</li>
-                    <li>css</li>
+                    <li>Salaire: {{offer.offer_salary}}</li>
+                    <li>Début: {{offer.offer_start_date}}</li>
+                    <li>Fin: {{offer.offer_end_date}}</li>
                 </ul>
-                <p>{{offer.offer_long_description}}</p>
+                <p>{{offer.offer_short_description}}</p>
                 <footer>
                     <div class="date">
                         <p>publié le :</p>
                         <time>09/02/2025</time>
                     </div>
-                    <button class="see-more gerer-offre"> <a href="creation-offre.html">modifier</a> </button>
-                    <button class="action-bouton" onclick="supprimer()">Supprimer</button>
+                    <form class="btn-offer" action="index.php" method="get">
+                        <input type="hidden" name="uri" value="offer/showForm">
+                        <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                        <button class="see-more" type="submit">Modifier</button>
+                        <button class="action-bouton" onclick="supprimer('index.php?uri=offer/delete&offer_id={{offer.offer_id}}')" type="button">Supprimer</button>
+                    </form>
                 </footer>
             </section>
-
         </article>
         {% endfor %}
     </section>
-    <button class="action-bouton ajout-offre" > <a href="addOffer.twig.html"> +</a></button>
+    <form action="index.php" method="get">
+        <input type="hidden" name="uri" value="offer/showForm">
+        <button class="action-bouton ajout-offre" type="submit">+</button>
+    </form>
     <section>
         <ul class="pagination">
             <li><a href="?page=1">Page 1</a></li>
@@ -54,4 +56,14 @@
         </ul>
     </section>
 </main>
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'offre ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -17,18 +17,15 @@ class OfferModel extends Model
         $query="SELECT * FROM Offers";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
-
-
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     function getOfferById($id) {
         $query = "SELECT * FROM Offers WHERE offer_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function addOffer($id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate) {
         $query = "INSERT INTO Offers (company_id, offer_title, offer_long_description,offer_short_description,offer_profile_description,offer_salary, offer_type,offer_start_date,offer_end_date) VALUES (:id_company, :offerTitle, :offerLongDescription,:offerShortDescription,:offerProfileDescription, :offerSalary, :offerType,:offerStartDate,:offerEndDate)";
@@ -82,15 +79,11 @@ class OfferModel extends Model
         return $stmt;
     }
     public function getOfferByCompany($id_company) {
-        $query = (
-            "SELECT * FROM Offers WHERE company_id = :id_company"
-        );
-
+        $query = "SELECT * FROM Offers WHERE company_id = :id_company";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

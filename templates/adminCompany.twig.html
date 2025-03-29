@@ -27,11 +27,11 @@
                             <p>publié le :</p>
                             <time>09/02/2025</time>
                         </div>
-
-                    <form class="btn-entreprise" action="#" method="get">
-                        <input type="hidden" name="id" value="{{company.id}}">
-                        <button class="see-more " type="submit" name="uri" value="company/showForm">modifier</button>
-                        <button class="action-bouton" onclick="supprimer()" type="submit" name="uri" value="company/delete">Supprimer</button>
+                    <form class="btn-entreprise" action="index.php" method="get">
+                        <input type="hidden" name="uri" value="company/showForm">
+                        <input type="hidden" name="company_id" value="{{company.company_id}}">
+                        <button class="see-more" type="submit">Modifier</button>
+                        <button class="action-bouton" onclick="supprimer('index.php?uri=company/delete&company_id={{company.company_id}}')" type="button">Supprimer</button>
                     </form>
                 </footer>
             </section>
@@ -50,4 +50,14 @@
         </ul>
     </section>
 </main>
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'entreprise ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
 {% endblock %}

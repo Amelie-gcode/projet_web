@@ -27,20 +27,19 @@ class CompanyModel extends Model
 
     public function getCompany($id) {
         $query = (
-            "SELECT * FROM Companies WHERE id_company = :id"
+            "SELECT * FROM Companies WHERE company_id = :id"
         );
 
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 
     public function getCompanyByName($name) {
         $query = (
-            "SELECT * FROM companies WHERE name_compnay = :name"
+            "SELECT * FROM companies WHERE company_name = :name"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":name", $name, PDO::PARAM_STR);
@@ -67,11 +66,11 @@ class CompanyModel extends Model
     {
         $query = (
             "UPDATE Companies SET
-                name_company = :name,
-                email_company = :email,
-                phone_company = :phone,
-                description_company = :description
-            WHERE id_company = :id"
+                company_name = :name,
+                company_email = :email,
+                company_phone = :phone,
+                company_description = :description
+            WHERE company_id = :id"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
@@ -85,7 +84,7 @@ class CompanyModel extends Model
     }
     public function deleteCompany($id) {
         $query = (
-            "DELETE FROM Companies WHERE id_company = :id"
+            "DELETE FROM Companies WHERE company_id = :id"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);

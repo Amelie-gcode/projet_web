@@ -19,19 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Delete confirmation modal functionality
-function supprimer() {
-    const modal = document.getElementById('deleteConfirmModal');
+function supprimer(deleteUrl) {
+    const modal = document.querySelector('.confirm-modal');
     const confirmYes = document.getElementById('confirmYes');
     const confirmNo = document.getElementById('confirmNo');
 
     modal.style.display = 'block';
 
     confirmYes.onclick = function() {
-        // Add your deletion logic here
-        
-        header('Location: index.php/?uri=offer/index');
-        console.log('Compte supprimé');
+        console.log('Entreprise supprimée');
         modal.style.display = 'none';
+        window.location.href = deleteUrl; // Redirect to the specified URL
     }
 
     confirmNo.onclick = function() {
