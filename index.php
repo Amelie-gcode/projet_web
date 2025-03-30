@@ -76,7 +76,7 @@ switch ($controllerName) {
                 break;
             case 'show':
                 if (!isset($_SESSION['user_id'])) {
-                    header("Location: ?uri=auth/login");
+                    header("Location: ?uri=auth/showForm");
                     exit();
                 }
                 $companyController->showCompany();
@@ -122,8 +122,7 @@ switch ($controllerName) {
                 break;
             case 'show':
                 if (!isset($_SESSION['user_id'])) {
-                    $_SESSION['show_modal'] = true;
-                    header("Location: ?uri=offer/index");
+                    header("Location: ?uri=auth/showForm");
                     exit();
                 }
                 $offerController->showOffer();
@@ -190,6 +189,9 @@ switch ($controllerName) {
         break;
     case 'auth':
         switch ($action) {
+            case 'showForm':
+                $authController->showLoginForm();
+                break;
             case 'login':
                 $authController->login();
                 break;
