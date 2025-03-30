@@ -28,7 +28,29 @@ class OfferModel extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function addOffer($id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate) {
-        $query = "INSERT INTO Offers (company_id, offer_title, offer_long_description,offer_short_description,offer_profile_description,offer_salary, offer_type,offer_start_date,offer_end_date) VALUES (:id_company, :offerTitle, :offerLongDescription,:offerShortDescription,:offerProfileDescription, :offerSalary, :offerType,:offerStartDate,:offerEndDate)";
+        $query = (
+            "INSERT INTO Offers (
+                company_id,
+                offer_title,
+                offer_long_description,
+                offer_short_description,
+                offer_profile_description,
+                offer_salary,
+                offer_type,
+                offer_start_date,
+                offer_end_date
+            )
+            VALUES (
+                    :id_company,
+                    :offerTitle,
+                    :offerLongDescription,
+                    :offerShortDescription,
+                    :offerProfileDescription,
+                    :offerSalary,
+                    :offerType,
+                    :offerStartDate,
+                    :offerEndDate)"
+        );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
         $stmt->bindValue(":offerTitle", $offerTitle, PDO::PARAM_STR);

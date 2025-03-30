@@ -5,7 +5,7 @@
 
 {% block content %}
 <main class="offer-creation">
-    <form class="offer-form" action="index.php" method="get">
+    <form class="offer-form" action="index.php?uri={% if offer %}offer/update{% else %}offer/add{% endif %}" method="post">
         <header>
             <h1>{% if offer %}Modifier l'offre{% else %}Créer une offre{% endif %}</h1>
         </header>
@@ -42,11 +42,11 @@
                         <legend>Type de contrat</legend>
                         <div class="type-options">
                             <label class="type-choice">
-                                <input type="radio" name="type" value="stage" >
+                                <input type="radio" name="offerType" value="Stage" >
                                 <span>Stage</span>
                             </label>
                             <label class="type-choice">
-                                <input type="radio" name="type" value="alternance">
+                                <input type="radio" name="offerType" value="Alternance">
                                 <span>Alternance</span>
                             </label>
                         </div>
@@ -106,7 +106,6 @@
 
         <footer class="offer-buttons">
             <a href="index.php?uri=offer/admin" class="offer-back" role="button">Retour</a>
-            <input name="uri" type="hidden" value="{% if offer %}offer/update{% else %}offer/add{% endif %}">
             {% if offer %}
             <input type="hidden" name="id" value="{{ offer.offer_id }}">
             <button type="submit" class="offer-submit">Modifier l'offre</button>
