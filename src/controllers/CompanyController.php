@@ -42,14 +42,19 @@ class CompanyController extends Controller
         $applyModel = new ApplyModel();
         $offerModel = new OfferModel();
 
-        if ( isset($_POST['company_id'])) {
-            $id = $_POST['company_id'];
+        if ( isset($_GET['company_id'])) {
+            $id = $_GET['company_id'];
             $company = $this->model->getCompany($id);
             $nbApply=$applyModel->getNumberApplyByCompany($id);
             $evaluations=$evalModel->getEvaluationByCompany($id);
             $avg=$evalModel->averageScore($id);
             $offers=$offerModel->getOfferByCompany($id);
-            echo $this->templateEngine->render('companyInfo.twig.html', ['company' => $company, 'evaluations' => $evaluations , 'nbApply' => $nbApply , 'offers' => $offers, 'moyenne' => $avg] );
+            echo $this->templateEngine->render('companyInfo.twig.html', [
+                'company' => $company,
+                'evaluations' => $evaluations,
+                'nbApply' => $nbApply,
+                'offers' => $offers,
+                'moyenne' => $avg]);
         } else {
             header('Location: ?uri=company/index');
         }

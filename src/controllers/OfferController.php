@@ -147,7 +147,8 @@ class  OfferController extends Controller
             isset($_POST['offerSalary'])&&
             isset($_POST['offerType'])&&
             isset($_POST['offerStartDate'])&&
-            isset($_POST['offerEndDate']))
+            isset($_POST['offerEndDate'])&&
+            isset($_POST['offerLocation']))
         {
             $id_company = $_POST['id_company'];
             $offerTitle = $_POST['offerTitle'];
@@ -158,6 +159,7 @@ class  OfferController extends Controller
             $offerType = $_POST['offerType'];
             $offerStartDate = $_POST['offerStartDate'];
             $offerEndDate = $_POST['offerEndDate'];
+            $offerLocation = $_POST['offerLocation'];
 
             // Ajouter l'offre et récupérer son ID
             $offer_id = $this->model->addOffer(
@@ -169,7 +171,8 @@ class  OfferController extends Controller
                 $offerSalary,
                 $offerType,
                 $offerStartDate,
-                $offerEndDate);
+                $offerEndDate,
+                $offerLocation);
 
             // Traiter les compétences sélectionnées
             if (isset($_POST['domaines']) && is_array($_POST['domaines'])) {
@@ -195,7 +198,8 @@ class  OfferController extends Controller
             isset($_POST['offerSalary'])&&
             isset($_POST['offerType'])&&
             isset($_POST['offerStartDate'])&&
-            isset($_POST['offerEndDate']))
+            isset($_POST['offerEndDate'])&&
+            isset($_POST['offerLocation']))
         {
             $offer_id = $_POST['id'];
             $id_company = $_POST['id_company'];
@@ -207,6 +211,7 @@ class  OfferController extends Controller
             $offerType = $_POST['offerType'];
             $offerStartDate = $_POST['offerStartDate'];
             $offerEndDate = $_POST['offerEndDate'];
+            $offerLocation = $_POST['offerLocation'];
 
             $this->model->updateOffer(
                 $offer_id,
@@ -218,7 +223,8 @@ class  OfferController extends Controller
                 $offerSalary,
                 $offerType,
                 $offerStartDate,
-                $offerEndDate);
+                $offerEndDate,
+                $offerLocation);
 
             // Mettre à jour les compétences
             if (isset($_POST['domaines']) && is_array($_POST['domaines'])) {

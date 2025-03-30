@@ -51,7 +51,7 @@
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
                         <li>{{offer.company_name}}</li>
-                        <li>Strasbourg</li>
+                        <li>{{offer.offer_location}}</li>
                     </ul>
                     <ul class="secondary-infos-offers">
                         <li>{{ offer.offer_salary|default('N/A') }} €</li>
@@ -89,12 +89,12 @@
             <header>
                 <h2>{{offerI.offer_title}}</h2>
                 <ul class="principal-infos-offers">
-                    <li><a href="Fiche-entreprise.html">{{offerI.company_name}}</a></li>
+                    <li><a href="index.php?uri=company/show&company_id={{offerI.company_id}}">{{offerI.company_name}}</a></li>
                     <div class="company-grade">
                         <li><i class="fas fa-star favoris-icon"></i></li>
                         <li>{{offerI.company_rate}}</li>
                     </div>
-                    <li>Strasbourg</li>
+                    <li>{{offerI.offer_location}}</li>
                     <li class="nb-candidats" >46 candidats</li>
                 </ul>
                 <div class="fav-button-container">

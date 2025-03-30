@@ -19,10 +19,12 @@
             <section class="offer-content">
                 <ul class="principal-infos-offers">
                     <li>{{offer.company_name}}</li>
-                    <li>{{offer.offer_type}}</li>
+                    <li>{{offer.offer_location}}</li>
+
                 </ul>
                 <ul class="secondary-infos-offers">
-                    <li>Salaire: {{offer.offer_salary}} €</li>
+                    <li>{{offer.offer_salary}} €</li>
+                    <li>{{offer.offer_type}}</li>
                     {% if offer.duration is defined and offer.duration != "N/A" %}
                         <li>{{offer.duration}} semaines</li>
                     {% endif %}

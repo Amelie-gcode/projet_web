@@ -24,7 +24,7 @@
                     <li><i class="fas fa-star favoris-icon"></i></li>
                     <li>{{offer.company_rate|default('Aucune évaluation')}}</li>
                 </div>
-                <li>Strasbourg</li>
+                <li>{{offer.offer_location}}</li>
                 <li>46 candidats</li>
             </ul>
             <h3>Déscription du poste</h3>
@@ -71,18 +71,18 @@
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
                         <li>{{offer.company_name|default('Entreprise inconnue')}}</li>
-                        <li>Strasbourg</li>
+                        <li>{{offer.offer_location}}</li>
                     </ul>
                     <ul class="secondary-infos-offers">
                         <li>{{offer.offer_salary|default('N/A')}} €</li>
                         <li>{{offer.offer_type|default('N/A')}}</li>
-                        {% if offer.duration is defined and offer.duration != "N/A" %}
+                            {% if offer.duration is defined and offer.duration != "N/A" %}
                         <li>{{offer.duration}} semaines</li>
                         {% endif %}
                         {% if offer.skills is defined %}
-                        {% for skill in offer.skills %}
-                        <li>{{skill.skill_name}}</li>
-                        {% endfor %}
+                            {% for skill in offer.skills %}
+                                <li>{{skill.skill_name}}</li>
+                            {% endfor %}
                         {% endif %}
                     </ul>
                     <p>{{offer.offer_short_description}}</p>
@@ -109,71 +109,9 @@
         <div class="form-container">
 
             <form method="post" action="index.php/?uri=apply/add" enctype="multipart/form-data" >
-                <div class="form-section_personal-info">
-                    <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" name="name">
-                        <span id="nomError" style="color: red;"></span><br>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="prenom">Prénom</label>
-                        <input type="text" id="prenom" name="prenom">
-                        <span id="prenomError" style="color: red;"></span><br>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="civilite">Civilité</label>
-                        <select name="civilite" id="civilite">
-                            <option value="">---</option>
-                            <option value="monsieur">Monsieur</option>
-                            <option value="madame">Madame</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email">
-                        <span id="emailError" style="color: red;"></span><br>
-                    </div>
-                </div>
-
-                <div class="form-section_secondary-info">
-
-                    <fieldset>
-                        <legend>À propos de vous</legend>
-                        <div class="checkbox-group">
-                            <label for="permis">
-                                <input type="checkbox" name="aPropos" id="permis"> Permis B
-                            </label>
-                            <label for="vehicule">
-                                <input type="checkbox" name="aPropos" id="vehicule"> Véhiculé
-                            </label>
-                            <label for="certification">
-                                <input type="checkbox" name="aPropos" id="certification"> Certification(s) (Microsoft, Cisco...)
-                            </label>
-                        </div>
-                    </fieldset>
-
-
-                    <fieldset>
-                        <legend>Je suis majeur</legend>
-                        <div class="radio-group">
-                            <label for="majeur_oui">
-                                <input type="radio" id="majeur_oui" name="majeur" value="oui" > Oui
-                            </label>
-
-                            <label for="majeur_non">
-                                <input type="radio" id="majeur_non" name="majeur" value="non" > Non
-                            </label>
-                        </div>
-                    </fieldset>
-                </div>
-
-
                 <div class="message-group">
                     <div class="form-field">
-                        <label for="motivation">Votre message au recruteur</label>
+                        <label for="motivation">Montrez votre motivation !!!!!</label>
                         <textarea id="motivation" name="motivation" rows="4"></textarea>
                     </div>
                     <div class="form-field">
@@ -194,4 +132,8 @@
     </section>
     </article>
 </main>
+<div class="scrolling-form-box postuler-scrolling-form-box">
+    <h2>{{offer.offer_title}}</h2>
+    <button id="scrolling-form">Postule maintenant !</button>
+</div>
 {% endblock %}

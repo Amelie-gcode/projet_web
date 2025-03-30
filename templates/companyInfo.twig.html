@@ -47,24 +47,32 @@
             </header>
             <section class="offer-content">
                 <ul class="principal-infos-offers">
-                    <li>{{offer.company_id}}</li>
-                    <li>Lieu</li>
+                    <li>{{company.company_name|default('Entreprise inconnue')}}</li>
+                    <li>{{offer.offer_location}}</li>
                 </ul>
                 <ul class="secondary-infos-offers">
-                    <li>Prix 20000€</li>
-                    <li>info 2</li>
-                    <li>info 3</li>
-                    <li>info 4</li>
-                    <li>info 5</li>
+                    <li>{{offer.offer_salary|default('N/A')}} €</li>
+                    <li>{{offer.offer_type|default('N/A')}}</li>
+                    {% if offer.duration is defined and offer.duration != "N/A" %}
+                        <li>{{offer.duration}} semaines</li>
+                    {% endif %}
+                    {% if offer.skills is defined %}
+                        {% for skill in offer.skills %}
+                            <li>{{skill.skill_name}}</li>
+                        {% endfor %}
+                    {% endif %}
                 </ul>
                 <p>{{offer.offer_short_description}}</p>
                 <footer>
                     <div class="date">
                         <p>publié le :</p>
-                        <time>09/02/2025</time>
+                        <time>{{offer.offer_start_date}}</time>
                     </div>
-
-                    <button class="see-more">détails de l'offre</button>
+                    <form action="index.php" method="get">
+                        <input type="hidden" name="uri" value="offer/show">
+                        <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                        <button type="submit" class="see-more">détails de l'offre</button>
+                    </form>
                 </footer>
             </section>
         </article>
