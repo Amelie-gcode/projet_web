@@ -42,8 +42,8 @@ class CompanyController extends Controller
         $applyModel = new ApplyModel();
         $offerModel = new OfferModel();
 
-        if (isset($_GET['company_id'])) {
-            $id = $_GET['company_id'];
+        if ( isset($_POST['company_id'])) {
+            $id = $_POST['company_id'];
             $company = $this->model->getCompany($id);
             $nbApply=$applyModel->getNumberApplyByCompany($id);
             $evaluations=$evalModel->getEvaluationByCompany($id);

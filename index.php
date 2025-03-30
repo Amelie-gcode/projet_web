@@ -55,7 +55,6 @@ $userController = new UserController($twig);
 switch ($controllerName) {
     case 'company':
 
-
         // Gestion des actions pour le contrôleur Company
         switch ($action) {
             case 'index':
@@ -167,6 +166,15 @@ switch ($controllerName) {
                 break;
         }
         break;
+        case 'evaluation':
+            switch ($action) {
+                case 'add':
+                    $evalController->addEvaluation();
+                    header('Location: index.php?uri=company/index');
+                    break;
+
+            }
+            break;
 
     default:
         echo '404 Not Found - Contrôleur inconnu';

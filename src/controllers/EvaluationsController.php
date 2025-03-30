@@ -21,13 +21,13 @@ class EvaluationsController extends Controller
     public function addEvaluation()
     {
         if(isset($_POST['evaluation_comment'])
-        && isset($_POST['evaluation_score'])
+        && isset($_POST['rating'])
         && isset($_POST['evaluation_date'])
         && isset($_POST['user_id'])
         && isset($_POST['company_id']))
         {
             $evaluationComment = $_POST['evaluation_comment'];
-            $evaluationScore = $_POST['evaluation_score'];
+            $evaluationScore = $_POST['rating'];
             $evaluationDate = $_POST['evaluation_date'];
             $userId = $_POST['user_id'];
             $companyId = $_POST['company_id'];

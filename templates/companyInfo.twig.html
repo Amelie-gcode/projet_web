@@ -78,21 +78,22 @@
 <section class="rating-section">
     <form class="rating-form" action="index.php/?uri=evaluation/add" method="post">
         <div class="rating-stars-input">
-            <span>Votre note :</span>
-            <div class="stars">
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
-                <i class="far fa-star"></i>
+            <div class="rating-stars">
+                <i class="star far fa-star" data-value="1"></i>
+                <i class="star far fa-star" data-value="2"></i>
+                <i class="star far fa-star" data-value="3"></i>
+                <i class="star far fa-star" data-value="4"></i>
+                <i class="star far fa-star" data-value="5"></i>
             </div>
+            <p>Note sélectionnée : <span id="selected-rating">0</span>/5</p>
+            <input type="hidden" name="rating" id="rating-value">
         </div>
         <div class="comment-input">
             <label for="evaluation_comment">Votre commentaire :</label>
             <textarea id="evaluation_comment" rows="4" placeholder="Partagez votre expérience..."></textarea>
         </div>
         <input type="hidden" name="company_id" value="{{company.company_id}}">
-        <input type="hidden" name="user_id" value="{{user.user_id}}"> <!-- a remplacer par un token-->
+        <input type="hidden" name="user_id" value="{{4}}"> <!-- a remplacer par un token-->
         <input type="hidden" name="evaluation_date" value="{{ 'now'|date('Y-m-d') }}">
         <button type="submit" class="submit-rating">Envoyer</button>
     </form>
@@ -121,12 +122,15 @@
                         </div>
                     </div>
                     <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+                        {% for i in 1..5 %}
+                        {% if i <= evaluation.evaluation_score %}
+                        <span class="star filled">★</span>
+                        {% else %}
+                        <span class="star">☆</span>
+                        {% endif %}
+                        {% endfor %}
                     </div>
+
                 </div>
                 <div class="comment-content">
                     {{evaluation.evaluation_comment}}
