@@ -1,7 +1,7 @@
-{# templates/company.twig.html #}
+{# templates/offerInfo.twig.html #}
 {% extends 'base.twig.html' %}
 
-{% block title %}O{% endblock %}
+{% block title %}Détails de l'offre{% endblock %}
 
 {% block content %}
 
@@ -19,10 +19,10 @@
             </div>
 
             <ul class="principal-infos-offers">
-                <li><a href="">{{offer.company_id}}</a></li>
+                <li><a href="">{{offer.company_name}}</a></li>
                 <div class="company-grade">
                     <li><i class="fas fa-star favoris-icon"></i></li>
-                    <li>3.5</li>
+                    <li>{{offer.company_rate|default('Aucune évaluation')}}</li>
                 </div>
                 <li>Strasbourg</li>
                 <li>46 candidats</li>
@@ -46,16 +46,16 @@
                 <aside class="contact-container">
                     <div class="contact-info">
                         <p>Email :</p>
-                        <p class="offer-email">example@test.com</p>
+                        <p class="offer-email">{{offer.company_email|default('Email inconnu')}}</p>
                     </div>
                     <div class="contact-info">
                         <p>Tel. :</p>
-                        <p class="offer-phone">06 76 92 34 40</p>
+                        <p class="offer-phone">{{offer.company_phone|default('Téléphone inconnu')}}</p>
                     </div>
                 </aside>
                 <div class="date">
                     <p>publié le :</p>
-                    <time>09/02/2025</time>
+                    <time>{{offer.offer_start_date}}</time>
                 </div>
             </address>
         </footer>
@@ -70,24 +70,32 @@
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
-                        <li>{{offer.company_id}}</li>
-                        <li>Lieu</li>
+                        <li>{{offer.company_name|default('Entreprise inconnue')}}</li>
+                        <li>Strasbourg</li>
                     </ul>
                     <ul class="secondary-infos-offers">
-                        <li>Prix 20000€</li>
-                        <li>info 2</li>
-                        <li>info 3</li>
-                        <li>info 4</li>
-                        <li>info 5</li>
+                        <li>{{offer.offer_salary|default('N/A')}} €</li>
+                        <li>{{offer.offer_type|default('N/A')}}</li>
+                        {% if offer.duration is defined and offer.duration != "N/A" %}
+                        <li>{{offer.duration}} semaines</li>
+                        {% endif %}
+                        {% if offer.skills is defined %}
+                        {% for skill in offer.skills %}
+                        <li>{{skill.skill_name}}</li>
+                        {% endfor %}
+                        {% endif %}
                     </ul>
                     <p>{{offer.offer_short_description}}</p>
                     <footer>
                         <div class="date">
                             <p>publié le :</p>
-                            <time>09/02/2025</time>
+                            <time>{{offer.offer_start_date}}</time>
                         </div>
-
-                        <button class="see-more">détails de l'offre</button>
+                        <form action="index.php" method="get">
+                            <input type="hidden" name="uri" value="offer/show">
+                            <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                            <button type="submit" class="see-more">détails de l'offre</button>
+                        </form>
                     </footer>
                 </section>
             </article>
@@ -176,7 +184,7 @@
                 <div class="form-actions">
                     <input type="reset" value="Réinitialiser" class="btn-reset">
                     <input type="hidden" name="apply_date" value="{{now|date('Y-m-d')}}">
-                    <input type="hidden" name="id_offer" value="{{offer.id}}">
+                    <input type="hidden" name="id_offer" value="{{offer.offer_id}}">
                     <input type="hidden" name="id_user" value="{{user.id}}"> <!-- mettre un token machin truc -->
                     <input type="submit" value="Postuler" class="btn-submit" >
                 </div>

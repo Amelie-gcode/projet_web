@@ -67,17 +67,31 @@
             <fieldset class="domains-section">
                 <legend>Compétences requises</legend>
                 <div id="domains-container">
+                    {% if selectedSkills is defined and selectedSkills|length > 0 %}
+                    {% for skill_id in selectedSkills %}
                     <div class="domain-input">
                         <select name="domaines[]" required>
                             <option value="">Sélectionnez une compétence</option>
                             {% for skill in skills %}
-                            <option value="{{ skill.skill_id }}" {% if offer_skills[0] and offer_skills[0] == skill.skill_id %}selected{% endif %}>
+                            <option value="{{ skill.skill_id }}" {% if skill.skill_id == skill_id %}selected{% endif %}>
                                 {{ skill.skill_name }}
                             </option>
                             {% endfor %}
                         </select>
+                        <button type="button" class="remove-domain" {% if loop.index0 == 0 %}style="display: none;"{% endif %}>-</button>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="domain-input">
+                        <select name="domaines[]" required>
+                            <option value="">Sélectionnez une compétence</option>
+                            {% for skill in skills %}
+                            <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                            {% endfor %}
+                        </select>
                         <button type="button" class="remove-domain" style="display: none;">-</button>
                     </div>
+                    {% endif %}
                 </div>
                 <button type="button" id="add-domain" class="add-domain">+</button>
             </fieldset>

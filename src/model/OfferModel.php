@@ -29,27 +29,27 @@ class OfferModel extends Model
     }
     public function addOffer($id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate) {
         $query = (
-            "INSERT INTO Offers (
-                company_id,
-                offer_title,
-                offer_long_description,
-                offer_short_description,
-                offer_profile_description,
-                offer_salary,
-                offer_type,
-                offer_start_date,
-                offer_end_date
-            )
-            VALUES (
-                    :id_company,
-                    :offerTitle,
-                    :offerLongDescription,
-                    :offerShortDescription,
-                    :offerProfileDescription,
-                    :offerSalary,
-                    :offerType,
-                    :offerStartDate,
-                    :offerEndDate)"
+        "INSERT INTO Offers (
+            company_id,
+            offer_title,
+            offer_long_description,
+            offer_short_description,
+            offer_profile_description,
+            offer_salary,
+            offer_type,
+            offer_start_date,
+            offer_end_date
+        )
+        VALUES (
+                :id_company,
+                :offerTitle,
+                :offerLongDescription,
+                :offerShortDescription,
+                :offerProfileDescription,
+                :offerSalary,
+                :offerType,
+                :offerStartDate,
+                :offerEndDate)"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
@@ -62,8 +62,9 @@ class OfferModel extends Model
         $stmt->bindValue(":offerStartDate", $offerStartDate, PDO::PARAM_STR);
         $stmt->bindValue(":offerEndDate", $offerEndDate, PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt;
 
+        // Retourner l'ID de l'offre créée
+        return $this->connection->pdo->lastInsertId();
     }
     public function deleteOffer($id) {
         $query= "DELETE  FROM Offers WHERE offer_id = :id";
