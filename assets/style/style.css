@@ -1806,10 +1806,8 @@ fieldset {
     margin-top: 5px;
 }
 
-.rating-stars {
-    color: #ffd700;
-    margin-top: 5px;
-}
+
+
 
 /* Section 2: Company Offers */
 
@@ -1889,14 +1887,27 @@ fieldset {
     font-weight: bold;
     color: #333;
 }
-
-.stars {
-    color: #ffd700;
-    font-size: 32px;
-    cursor: pointer;
+.rating-stars {
     display: flex;
-    gap: 8px;
+    gap: 5px;
+    cursor: pointer;
 }
+
+.rating-form .star {
+    font-size: 30px;
+    color: gray;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.star.fas {
+    color: gold; /* Étoile remplie */
+}
+
+.star.hovered {
+    color: gold;
+    transform: scale(1.2);
+}
+
 
 .comment-input {
     display: flex;
@@ -1943,6 +1954,14 @@ fieldset {
 .submit-rating:hover {
     background: #631313;
     transform: translateY(-2px);
+}
+.rating .star {
+    font-size: 40px;
+    color: gray;
+}
+
+.rating .star.filled {
+    color: gold;
 }
 
 
@@ -2229,8 +2248,8 @@ fieldset {
     align-items: center;
 }
 
-.star {
-    color: #FFD700;
+.stat-item , .star {
+    color: #FFD700; !important;
     font-size: 1.2rem;
     margin-right: 2px;
 }

@@ -53,8 +53,7 @@
                             <p>publié le :</p>
                             <time>09/02/2025</time>
                         </div>
-                        <form class="btn-entreprise" action="index.php" method="get">
-                            <input type="hidden" name="uri" value="company/show">
+                        <form class="btn-entreprise" action="index.php/?uri=company/show" method="post">
                             <input name="company_id" type="hidden" value="{{company.company_id}}">
                             <button class="see-more" type="submit">voir plus</button>
                         </form>

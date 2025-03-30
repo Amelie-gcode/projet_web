@@ -67,3 +67,46 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll(".rating-stars .star");
+    const ratingValue = document.getElementById("rating-value");
+    const selectedRating = document.getElementById("selected-rating");
+
+    stars.forEach(star => {
+        star.addEventListener("click", function () {
+            const value = parseInt(this.getAttribute("data-value")); // Convertir en nombre
+            console.log("Note sélectionnée :", value); // Débogage
+
+            ratingValue.value = value; // Met à jour l'input caché
+            selectedRating.textContent = value; // Met à jour l'affichage
+
+            // Réinitialiser toutes les étoiles
+            stars.forEach(s => {
+                s.classList.remove("fas");
+                s.classList.add("far");
+            });
+
+            // Colorer les étoiles jusqu'à celle cliquée
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.remove("far");
+                stars[i].classList.add("fas");
+            }
+        });
+
+        // Effet de survol
+        star.addEventListener("mouseover", function () {
+            const value = parseInt(this.getAttribute("data-value"));
+
+            stars.forEach(s => s.classList.remove("hovered"));
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.add("hovered");
+            }
+        });
+
+        star.addEventListener("mouseleave", function () {
+            stars.forEach(s => s.classList.remove("hovered"));
+        });
+    });
+});
+
