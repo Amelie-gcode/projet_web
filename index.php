@@ -126,7 +126,6 @@ switch ($controllerName) {
                 break;
             case 'update':
                 $offerController->updateOffer();
-                header('Location: index.php?uri=offer/admin');
                 break;
             case 'showForm':
                 $offerController->showForm();

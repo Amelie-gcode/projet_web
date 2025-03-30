@@ -71,26 +71,27 @@ class  OfferController extends Controller
         }
     }
     public function addOffer() {
-        if (isset($_GET['id_company']) &&
-            isset($_GET['offerTitle']) &&
-            isset($_GET['offerLongDescription']) &&
-            isset($_GET['offerShortDescription']) &&
-            isset($_GET['offerProfileDescription']) &&
-            isset($_GET['offerSalary'])&&
-            isset($_GET['offerType'])&&
-            isset($_GET['offerStartDate'])&&
-            isset($_GET['offerEndDate']))
+        if (isset($_POST['id_company']) &&
+            isset($_POST['offerTitle']) &&
+            isset($_POST['offerLongDescription']) &&
+            isset($_POST['offerShortDescription']) &&
+            isset($_POST['offerProfileDescription']) &&
+            isset($_POST['offerSalary'])&&
+            isset($_POST['offerType'])&&
+            isset($_POST['offerStartDate'])&&
+            isset($_POST['offerEndDate']))
             {
-                $id_company = $_GET['id_company'];
-                $offerTitle = $_GET['offerTitle'];
-                $offerLongDescription = $_GET['offerLongDescription'];
-                $offerShortDescription = $_GET['offerShortDescription'];
-                $offerProfileDescription = $_GET['offerProfileDescription'];
-                $offerSalary = $_GET['offerSalary'];
-                $offerType = $_GET['offerType'];
-                $offerStartDate = $_GET['offerStartDate'];
-                $offerEndDate = $_GET['offerEndDate'];
-                $this->model->addOffer($id_company,
+                $id_company = $_POST['id_company'];
+                $offerTitle = $_POST['offerTitle'];
+                $offerLongDescription = $_POST['offerLongDescription'];
+                $offerShortDescription = $_POST['offerShortDescription'];
+                $offerProfileDescription = $_POST['offerProfileDescription'];
+                $offerSalary = $_POST['offerSalary'];
+                $offerType = $_POST['offerType'];
+                $offerStartDate = $_POST['offerStartDate'];
+                $offerEndDate = $_POST['offerEndDate'];
+                $this->model->addOffer(
+                    $id_company,
                     $offerTitle,
                     $offerLongDescription,
                     $offerShortDescription,
@@ -100,33 +101,34 @@ class  OfferController extends Controller
                     $offerStartDate,
                     $offerEndDate);
             }
-
     }
     public function updateOffer() {
-        if (isset($_GET['id']) &&
-            isset($_GET['id_company']) &&
-            isset($_GET['offerTitle']) &&
-            isset($_GET['offerLongDescription']) &&
-            isset($_GET['offerShortDescription']) &&
-            isset($_GET['offerProfileDescription']) &&
-            isset($_GET['offerSalary'])&&
-            isset($_GET['offerType'])&&
-            isset($_GET['offerStartDate'])&&
-            isset($_GET['offerEndDate'])
+        if (isset($_POST['id']) &&
+            isset($_POST['id_company']) &&
+            isset($_POST['offerTitle']) &&
+            isset($_POST['offerLongDescription']) &&
+            isset($_POST['offerShortDescription']) &&
+            isset($_POST['offerProfileDescription']) &&
+            isset($_POST['offerSalary'])&&
+            isset($_POST['offerType'])&&
+            isset($_POST['offerStartDate'])&&
+            isset($_POST['offerEndDate'])
 
         )
             {
-                $offer_id = $_GET['id'];
-                $id_company = $_GET['id_company'];
-                $offerTitle = $_GET['offerTitle'];
-                $offerLongDescription = $_GET['offerLongDescription'];
-                $offerShortDescription = $_GET['offerShortDescription'];
-                $offerProfileDescription = $_GET['offerProfileDescription'];
-                $offerSalary = $_GET['offerSalary'];
-                $offerType = $_GET['offerType'];
-                $offerStartDate = $_GET['offerStartDate'];
-                $offerEndDate = $_GET['offerEndDate'];
-                $this->model->updateOffer( $offer_id,$id_company,
+                $offer_id = $_POST['id'];
+                $id_company = $_POST['id_company'];
+                $offerTitle = $_POST['offerTitle'];
+                $offerLongDescription = $_POST['offerLongDescription'];
+                $offerShortDescription = $_POST['offerShortDescription'];
+                $offerProfileDescription = $_POST['offerProfileDescription'];
+                $offerSalary = $_POST['offerSalary'];
+                $offerType = $_POST['offerType'];
+                $offerStartDate = $_POST['offerStartDate'];
+                $offerEndDate = $_POST['offerEndDate'];
+                $this->model->updateOffer(
+                    $offer_id,
+                    $id_company,
                     $offerTitle,
                     $offerLongDescription,
                     $offerShortDescription,
@@ -135,11 +137,14 @@ class  OfferController extends Controller
                     $offerType,
                     $offerStartDate,
                     $offerEndDate);
+                header('Location: index.php?uri=offer/admin');
+            } else {
+                header('Location: index.php?uri=offer/admin');
+        }
 
-            }
     }
 
-    public function showAdminoffer(){
+    public function showAdminOffer(){
         $offers = $this->model->getAllOffers();
         echo $this->templateEngine->render('adminOffer.twig.html', ['offers' => $offers]);
     }
