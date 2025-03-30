@@ -31,7 +31,8 @@ class EvaluationsController extends Controller
             $evaluationDate = $_POST['evaluation_date'];
             $userId = $_POST['user_id'];
             $companyId = $_POST['company_id'];
-            $this->model->addEvaluation($evaluationComment, $evaluationScore, $evaluationDate, $userId, $companyId);
+            $this->model->addEvaluation($userId, $companyId, $evaluationComment, $evaluationDate, $evaluationScore);
+
         }
     }
     public function getEvaluationByCompany()
