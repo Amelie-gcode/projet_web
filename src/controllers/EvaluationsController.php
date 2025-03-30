@@ -41,7 +41,7 @@ class EvaluationsController extends Controller
         return $evaluation;
 
     }
-    public function getavgscore()
+    public function getAvgScore()
     {
         if(isset($_POST['company_id'])){
             $companyId = $_POST['company_id'];

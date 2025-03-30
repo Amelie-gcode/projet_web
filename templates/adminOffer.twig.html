@@ -18,19 +18,25 @@
             </header>
             <section class="offer-content">
                 <ul class="principal-infos-offers">
-                    <li>Entreprise: {{offer.company_id}}</li>
-                    <li>Type: {{offer.offer_type}}</li>
+                    <li>{{offer.company_name}}</li>
+                    <li>{{offer.offer_type}}</li>
                 </ul>
                 <ul class="secondary-infos-offers">
-                    <li>Salaire: {{offer.offer_salary}}</li>
-                    <li>Début: {{offer.offer_start_date}}</li>
-                    <li>Fin: {{offer.offer_end_date}}</li>
+                    <li>Salaire: {{offer.offer_salary}} €</li>
+                    {% if offer.duration is defined and offer.duration != "N/A" %}
+                        <li>{{offer.duration}} semaines</li>
+                    {% endif %}
+                    {% if offer.skills is defined %}
+                        {% for skill in offer.skills %}
+                            <li>{{skill.skill_name}}</li>
+                        {% endfor %}
+                    {% endif %}
                 </ul>
                 <p>{{offer.offer_short_description}}</p>
                 <footer>
                     <div class="date">
                         <p>publié le :</p>
-                        <time>09/02/2025</time>
+                        <time>{{offer.offer_start_date}}</time>
                     </div>
                     <form class="btn-offer" action="index.php" method="get">
                         <input type="hidden" name="uri" value="offer/showForm">
