@@ -3,7 +3,7 @@
  * This is the router, the main entry point of the application.
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
-
+session_start();
 echo "<pre>";
 print_r($_GET);
 echo "</pre>";
@@ -23,6 +23,7 @@ use App\controllers\LikesController;
 use App\controllers\RequiresController;
 use App\controllers\SkillsController;
 use App\controllers\StudentsController;
+use App\controllers\AuthController;
 
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -50,6 +51,7 @@ $applyController = new ApplyController($twig);
 $offerController = new OfferController($twig);
 $likesController = new LikesController($twig);
 $userController = new UserController($twig);
+$authController = new AuthController($twig);
 
 // Déterminer quel contrôleur utiliser en fonction de l'URI
 switch ($controllerName) {
@@ -73,6 +75,10 @@ switch ($controllerName) {
                 $companyController->deleteCompany();
                 break;
             case 'show':
+                if (!isset($_SESSION['user_id'])) {
+                    header("Location: ?uri=auth/showForm");
+                    exit();
+                }
                 $companyController->showCompany();
                 break;
             case 'showForm':
@@ -115,7 +121,12 @@ switch ($controllerName) {
                 $offerController->showAllOffers();
                 break;
             case 'show':
+                if (!isset($_SESSION['user_id'])) {
+                    header("Location: ?uri=auth/showForm");
+                    exit();
+                }
                 $offerController->showOffer();
+                break;
             case 'add':
                 $offerController->addOffer();
                 header('Location: index.php?uri=offer/admin');
@@ -165,15 +176,28 @@ switch ($controllerName) {
                 break;
         }
         break;
-        case 'evaluation':
-            switch ($action) {
-                case 'add':
-                    $evalController->addEvaluation();
-                    header('Location: index.php?uri=company/index');
-                    break;
+    case 'evaluation':
+        switch ($action) {
+            case 'add':
+                $evalController->addEvaluation();
+                header('Location: index.php?uri=company/index');
+                break;
+            default:
+                echo '404 Not Found - Action inconnue';
+                break;
+        }
+        break;
+    case 'auth':
+        switch ($action) {
+            case 'showForm':
+                $authController->showLoginForm();
+                break;
+            case 'login':
+                $authController->login();
+                break;
+        }
+        break;
 
-            }
-            break;
 
     default:
         echo '404 Not Found - Contrôleur inconnu';

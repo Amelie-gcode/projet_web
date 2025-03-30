@@ -158,12 +158,13 @@
 <div id="modal" class="modal">
     <div class="modal-content connexion_container">
         <span class="close-button">&times;</span>
-        <form class="connexion_box">
+        <form class="connexion_box" action="?uri=auth/login" method="post">
             <h1 class="titre_connexion">Se connecter</h1>
-            <label for="identifant">Identifiant</label>
-            <input id="identifant" class="identifiant" type="text">
-            <label for="MDP">Mot de passe</label>
-            <input id="MDP" type="password">
+            <label for="email">email</label>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required>
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required>
+            <input type="hidden" name="access" id="access" value="{{show_modal}}">
             <button type="submit">Se connecter</button>
         </form>
     </div>

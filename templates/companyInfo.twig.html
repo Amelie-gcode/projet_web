@@ -10,7 +10,7 @@
     <!-- Section 1: Company Info -->
     <section class="company-info">
         <div class="company-header">
-            <img src="../assets/image/company-logo.png" alt="Logo entreprise">
+            <img src="/assets/image/company-logo.png" alt="Logo entreprise">
             <h2>{{company.company_name}}</h2>
         </div>
         <div class="company-description">
@@ -24,11 +24,15 @@
             <div class="stat-item">
                 <span class="stat-value">{{moyenne}}/5</span>
                 <span class="rating-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
+        {% for i in 1..5 %}
+            {% if moyenne >= i %}
+                <i class="fas fa-star"></i> {# Étoile pleine #}
+            {% elseif moyenne > i - 1 %}
+                <i class="fas fa-star-half-alt"></i> {# Demi-étoile #}
+            {% else %}
+                <i class="far fa-star"></i> {# Étoile vide #}
+            {% endif %}
+        {% endfor %}
                 </span>
             </div>
         </div>
@@ -101,8 +105,8 @@
             <textarea id="evaluation_comment" rows="4" placeholder="Partagez votre expérience..."></textarea>
         </div>
         <input type="hidden" name="company_id" value="{{company.company_id}}">
-        <input type="hidden" name="user_id" value="{{4}}"> <!-- a remplacer par un token-->
-        <input type="hidden" name="evaluation_date" value="{{ 'now'|date('Y-m-d') }}">
+        <input type="hidden" name="user_id" value="4"> <!-- a remplacer par un token-->
+        <input type="hidden" name="evaluation_date" value="2025-02-09">
         <button type="submit" class="submit-rating">Envoyer</button>
     </form>
 </section>
