@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
             modal.setAttribute('data-show', 'false');
 
-            //history.replaceState(null, null, window.location.pathname + window.location.search.replace(/[?&]login_error=[^&]+/, ''));
+            history.replaceState(null, null, window.location.pathname + window.location.search.replace(/[?&]login_error=[^&]+/, ''));
+
         });
     }
 });
