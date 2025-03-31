@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
         closeButton.addEventListener('click', function() {
             modal.style.display = 'none';
 
-            //history.replaceState(null, null, window.location.pathname + window.location.search.replace(/[?&]login_error=[^&]+/, ''));
+            history.replaceState(null, null, window.location.pathname + window.location.search.replace(/[?&]login_error=[^&]+/, ''));
+
         });
     }
 });

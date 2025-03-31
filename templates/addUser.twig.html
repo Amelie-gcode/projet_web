@@ -6,7 +6,7 @@
 {% block content %}
 <!-- <body class="body-creation-compte"> -->
 <section class="account-signup">
-    <form class="account-form" action="index.php?uri={% if user %}user/update{% else %}user/add{% endif %}" method="post">
+    <form class="account-form" action="?uri={% if user %}user/update{% else %}user/add{% endif %}" method="post">
 
     <h1>{% if user %}Modifier le compte{% else %}Creation Compte{% endif %}</h1>
 
@@ -24,11 +24,14 @@
             <label for="email">Email</label>
             <input type="email" id="email" name="email" value="{{ user.user_email|default('') }}">
         </div>
+        {% if user %}
 
+        {% else %}
         <div class="account-form-group">
             <label for="password">Mot de passe</label>
             <input type="password" id="password" name="password" value="{{ user.user_password|default('') }}">
         </div>
+        {% endif %}
 
         <div class="account-form-group">
             <label class="account-role-label">Statut</label>
@@ -46,9 +49,9 @@
         </div>
 
         <div class="account-buttons">
+            <input type="hidden" name="user_id" value="{{ user.user_id }}">
             <a href="index.php/?uri=user/index" class="account-back">Retour</a>
             {% if user %}
-            <input type="hidden" name="user_id" value="{{ user.user_id }}">
             <button type="submit" class="account-submit">Modifier le compte</button>
             {% else %}
             <button type="submit" class="account-submit">Créer Compte</button>

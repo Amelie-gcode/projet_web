@@ -36,6 +36,62 @@ class UserModel extends Model
         $stmt->bindValue(":role", $role, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
     public function deleteUser($id) {
         $query= "DELETE  FROM Users WHERE user_id = :id";
@@ -44,23 +100,20 @@ class UserModel extends Model
         $stmt->execute();
         return $stmt->fetch( PDO::FETCH_ASSOC);
     }
-    public function updateUser($id, $name, $forname, $email, $password, $role) {
+    public function updateUser($id, $name, $forname, $email, $role) {
         $query = (
             "UPDATE Users SET
                   user_lastname = :name,
                   user_firstname = :forname,
                   user_email = :email,
-                  user_password = :password,
                   user_status = :role
               WHERE user_id = :id"
         );
         $stmt = $this->connection->pdo->prepare($query);
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->bindValue(":name", $name, PDO::PARAM_STR);
         $stmt->bindValue(":forname", $forname, PDO::PARAM_STR);
         $stmt->bindValue(":email", $email, PDO::PARAM_STR);
-        $stmt->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
         $stmt->bindValue(":role", $role, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);

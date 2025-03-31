@@ -4,7 +4,8 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 session_start();
-
+//$_SESSION['user_id'] = 9;
+//$_SESSION['user_status'] = 'admin';
 
 echo "<pre>";
 print_r($_GET);
