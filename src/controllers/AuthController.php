@@ -37,25 +37,27 @@ class AuthController extends Controller
 
                     error_log("Login successful for user ID: {$user['user_id']}");
                     header("Location: ?uri=offer/index");
+                    $_SESSION['show_modal'] = 'false';
                     exit();
                 } else {
                     error_log("Password verification failed for email: $email");
                     $_SESSION['login_error'] = "Mot de passe incorrect";
-                    $_SESSION['show_modal'] = true;
+                    $_SESSION['show_modal'] = 'true';
                 }
             } else {
                 error_log("No user found with email: $email");
                 $_SESSION['login_error'] = "Aucun utilisateur trouvé avec cet email";
-                $_SESSION['show_modal'] = true;
+                $_SESSION['show_modal'] = 'true';
             }
 
             // Redirection vers la page des offres avec message d'erreur dans la session
-            header("Location: ?uri=auth/showForm");
+            header("Location: ?uri=offer/index");
             exit();
         }
     }
 
     public function logout() {
+        $_SESSION = array();
         session_destroy();
         header("Location: ?uri=offer/index");
         exit();

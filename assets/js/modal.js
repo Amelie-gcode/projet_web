@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ne vérifier la présence d'un message d'erreur que si l'accès est demandé
     // ou si une action de connexion a été tentée
 
+    if (modal && modal.getAttribute('data-show') === 'true') {
+        modal.style.display = 'block';
+    }
+
     openModalButtons.forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
@@ -17,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeButton) {
         closeButton.addEventListener('click', function() {
             modal.style.display = 'none';
+            modal.setAttribute('data-show', 'false');
 
             history.replaceState(null, null, window.location.pathname + window.location.search.replace(/[?&]login_error=[^&]+/, ''));
 
