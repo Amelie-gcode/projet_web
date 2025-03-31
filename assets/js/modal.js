@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     // First modal page connexion
     const modal = document.getElementById('modal');
-    const openModalButton = document.querySelector('.user-items');
+    const openModalButtons = document.querySelectorAll('.auth');
     const closeButton = document.querySelector('.close-button');
-    const accessInput = document.getElementById('access'); // Correction ici
 
-    if (accessInput && accessInput.value === '1') {
-        modal.style.display = 'block';
-    }
-    if (openModalButton) {
-        openModalButton.addEventListener('click', function(event) {
+    // Ne vérifier la présence d'un message d'erreur que si l'accès est demandé
+    // ou si une action de connexion a été tentée
+
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
             event.preventDefault();
             modal.style.display = 'block';
         });
-    }
-
+    });
 
     if (closeButton) {
         closeButton.addEventListener('click', function() {
             modal.style.display = 'none';
+
+            //history.replaceState(null, null, window.location.pathname + window.location.search.replace(/[?&]login_error=[^&]+/, ''));
         });
     }
 });

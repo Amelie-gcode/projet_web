@@ -81,9 +81,11 @@ class  OfferController extends Controller
             }
         }
 
+
         echo $this->templateEngine->render('offers.twig.html', [
             'offers' => $offers,
-            'offerI' => $offerI]);
+            'offerI' => $offerI,
+            'session' => $_SESSION]);
     }
     public function showOffer()
     {

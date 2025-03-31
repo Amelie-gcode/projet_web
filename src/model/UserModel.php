@@ -71,7 +71,7 @@ class UserModel extends Model
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":role", $role, PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getUserByEmail($email) {
         $query = "SELECT * FROM Users WHERE user_email = :email";

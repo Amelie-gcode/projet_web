@@ -14,12 +14,21 @@
                 <i class="fa-solid fa-user"></i>
             </button>
             <ul id="user-menu" class="dropdown-menu">
-                <li><a href="" class="user-items">Profil</a></li>
-                <li><a href="favoris.html" class="user-items">Mes offres</a></li>
-                <li><a href="index.php?uri=user/index" class="user-items">Gestion compte</a></li>
-                <li><a href="index.php?uri=offer/admin" class="user-items">Gestion offre</a></li>
-                <li><a href="/?uri=company/admin" class="user-items">Gestion entreprise</a></li>
-                <li><a href="" class="user-items">Déconnexion</a></li>
+                {%if session.user_id is not defined%}
+                    <li><a href="" class="user-items auth">Se connecter</a></li>
+                {%endif%}
+                {%if session.user_id is defined%}
+                    {%if session.user_status == 'Etudiant'%}
+                        <li><a href="" class="user-items">Profil</a></li>
+                        <li><a href="favoris.html" class="user-items ">Mes offres</a></li>
+                        <li><a href="index.php/?uri=auth/logout" class="user-items">Déconnexion</a></li>
+                    {%else%}
+                        <li><a href="index.php?uri=user/index" class="user-items">Gestion compte</a></li>
+                        <li><a href="index.php?uri=offer/admin" class="user-items">Gestion offre</a></li>
+                        <li><a href="/?uri=company/admin" class="user-items">Gestion entreprise</a></li>
+                        <li><a href="index.php/?uri=auth/logout" class="user-items">Déconnexion</a></li>
+                    {%endif%}
+                {%endif%}
             </ul>
         </aside>
     </nav>

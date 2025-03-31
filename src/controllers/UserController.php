@@ -14,7 +14,8 @@ class UserController extends Controller
     }
     public function showAllUsers(){
         $users = $this->model->getAllUsers();
-        echo $this->templateEngine->render('users.twig.html', ['users' => $users]);
+        $userstudent= $this->model->getUserByRole('Etudiant');
+        echo $this->templateEngine->render('users.twig.html', ['users' => $users, 'userstudent' => $userstudent]);
 
     }
     public function showUser(){
@@ -52,13 +53,13 @@ class UserController extends Controller
             isset($_POST['forname']) &&
             isset($_POST['email']) &&
             isset($_POST['password']) &&
-            isset($_POST['role'])) {
+            isset($_POST['status'])) {
             $name = $_POST['name'];
             $forname = $_POST['forname'];
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $role = intval($_POST['role']);
-            $this->model->addUser($name,$forname, $email, $password, $role);
+            $status = $_POST['status'];
+            $this->model->addUser($name,$forname, $email, $password, $status);
             }
         header('Location: ?uri=user/index');
     }

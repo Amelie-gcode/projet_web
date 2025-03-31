@@ -33,13 +33,13 @@
         <div class="account-form-group">
             <label class="account-role-label">Statut</label>
             <div class="account-role-options" >
-                {% set user_status = user.user_status|default(0) %}
+
                 <label class="account-role-choice">
-                    <input type="radio" name="role" value="0" {% if user and user_status == 0 %} checked {% endif %}>
+                    <input type="radio" name="status" value="Etudiant" {% if user and user.user_status == 'Etudiant' %}checked{% endif %}>
                     <span>Étudiant</span>
                 </label>
                 <label class="account-role-choice">
-                    <input type="radio" name="role" value="1" {% if user and user_status == 1 %} checked {% endif %}>
+                    <input type="radio" name="status" value="Pilote" {% if user and user.user_status == 'Pilote' %}checked{% endif %}>
                     <span>Pilote</span>
                 </label>
             </div>

@@ -133,11 +133,16 @@
                         <p>publié le :</p>
                         <time>{{offerI.offer_start_date}}</time>
                     </div>
+                    {% if session.user_id is defined %}
                     <form action="#" method="get">
                         <input type="hidden" name="uri" value="offer/show">
                         <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
                         <button type="submit" class="apply-button user-items">Postuler</button>
                     </form>
+                    {% endif %}
+                    {% if session.user_id is not defined %}
+                        <button type="submit" class="apply-button user-items auth" >Postuler</button>
+                    {% endif %}
                 </address>
             </footer>
         </article>
@@ -160,11 +165,17 @@
         <span class="close-button">&times;</span>
         <form class="connexion_box" action="?uri=auth/login" method="post">
             <h1 class="titre_connexion">Se connecter</h1>
+
+            {% if session.login_error is defined %}
+            <div class="error-message" style="color: red; text-align: center; margin-bottom: 0px;">
+                {{ session.login_error }}
+            </div>
+            {% endif %}
+
             <label for="email">email</label>
             <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required>
             <label for="password">Mot de passe</label>
             <input id="password" type="password" name="password" placeholder="mot de passe" required>
-            <input type="hidden" name="access" id="access" value="{{show_modal}}">
             <button type="submit">Se connecter</button>
         </form>
     </div>

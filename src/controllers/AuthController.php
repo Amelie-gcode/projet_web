@@ -11,44 +11,53 @@ class AuthController extends Controller
         $this->model= new UserModel();
         $this->templateEngine = $templateEngine;
     }
-    public function showLoginForm()
-    {
-        $offerModel = new OfferModel();
-        $offers=$offerModel->getAllOffers();
-        if (!isset($_SESSION['user_id'])) {
-            $_SESSION['show_modal']=true;
-        }
-        echo $this->templateEngine->render('offers.twig.html',['offers'=> $offers, 'show_modal' => $_SESSION['show_modal']]);
-        unset($_SESSION['show_modal']);
-    }
     public function login()
     {
         if (isset($_POST['email']) && isset($_POST['password'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
 
+            error_log("Login attempt for email: $email");
+
+            // Vérifie si l'email existe dans la base de données
             $user = $this->model->getUserByEmail($email);
 
-            $hashedPassword =password_hash($password, PASSWORD_DEFAULT);
+            if ($user) {
+                // Vérifie le mot de passe avec `password_verify`
+                error_log("Stored hash: " . $user['user_password']);
+                error_log("decrypted" . password_hash($password, PASSWORD_DEFAULT));
+                error_log("Password verification result: " . (password_verify($password, $user['user_password']) ? "true" : "false"));
 
-            if ($hashedPassword == $user['password']) {
-                echo "Identifiants corrects";
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['user_status'] = $user['user_status']; // Ex: 'admin', 'user', 'company'
-                header("Location: ?uri=offer/index"); // Redirection
-                exit();
+
+                if (password_verify($password, $user['user_password'])) {
+                    // Ne pas appeler session_start() si déjà démarré dans index.php
+                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['user_status'] = $user['user_status'];
+                    $_SESSION['user_name'] = $user['user_firstname'];
+
+                    error_log("Login successful for user ID: {$user['user_id']}");
+                    header("Location: ?uri=offer/index");
+                    exit();
+                } else {
+                    error_log("Password verification failed for email: $email");
+                    $_SESSION['login_error'] = "Mot de passe incorrect";
+                    $_SESSION['show_modal'] = true;
+                }
             } else {
-                echo "Identifiants incorrects";
-                header("Location: ?uri=auth/login");
-                exit();
+                error_log("No user found with email: $email");
+                $_SESSION['login_error'] = "Aucun utilisateur trouvé avec cet email";
+                $_SESSION['show_modal'] = true;
             }
-            echo "oui";
+
+            // Redirection vers la page des offres avec message d'erreur dans la session
+            header("Location: ?uri=auth/showForm");
+            exit();
         }
-        echo "non";
     }
+
     public function logout() {
         session_destroy();
-        header("Location: ?uri=login");
+        header("Location: ?uri=offer/index");
         exit();
     }
 }

@@ -4,6 +4,8 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 session_start();
+
+
 echo "<pre>";
 print_r($_GET);
 echo "</pre>";
@@ -31,6 +33,7 @@ $twig = new \Twig\Environment($loader, [
     'debug' => true,
     'cache' => false
 ]);
+$twig->addGlobal('session', $_SESSION);
 
 if (isset($_GET['uri'])) {
     $uri = $_GET['uri'];
@@ -75,10 +78,6 @@ switch ($controllerName) {
                 $companyController->deleteCompany();
                 break;
             case 'show':
-                if (!isset($_SESSION['user_id'])) {
-                    header("Location: ?uri=auth/showForm");
-                    exit();
-                }
                 $companyController->showCompany();
                 break;
             case 'showForm':
@@ -121,10 +120,6 @@ switch ($controllerName) {
                 $offerController->showAllOffers();
                 break;
             case 'show':
-                if (!isset($_SESSION['user_id'])) {
-                    header("Location: ?uri=auth/showForm");
-                    exit();
-                }
                 $offerController->showOffer();
                 break;
             case 'add':
@@ -194,6 +189,9 @@ switch ($controllerName) {
                 break;
             case 'login':
                 $authController->login();
+                break;
+            case 'logout':
+                $authController->logout();
                 break;
         }
         break;
