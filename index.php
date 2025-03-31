@@ -118,6 +118,7 @@ switch ($controllerName) {
         switch ($action) {
             case 'index':
                 $offerController->showAllOffers();
+                $_SESSION['show_modal'] = 'false';
                 break;
             case 'show':
                 $offerController->showOffer();

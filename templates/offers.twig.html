@@ -160,7 +160,9 @@
 
 <button id="scrollToTop" style="display: none;">↑</button>
 
-<div id="modal" class="modal">
+
+
+<div id="modal" class="modal" data-show="{{ session.show_modal == 'true' ? 'true' : 'false' }}">
     <div class="modal-content connexion_container">
         <span class="close-button">&times;</span>
         <form class="connexion_box" action="?uri=auth/login" method="post">
