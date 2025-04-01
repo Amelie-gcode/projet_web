@@ -13,8 +13,8 @@ class DatabaseSQL {
  private $password = "20051027aA&"; // Mot de passe de l'utilisateur MySQL
  */
 
-    private $host = "localhost:3307"; // Nom du serveur Azure MySQL
-    private $dbname = "amely"; // Nom de ta base de données
+    private $host = "localhost:3306"; // Nom du serveur Azure MySQL
+    private $dbname = "amely_test"; // Nom de ta base de données
     private $username = "root"; // Utilisateur avec suffixe "@amely"
     private $password = ""; // Mot de passe de l'utilisateur MySQL
     public $pdo;

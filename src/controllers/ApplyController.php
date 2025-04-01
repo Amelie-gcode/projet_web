@@ -3,6 +3,8 @@
 namespace App\controllers;
 
 use App\model\ApplyModel;
+use App\model\OfferModel;
+use App\model\UserModel;
 
 class ApplyController extends Controller
 {
@@ -24,6 +26,22 @@ class ApplyController extends Controller
         } else {
             header('Location: /apply');
         }
+    }
+    public function showApplyByOfferAndUser()
+    {
+        $offerModel= new OfferModel();
+        $userModel= new UserModel();
+        if (isset($_GET['offer_id']) && isset($_GET['user_id'])) {
+            $idOffer = $_GET['offer_id'];
+            $idUser= $_GET['user_id'];
+            $offer= $offerModel->getOfferById($idOffer);
+            $user= $userModel->getUser($idUser);
+            $apply= $this->model->getApplyByOfferAndUser($idOffer, $idUser);
+            echo $this->templateEngine->render('ApplyInfo.twig.html', ['apply' => $apply, 'offer' => $offer, 'user' => $user]);
+        } else {
+            header('Location: offer/index');
+        }
+
     }
     public function showApplyByUser()
     {

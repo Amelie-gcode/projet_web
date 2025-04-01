@@ -1,0 +1,33 @@
+{# templates/ApplyInfo.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Candidature{% endblock %}
+
+{% block content %}
+{%if session.user_status == "Etudiant"%}
+<h1 class="principal-title">Votre Candidature :</h1>
+{%else%}
+<h1 class="principal-title">Candidature de {{user.user_firstname}} {{user.user_lastname}} :</h1>
+{%endif%}
+<div class="company-profile">
+  <!-- Section 1: Company Info -->
+  <section class="company-info">
+    <div class="company-header">
+      <h2>Lettre de motivation :</h2>
+    </div>
+    <div class="company-description">
+      <p style="font-size: 20px">{{apply.application_cover_letter}}</p>
+    </div>
+    <div class="company-stats">
+      <div class="stat-item">
+        <span class="stat-value">{{apply.application_date}}</span>
+        <span class="stat-label">Date de candidature</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{offer.offer_title}}</span>
+        <span class="stat-label">Nom de l'offre</span>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -42,8 +42,8 @@ class   LikesModel extends Model
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_user", $id_user, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
     public function nbLikesByUsers($id_user) {

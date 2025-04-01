@@ -35,7 +35,7 @@
                             <th>{{user.user_status}}</th>
                             <th>
                                 <form action="index.php" method="get">
-                                    <input type="hidden" name="user_id" value="{{userstudent.user_id}}">
+                                    <input type="hidden" name="user_id" value="{{user.user_id}}">
                                     <button class="action-bouton" type="submit" name="uri" value="user/show">STATS</button>
                                     <button class="action-bouton" type="submit" name="uri" value="user/showForm">MODIFIER</button>
                                     <button class="action-bouton" onclick="supprimer('index.php?uri=user/delete&user_id={{user.user_id}}')" type="button">Supprimer</button>
