@@ -187,9 +187,6 @@ switch ($controllerName) {
         break;
     case 'auth':
         switch ($action) {
-            case 'showForm':
-                $authController->showLoginForm();
-                break;
             case 'login':
                 $authController->login();
                 break;

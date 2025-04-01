@@ -69,27 +69,22 @@ class UserController extends Controller
     }
 
     public function updateUser(){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            var_dump($_POST);
-        }
         if (isset($_POST['user_id']) &&
             isset($_POST['name']) &&
             isset($_POST['forname']) &&
             isset($_POST['email']) &&
-            isset($_POST['password']) &&
             isset($_POST['status'])) {
 
             $id = $_POST['user_id'];
             $name = $_POST['name'];
             $forname = $_POST['forname'];
             $email = $_POST['email'];
-            $password = $_POST['password'];
             $status = $_POST['status'];
 
-            $this->model->updateUser($id, $name, $forname, $email, $password, $status);
-            //header('Location: ?uri=user/index');
+            $this->model->updateUser($id, $name, $forname, $email,  $status);
+            header('Location: ?uri=user/index');
         } else {
-            //header('Location: ?uri=user/index');
+            header('Location: ?uri=user/index');
         }
     }
     public function showForm(){
@@ -105,5 +100,6 @@ class UserController extends Controller
             echo $this->templateEngine->render('addUser.twig.html');
         }
     }
+
 
 }

@@ -18,24 +18,24 @@ class EvaluationsModel extends Model
         $query = "SELECT * FROM Evaluations";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
     }
     function getEvaluation($id){
         $query = "SELECT * FROM Evaluations WHERE evaluation_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
     }
     function getEvaluationByCompany($id){
         $query = "Select * From Evaluations where company_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
     function addEvaluation($id_user, $id_company, $evaluationComment, $evaluationDate, $evaluationScore)
     {
@@ -47,7 +47,7 @@ class EvaluationsModel extends Model
         $stmt->bindValue(":evaluationDate", $evaluationDate, PDO::PARAM_STR);
         $stmt->bindValue(":evaluationScore", $evaluationScore, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function averageScore($id_company) {

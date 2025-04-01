@@ -3,6 +3,7 @@
 namespace App\controllers;
 
 use App\model\EvaluationsModel;
+use App\model\UserModel;
 
 class EvaluationsController extends Controller
 {
@@ -26,6 +27,7 @@ class EvaluationsController extends Controller
         && isset($_POST['user_id'])
         && isset($_POST['company_id']))
         {
+
             $evaluationComment = $_POST['evaluation_comment'];
             $evaluationScore = $_POST['rating'];
             $evaluationDate = $_POST['evaluation_date'];
@@ -49,6 +51,15 @@ class EvaluationsController extends Controller
             $avg= $this->model->averageScore($companyId);
             echo $avg;
         }
+
+    }
+    public function getUserByEvaluation($id)
+    {
+        $userModel= new UserModel();
+
+        $evalid= $this->model->getEvaluation($id);
+
+        return $userModel->getUser($evalid['user_id']);
 
     }
 }

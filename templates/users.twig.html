@@ -26,7 +26,6 @@
             </thead>
             <tbody>
             {% if session.user_status == 'Pilote' %}
-
                 {% for user in users %}
                     {% if user.user_status == 'Etudiant' %}
                         <tr>
@@ -45,7 +44,6 @@
                         </tr>
                     {% endif %}
                 {% endfor %}
-
             {% else %}
                 {% for user in users %}
                     {% if user.user_status != 'Admin' %}
