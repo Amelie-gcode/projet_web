@@ -139,4 +139,40 @@ document.addEventListener("DOMContentLoaded", function () {
             stars.forEach(s => s.classList.remove("hovered"));
         });
     });
-});
+
+    // envoie form filtre plus search
+
+    const searchForm = document.querySelector(".search-container"); // Sélectionne le formulaire de recherche
+    const filtersForm = document.querySelector(".filters-container"); // Sélectionne le formulaire des filtres
+
+    if (!searchForm || !filtersForm) return; // Sécurité : on ne continue que si les formulaires existent
+
+    searchForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Empêche l'envoi classique du formulaire
+
+        const formData = new FormData(searchForm);
+        const filterFormData = new FormData(filtersForm);
+
+        // Fusionne les données des deux formulaires
+        filterFormData.forEach((value, key) => {
+            formData.append(key, value);
+        });
+
+        const filteredParams = new URLSearchParams();
+
+        formData.forEach((value, key) => {
+            if (key === "domaines[]") {
+                if (value.trim() !== "") {
+                    filteredParams.append(key, value);
+                }
+            } else if (value.trim() !== "") {
+                filteredParams.append(key, value);
+            }
+        });
+
+        window.location.href = window.location.pathname + "?" + filteredParams.toString();
+    });
+
+
+
+ });
