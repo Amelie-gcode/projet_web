@@ -132,7 +132,10 @@
             <div class="comment-card">
                 <div class="comment-header">
                     <div class="user-info">
-                        <div class="user-avatar">AG <div>
+                        <div class="user-avatar" id="user_avatar"> </div>
+                        <input type="hidden" class="firstname" value="{{users[evaluation.user_id].user_firstname}}">
+                        <input type="hidden" class="lastname" value="{{users[evaluation.user_id].user_lastname}}">
+                        <div>
                             <div class="user-name">
                                 {{ users[evaluation.user_id].user_lastname }}
                                 {{ users[evaluation.user_id].user_firstname }}

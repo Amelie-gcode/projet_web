@@ -125,7 +125,7 @@
                     <input type="reset" value="Réinitialiser" class="btn-reset">
                     <input type="hidden" name="apply_date" value="{{now|date('Y-m-d')}}">
                     <input type="hidden" name="id_offer" value="{{offer.offer_id}}">
-                    <input type="hidden" name="id_user" value="{{user.id}}"> <!-- mettre un token machin truc -->
+                    <input type="hidden" name="id_user" value="{{session.user_id}}"> <!-- mettre un token machin truc -->
                     <input type="submit" value="Postuler" class="btn-submit" >
                 </div>
 

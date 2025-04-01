@@ -3,6 +3,7 @@
 namespace App\controllers;
 
 use App\model\LikesModel;
+use App\model\OfferModel;
 
 class LikesController extends controller
 {
@@ -11,10 +12,15 @@ class LikesController extends controller
         $this->model = new LikesModel();
     }
     public function showLikesByStudent(){
-        if(isset($_GET['user_id'])){
-            $user_id=$_GET['user_id'];
+        $offerModel= new OfferModel();
+        if(isset($_SESSION['user_id'])){
+            $user_id=$_SESSION['user_id'];
             $likes=$this->model->getLikesByUsers($user_id);
-            return $likes;
+            $offers=[];
+            foreach ($likes as $like){
+                $offers[]= $offerModel->getOfferById($like['offer_id']);
+            }
+            echo $this->templateEngine->render('Likes.twig.html', ['offers' => $offers]);
         }
     }
     public function nbLikesByOffer()
@@ -27,31 +33,31 @@ class LikesController extends controller
 
     }
     public function addLike(){
-        if(isset($_POST['user_id']) && isset($_POST['offer_id'])){
-            $user_id=$_POST['user_id'];
+        if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){
+            $user_id=$_SESSION['user_id'];
             $offer_id=$_POST['offer_id'];
             $this->model->addLike($user_id,$offer_id);
         }
     }
 
     public function deleteLike(){
-        if(isset($_POST['user_id']) && isset($_POST['offer_id'])){
-            $user_id=$_POST['user_id'];
+        if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){
+            $user_id=$_SESSION['user_id'];
             $offer_id=$_POST['offer_id'];
             $this->model->deleteLike($user_id,$offer_id);
         }
     }
     public function isLiked(){
-        if(isset($_POST['user_id']) && isset($_POST['offer_id'])){
-            $user_id=$_POST['user_id'];
+        if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){
+            $user_id=$_SESSION['user_id'];
             $offer_id=$_POST['offer_id'];
             $this->model->isLiked($user_id,$offer_id);
         }
     }
     public function nbLikesByStudent()
     {
-        if (isset($_GET['user_id'])){
-            $user_id=$_GET['user_id'];
+        if (isset($_SESSION['user_id'])){
+            $user_id=$_SESSION['user_id'];
             $likes=$this->model->nbLikesByUsers($user_id);
             echo $likes;
         }

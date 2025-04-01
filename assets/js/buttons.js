@@ -176,3 +176,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
  });
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".comment-card").forEach(card => {
+        let firstName = card.querySelector(".firstname").value.trim();
+        let lastName = card.querySelector(".lastname").value.trim();
+        let avatar = card.querySelector(".user-avatar");
+
+        if (firstName && lastName) {
+            let initials = firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
+            avatar.textContent = initials;
+        }
+    });
+});

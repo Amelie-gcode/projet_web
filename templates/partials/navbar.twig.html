@@ -19,8 +19,8 @@
                 {%endif%}
                 {%if session.user_id is defined%}
                     {%if session.user_status == 'Etudiant'%}
-                        <li><a href="" class="user-items">Profil</a></li>
-                        <li><a href="favoris.html" class="user-items ">Mes offres</a></li>
+                        <li><a href="?uri=user/show" class="user-items">Profil</a></li>
+                        <li><a href="?uri=likes/show" class="user-items ">Mes offres</a></li>
                         <li><a href="index.php/?uri=auth/logout" class="user-items">Déconnexion</a></li>
                     {%else%}
                         <li><a href="index.php?uri=user/index" class="user-items">Gestion compte</a></li>

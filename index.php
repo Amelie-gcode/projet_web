@@ -105,10 +105,7 @@ switch ($controllerName) {
                 $applyController->deleteApply();
                 break;
             case 'show':
-                $applications=$applyController->showApplyByUser();
-                $likes=$likesController->showLikesByStudent();
-
-                echo $this->templateEngine->render('Likes.twig.html', ['applications' => $applications, 'likes' => $likes]);
+                $applyController->showApplyByOfferAndUser();
                 break;
             default:
                 echo '404 Not Found - Action inconnue';
@@ -195,7 +192,13 @@ switch ($controllerName) {
                 break;
         }
         break;
-
+    case 'likes':
+        switch ($action) {
+            case 'show':
+                $likesController->showLikesByStudent();
+                break;
+        }
+        break;
 
     default:
         echo '404 Not Found - Contrôleur inconnu';

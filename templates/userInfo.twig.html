@@ -53,9 +53,10 @@
             <time>09/02/2025</time>
           </div>
           <form action="#" method="get">
-            <input type="hidden" name="uri" value="offer/show">
+            <input type="hidden" name="uri" value="apply/show">
             <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
-            <button type="submit" class="see-more">details de l'offre</button>
+            <input type="hidden" name="user_id" value="{{user.user_id}}">
+            <button type="submit" class="see-more">voir candidature</button>
           </form>
         </footer>
       </section>
