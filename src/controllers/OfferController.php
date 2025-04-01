@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\model\ApplyModel;
 use App\model\EvaluationsModel;
+use App\model\LikesModel;
 use App\model\OfferModel;
 use App\model\SkillsModel;
 use App\model\CompanyModel;

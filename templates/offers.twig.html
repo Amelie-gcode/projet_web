@@ -91,18 +91,34 @@
                 <ul class="principal-infos-offers">
                     <li><a href="index.php?uri=company/show&company_id={{offerI.company_id}}">{{offerI.company_name}}</a></li>
                     <div class="company-grade">
-                        <li><i class="fas fa-star favoris-icon"></i></li>
+                        <li><i id="likeValue" class="fas fa-star favoris-icon"></i></li>
                         <li>{{offerI.company_rate}}</li>
                     </div>
                     <li>{{offerI.offer_location}}</li>
                     <li class="nb-candidats" >46 candidats</li>
                 </ul>
-                <div class="fav-button-container">
-                    <button type="button" class="favorite-button" aria-label="Ajouter aux favoris">
+
+                {% if isLiked %}
+                <form class="fav-button-container" action="index.php/?uri=like/add" method="get" >
+                    <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
                         <i class="far fa-heart heart-icon"></i>
                     </button>
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <input type="hidden" name="user_id" value="{{session.user_id}}">
                     <p class="nb-fav">53</p>
-                </div>
+                </form>
+                {% else %}
+
+                <form class="fav-button-container" action="index.php/?uri=like/delete" method="get" >
+                    <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
+                        <i class="far fa-heart heart-icon"></i>
+                    </button>
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <input type="hidden" name="user_id" value="{{session.user_id}}">
+                    <p class="nb-fav">53</p>
+                </form>
+                {%endif%}
+
                 <h3>Déscription du poste</h3>
             </header>
             <section class="offer-content">

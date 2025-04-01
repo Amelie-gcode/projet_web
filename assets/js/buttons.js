@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+
+
+
+
+
     // Gestion des compétences
     const addDomainButton = document.getElementById('add-domain');
     const domainsContainer = document.getElementById('domains-container');
@@ -154,3 +159,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+

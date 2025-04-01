@@ -33,6 +33,8 @@ class   LikesModel extends Model
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_user", $id_user, PDO::PARAM_INT);
         $stmt->bindValue(":id_offer", $id_offer, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
     }
 
     public function getLikesByUsers($id_user) {
