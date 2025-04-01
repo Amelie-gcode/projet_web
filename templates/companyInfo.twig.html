@@ -75,7 +75,9 @@
                     <form action="index.php" method="get">
                         <input type="hidden" name="uri" value="offer/show">
                         <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
-                        <button type="submit" class="see-more">détails de l'offre</button>
+                        {% if session.user_id is defined %}
+                            <button type="submit" class="see-more">détails de l'offre</button>
+                        {% endif %}
                     </form>
                 </footer>
             </section>
@@ -173,9 +175,9 @@
             {% endif %}
 
             <label for="email">email</label>
-            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required value="{{ cookie.email|default('') }}">
             <label for="password">Mot de passe</label>
-            <input id="password" type="password" name="password" placeholder="mot de passe" required>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required value="{{ cookie.password|default('') }}">
             <button type="submit">Se connecter</button>
         </form>
     </div>

@@ -4,31 +4,10 @@
 {% block title %}Entreprises{% endblock %}
 
 {% block content %}
-<form class="search-container">
+<form class="search-container" action="#" method="get">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" placeholder="Recherche une entreprise !">
-</form>
-<form class="filters-container">
-    <div class="filter">
-        <input type="checkbox" id="filter1" name="filter1" value="filter1">
-        <label for="filter1">Lieu</label>
-    </div>
-    <div class="filter">
-        <input type="checkbox" id="filter2" name="filter2" value="filter2">
-        <label for="filter2">Populaire</label>
-    </div>
-    <div class="filter">
-        <input type="checkbox" id="filter5" name="filter5" value="filter5">
-        <label for="filter5">réseaux</label>
-    </div>
-    <div class="filter">
-        <input type="checkbox" id="filter6" name="filter6" value="filter6">
-        <label for="filter6">web</label>
-    </div>
-    <div class="filter">
-        <input type="checkbox" id="filter7" name="filter7" value="filter7">
-        <label for="filter7">big data</label>
-    </div>
+    <input type="hidden" name="uri" value="company/index">
+    <input type="text" name="research" placeholder="Recherche une entreprise !" value="{{ research ? research : '' }}">
 </form>
     <main class="gerer-entreprise">
         <section class="titre-entreprise">
@@ -84,9 +63,9 @@
             {% endif %}
 
             <label for="email">email</label>
-            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required value="{{ cookie.email|default('') }}">
             <label for="password">Mot de passe</label>
-            <input id="password" type="password" name="password" placeholder="mot de passe" required>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required value="{{ cookie.password|default('') }}">
             <button type="submit">Se connecter</button>
         </form>
     </div>

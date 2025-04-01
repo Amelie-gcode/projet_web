@@ -35,6 +35,7 @@ $twig = new \Twig\Environment($loader, [
     'cache' => false
 ]);
 $twig->addGlobal('session', $_SESSION);
+$twig->addGlobal('cookie', $_COOKIE);
 
 if (isset($_GET['uri'])) {
     $uri = $_GET['uri'];

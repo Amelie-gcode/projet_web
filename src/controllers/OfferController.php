@@ -25,8 +25,12 @@ class  OfferController extends Controller
         $skillsModel = new SkillsModel();
         $companyModel = new CompanyModel();
         $evaluationsModel = new EvaluationsModel();
-        $offers = $this->model->getAllOffers();
-
+        if (isset($_GET['research'])) {
+            $research = $_GET['research'];
+            $offers = $this->model->getALLOffersByResearch($research);
+        } else {
+            $offers = $this->model->getAllOffers();
+        }
         // Récupérer les compétences pour chaque offre
         foreach($offers as &$offer) {
             // Ajouter le nom de l'entreprise
@@ -37,7 +41,7 @@ class  OfferController extends Controller
             $offer['company_email'] = $company ? $company['company_email'] : 'Email inconnue';
             $offer['company_rate'] = $companyRate ? $companyRate : 'Aucune évaluation';
 
-            // Reste du code inchangé
+
             if(!empty($offer['offer_start_date']) && !empty($offer['offer_end_date'])) {
                 $start = new \DateTime($offer['offer_start_date']);
                 $end = new \DateTime($offer['offer_end_date']);
@@ -85,7 +89,9 @@ class  OfferController extends Controller
         echo $this->templateEngine->render('offers.twig.html', [
             'offers' => $offers,
             'offerI' => $offerI,
-            'session' => $_SESSION]);
+            'research' => $research ?? '',
+            'session' => $_SESSION
+        ]);
     }
     public function showOffer()
     {

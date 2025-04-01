@@ -31,6 +31,9 @@ class AuthController extends Controller
 
                 if (password_verify($password, $user['user_password'])) {
                     // Ne pas appeler session_start() si déjà démarré dans index.php
+                    setcookie( 'email', $email, time() + 60 * 60 * 24 * 31);
+                    setcookie( 'password', $password, time() + 60 * 60 * 24 * 31);
+
                     $_SESSION['user_id'] = $user['user_id'];
                     $_SESSION['user_status'] = $user['user_status'];
                     $_SESSION['user_name'] = $user['user_firstname'];

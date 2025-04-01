@@ -176,6 +176,12 @@ header .nav-user {
     box-shadow: 1px 6px 15px rgba(0,0,0,0.3);
 }
 
+.search-container input {
+    font-size: 18px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+}
+
 
 /*---------------------------------------- FILTER ---------------------------------------------*/
 

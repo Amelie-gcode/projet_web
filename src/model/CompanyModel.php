@@ -24,6 +24,18 @@ class CompanyModel extends Model
         return $stmt->fetchALL(PDO::FETCH_ASSOC);
     }
 
+    public function getALLCompanyByResearch ($research)
+    {
+        $query = (
+            "SELECT * FROM Companies WHERE
+                company_name LIKE :research"
+        );
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(':research', '%' . $research . '%');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getCompany($id) {
         $query = (
             "SELECT * FROM Companies WHERE company_id = :id"
