@@ -5,6 +5,7 @@ use App\model\ApplyModel;
 use App\model\CompanyModel;
 use App\model\EvaluationsModel;
 use App\model\OfferModel;
+use App\model\UserModel;
 
 class CompanyController extends Controller
 {
@@ -41,25 +42,37 @@ class CompanyController extends Controller
         $evalModel = new EvaluationsModel();
         $applyModel = new ApplyModel();
         $offerModel = new OfferModel();
+        $userModel = new UserModel();
 
-        if ( isset($_GET['company_id'])) {
+        if (isset($_GET['company_id'])) {
             $id = $_GET['company_id'];
             $company = $this->model->getCompany($id);
-            $nbApply=$applyModel->getNumberApplyByCompany($id);
-            $evaluations=$evalModel->getEvaluationByCompany($id);
-            $avg=$evalModel->averageScore($id);
-            $offers=$offerModel->getOfferByCompany($id);
+            $nbApply = $applyModel->getNumberApplyByCompany($id);
+            $evaluations = $evalModel->getEvaluationByCompany($id);
+            $avg = round( $evalModel->averageScore($id) ,1);
+            $offers = $offerModel->getOfferByCompany($id);
+            $users = [];
+
+            foreach ($evaluations as $eval) {
+                $userId = $eval['user_id']; // Récupère l'ID de l'utilisateur
+                if (!isset($users[$userId])) { // Vérifie si l'utilisateur n'a pas déjà été récupéré
+                    $users[$userId] = $userModel->getUser($userId);
+                }
+            }
             echo $this->templateEngine->render('companyInfo.twig.html', [
                 'company' => $company,
                 'evaluations' => $evaluations,
+                'users' => $users, // Correction : utiliser user_id comme clé
                 'nbApply' => $nbApply,
                 'offers' => $offers,
-                'moyenne' => $avg]);
+                'moyenne' => $avg
+            ]);
         } else {
             header('Location: ?uri=company/index');
+            exit();
         }
-
     }
+
 
     public function addCompany() {
         if (isset($_GET['name']) &&

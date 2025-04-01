@@ -103,11 +103,11 @@
             </div>
             <div class="comment-input">
                 <label for="evaluation_comment">Votre commentaire :</label>
-                <textarea id="evaluation_comment" rows="4" placeholder="Partagez votre expérience..."></textarea>
+                <textarea id="evaluation_comment"  name="evaluation_comment" rows="4" placeholder="Partagez votre expérience..."></textarea>
             </div>
             <input type="hidden" name="company_id" value="{{company.company_id}}">
-            <input type="hidden" name="user_id" value="4"> <!-- a remplacer par un token-->
-            <input type="hidden" name="evaluation_date" value="2025-02-09">
+            <input type="hidden" name="user_id" value="{{session.user_id}}">
+            <input type="hidden" name="evaluation_date" value=" {{now|date('Y-m-d')}}">
             <button type="submit" class="submit-rating">Envoyer</button>
         </form>
     </section>
@@ -116,23 +116,26 @@
 <!-- Section 4: Les Avis -->
 
 <!-- En-tête de la section -->
-<div >
+<div>
     <h2 class="principal-title">Les Avis</h2>
 </div>
+
 <section class="container">
     <div class="comments-section">
-        <h3 class="form-title">Avis clients (15)</h3>
+        <h3 class="form-title">Avis clients ({{ evaluations|length }})</h3>
 
         <div class="comments-list">
             {% for evaluation in evaluations %}
-            <!-- Commentaire 1 -->
+            <!-- Commentaire -->
             <div class="comment-card">
                 <div class="comment-header">
                     <div class="user-info">
-                        <div class="user-avatar">MP</div>
-                        <div>
-                            <div class="user-name">Marie P.</div>
-                            <div class="comment-date">{{evaluation.evaluation_date}}</div>
+                        <div class="user-avatar">AG <div>
+                            <div class="user-name">
+                                {{ users[evaluation.user_id].user_lastname }}
+                                {{ users[evaluation.user_id].user_firstname }}
+                            </div>
+                            <div class="comment-date">{{ evaluation.evaluation_date }}</div>
                         </div>
                     </div>
                     <div class="rating">
@@ -144,16 +147,16 @@
                         {% endif %}
                         {% endfor %}
                     </div>
-
                 </div>
                 <div class="comment-content">
-                    {{evaluation.evaluation_comment}}
+                    {{ evaluation.evaluation_comment }}
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+
 <div id="modal" class="modal">
     <div class="modal-content connexion_container">
         <span class="close-button">&times;</span>
