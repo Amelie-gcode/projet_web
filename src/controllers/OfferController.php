@@ -17,6 +17,15 @@ class  OfferController extends Controller
     }
     public function showAllOffers()
     {
+
+        $filters = [
+            "filter_alternance" => isset($_GET['filter_alternance']),
+            "filter_stage" => isset($_GET['filter_stage']),
+            "filter_aime" => isset($_GET['filter_aime']),
+            "filter_moins_3mois" => isset($_GET['filter_moins_3mois']),
+            "filter_plus_3mois" => isset($_GET['filter_plus_3mois'])
+        ];
+        var_dump($filters);
         if(isset($_GET['offer_id'])) {
             $id = $_GET['offer_id'];
         }
@@ -26,12 +35,23 @@ class  OfferController extends Controller
         $skillsModel = new SkillsModel();
         $companyModel = new CompanyModel();
         $evaluationsModel = new EvaluationsModel();
-        if (isset($_GET['research'])) {
-            $research = $_GET['research'];
-            $offers = $this->model->getALLOffersByResearch($research);
+
+        $hasActiveFilters = in_array(true, $filters, true);
+        $hasValidDomaines = isset($_GET['domaines']) && is_array($_GET['domaines']) && array_filter($_GET['domaines']);
+
+        if (!empty($_GET['research']) || $hasValidDomaines || $hasActiveFilters) {
+            $research = $_GET['research'] ?? '';
+            $skills = isset($_GET['domaines']) ? array_filter($_GET['domaines'], function($skill) {
+                return !empty(trim($skill));
+            }) : [];
+
+
+            $offers = $this->model->getALLOffersByResearch($research, $skills, $filters);
         } else {
             $offers = $this->model->getAllOffers();
         }
+
+
         // Récupérer les compétences pour chaque offre
         foreach($offers as &$offer) {
             // Ajouter le nom de l'entreprise
@@ -85,13 +105,15 @@ class  OfferController extends Controller
                 }
             }
         }
-
+        $skillsModel = new SkillsModel();
+        $skills = $skillsModel->getSkills();
 
         echo $this->templateEngine->render('offers.twig.html', [
             'offers' => $offers,
             'offerI' => $offerI,
             'research' => $research ?? '',
-            'session' => $_SESSION
+            'session' => $_SESSION,
+            'skills' => $skills
         ]);
     }
     public function showOffer()

@@ -20,20 +20,61 @@ class OfferModel extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getALLOffersByResearch($research)
+    public function getALLOffersByResearch($research, $skills, $filters)
     {
-        $query = (
-            "SELECT * FROM Offers WHERE
-                offer_title LIKE :research OR
-                offer_location LIKE :research OR
-                company_id IN (
-                    SELECT company_id FROM Companies WHERE
-                        company_name LIKE :research
-                )
-        ");
+        $query = "SELECT DISTINCT o.* FROM Offers o"; // Utilisation de DISTINCT pour éviter les doublons
+        $params = []; // Tableau pour stocker les valeurs des paramètres
+
+        // 🔹 Si on a des skills, on ajoute un INNER JOIN avec la table Requires
+        if (!empty($skills)) {
+            $query .= " LEFT JOIN Requires r ON o.offer_id = r.offer_id";
+        }
+
+        $query .= " WHERE 1=1"; // Toujours vrai, permet d'ajouter dynamiquement des conditions avec AND
+
+        // 🔹 Recherche par mot-clé
+        if (!empty($research)) {
+            $query .= " AND (o.offer_title LIKE :research OR
+                          o.offer_location LIKE :research OR
+                          o.company_id IN (
+                              SELECT company_id FROM Companies WHERE company_name LIKE :research
+                          ))";
+            $params[':research'] = '%' . $research . '%';
+        }
+
+        // 🔹 Filtrage par compétences
+        if (!empty($skills)) {
+            $placeholders = [];
+            foreach ($skills as $index => $skill) {
+                $placeholder = ":skill$index";
+                $placeholders[] = $placeholder;
+                $params[$placeholder] = $skill;
+            }
+            if (!empty($placeholders)) {
+                $query .= " AND r.skill_id IN (" . implode(',', $placeholders) . ")";
+            }
+        }
+
+        // 🔹 Filtres supplémentaires
+        if (!empty($filters)) {
+            if ($filters['filter_alternance']) {
+                $query .= " AND o.offer_type = 'alternance'";
+            }
+            if ($filters['filter_stage']) {
+                $query .= " AND o.offer_type = 'stage'";
+            }
+            if ($filters['filter_moins_3mois']) {
+                $query .= " AND TIMESTAMPDIFF(MONTH, o.offer_start_date, o.offer_end_date) <= 3";
+            }
+            if ($filters['filter_plus_3mois']) {
+                $query .= " AND TIMESTAMPDIFF(MONTH, o.offer_start_date, o.offer_end_date) > 3";
+            }
+        }
+
+        // 🔹 Exécution de la requête préparée
         $stmt = $this->connection->pdo->prepare($query);
-        $stmt->bindValue(':research', '%' . $research . '%');
-        $stmt->execute();
+        $stmt->execute($params);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
