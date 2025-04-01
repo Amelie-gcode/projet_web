@@ -13,10 +13,14 @@ class UserController extends Controller
         $this->templateEngine = $templateEngine;
     }
     public function showAllUsers(){
-        $users = $this->model->getAllUsers();
-        $userstudent= $this->model->getUserByRole('Etudiant');
-        echo $this->templateEngine->render('users.twig.html', ['users' => $users, 'userstudent' => $userstudent]);
-
+        if (isset($_GET['research'])) {
+            $research = $_GET['research'];
+            $users = $this->model->getALLUsersByResearch($research);
+            echo $this->templateEngine->render('users.twig.html', ['users' => $users, 'research' => $research]);
+        } else {
+            $users = $this->model->getAllUsers();
+            echo $this->templateEngine->render('users.twig.html', ['users' => $users, 'research' => '']);
+        }
     }
     public function showUser(){
         $applyModel=new ApplyModel();
@@ -89,6 +93,9 @@ class UserController extends Controller
         }
     }
     public function showForm(){
+        if($_SERVER["REQUEST_METHOD"] == "GET"){
+            var_dump($_GET);
+        }
         if (isset($_GET['user_id'])) {
             $id = $_GET['user_id'];
             $user= $this->model->getUser($id);

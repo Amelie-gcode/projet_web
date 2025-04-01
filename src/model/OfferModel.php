@@ -20,6 +20,23 @@ class OfferModel extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getALLOffersByResearch($research)
+    {
+        $query = (
+            "SELECT * FROM Offers WHERE
+                offer_title LIKE :research OR
+                offer_location LIKE :research OR
+                company_id IN (
+                    SELECT company_id FROM Companies WHERE
+                        company_name LIKE :research
+                )
+        ");
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(':research', '%' . $research . '%');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function getOfferById($id) {
         $query = "SELECT * FROM Offers WHERE offer_id = :id";
         $stmt = $this->connection->pdo->prepare($query);

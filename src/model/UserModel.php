@@ -18,6 +18,20 @@ class UserModel extends Model
         $stmt->execute();
         return  $stmt->fetchall(PDO::FETCH_ASSOC);
     }
+
+    public function getALLUsersByResearch($research) {
+        $query = (
+            "SELECT * FROM Users WHERE
+                CONCAT(user_firstname, ' ', user_lastname) LIKE :research OR
+                CONCAT(user_lastname, ' ', user_firstname) LIKE :research OR
+                user_status LIKE :research"
+        );
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(':research', '%' . $research . '%');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getUser($id) {
         $query = "SELECT * FROM Users WHERE user_id = :id";
         $stmt = $this->connection->pdo->prepare($query);

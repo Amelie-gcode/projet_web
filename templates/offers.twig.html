@@ -8,7 +8,7 @@
 
 <form class="search-container">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" name="search" placeholder="Recherche un stage !">
+    <input type="text" name="research" placeholder="Recherche un stage !" value="{{ research ? research : '' }}">
 </form>
 <form class="filters-container">
     <div class="filter">
@@ -175,9 +175,9 @@
             {% endif %}
 
             <label for="email">email</label>
-            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required value="{{ cookie.email|default('') }}">
             <label for="password">Mot de passe</label>
-            <input id="password" type="password" name="password" placeholder="mot de passe" required>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required value="{{ cookie.password|default('') }}">
             <button type="submit">Se connecter</button>
         </form>
     </div>
