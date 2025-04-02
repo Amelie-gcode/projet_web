@@ -197,7 +197,7 @@ switch ($controllerName) {
             case 'show':
                 $likesController->showLikesByStudent();
                 break;
-            case 'add':
+            case 'add':;
                 $likesController->addLike();
                 break;
             case 'delete':

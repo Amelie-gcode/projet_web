@@ -1,26 +1,36 @@
 // changement remplissage du coeur
 document.addEventListener('DOMContentLoaded', function () {
-    const heartIcons = document.querySelectorAll('.heart-icon');
-
-    heartIcons.forEach(heartIcon => {
-        heartIcon.addEventListener('click', function () {
-            this.classList.toggle('far');
-            this.classList.toggle('fas');
-            this.classList.toggle('liked');
-        });
-    });
-
-    /* bouton page fav*/
-    const buttons = document.querySelectorAll('.fav-btn');
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Désactive tous les boutons
-            buttons.forEach(btn => btn.classList.remove('active'));
-            // Active le bouton cliqué
-            this.classList.add('active');
-        });
-    });
-
+    // document.querySelectorAll(".like-form").forEach(form => {
+    //     form.addEventListener("click", function (event) {
+    //         event.preventDefault(); // Empêche le rechargement de la page
+    //
+    //         const heartIcon = this.querySelector(".heart-icon");
+    //         const offerId = this.dataset.offerid;
+    //         const userId = this.dataset.userid;
+    //         const isLiked = heartIcon.classList.contains("fas"); // Vérifie si déjà liké
+    //
+    //         // URL avec paramètre uri pour le routeur
+    //         const url = new URL(window.location.href);
+    //         url.searchParams.set('uri', `likes/${isLiked ? "delete" : "add"}`);
+    //         url.searchParams.set('offer_id', offerId);
+    //         url.searchParams.set('user_id', userId);
+    //
+    //         fetch(url.toString(), {
+    //             method: "GET",
+    //             headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    //         })
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 if (data.success) {
+    //                     heartIcon.classList.toggle("far");
+    //                     heartIcon.classList.toggle("fas");
+    //                 } else {
+    //                     alert("Erreur lors de l'ajout du like");
+    //                 }
+    //             })
+    //             .catch(error => console.error("Erreur:", error));
+    //     });
+    // });
 
 
 
@@ -43,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Gestion du clic sur le bouton d'ajout
-        addDomainButton.addEventListener('click', function() {
+        addDomainButton.addEventListener('click', function () {
             const domainInputs = document.querySelectorAll('.domain-input');
 
             if (domainInputs.length < 5) { // Limite à 5 domaines
@@ -71,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Délégation d'événements pour gérer la suppression
-        domainsContainer.addEventListener('click', function(e) {
+        domainsContainer.addEventListener('click', function (e) {
             if (e.target.classList.contains('remove-domain')) {
                 e.target.closest('.domain-input').remove();
 

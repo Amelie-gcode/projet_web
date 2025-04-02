@@ -33,19 +33,21 @@ class LikesController extends controller
 
     }
     public function addLike(){
-        if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){
+        if(isset($_SESSION['user_id']) && isset($_GET['offer_id'])){
             $user_id=$_SESSION['user_id'];
-            $offer_id=$_POST['offer_id'];
+            $offer_id=$_GET['offer_id'];
             $this->model->addLike($user_id,$offer_id);
         }
+        header('Location: index.php?uri=offer/index');
     }
 
     public function deleteLike(){
-        if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){
+        if(isset($_SESSION['user_id']) && isset($_GET['offer_id'])){
             $user_id=$_SESSION['user_id'];
-            $offer_id=$_POST['offer_id'];
+            $offer_id=$_GET['offer_id'];
             $this->model->deleteLike($user_id,$offer_id);
         }
+        header('Location: index.php?uri=offer/index');
     }
     public function isLiked(){
         if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){

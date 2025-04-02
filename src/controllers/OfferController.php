@@ -26,12 +26,14 @@ class  OfferController extends Controller
             "filter_plus_3mois" => isset($_GET['filter_plus_3mois'])
         ];
         var_dump($filters);
+
         if(isset($_GET['offer_id'])) {
             $id = $_GET['offer_id'];
         }
         else {
             $id = 1;
         }
+
         $skillsModel = new SkillsModel();
         $companyModel = new CompanyModel();
         $evaluationsModel = new EvaluationsModel();
@@ -107,13 +109,20 @@ class  OfferController extends Controller
         }
         $skillsModel = new SkillsModel();
         $skills = $skillsModel->getSkills();
+        $likeModel = new LikesModel(); // Assure-toi que LikeModel est bien inclus
+        $isLiked = false;
+
+        if (isset($_SESSION['user_id']) && isset($offerI['offer_id'])) {
+            $isLiked = $likeModel->isLiked($_SESSION['user_id'], $offerI['offer_id']);
+        }
 
         echo $this->templateEngine->render('offers.twig.html', [
             'offers' => $offers,
             'offerI' => $offerI,
             'research' => $research ?? '',
             'session' => $_SESSION,
-            'skills' => $skills
+            'skills' => $skills,
+            'isLiked'=> $isLiked,
         ]);
     }
     public function showOffer()

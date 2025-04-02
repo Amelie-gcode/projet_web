@@ -71,20 +71,17 @@ class   LikesModel extends Model
     }
 
     public function isLiked($id_user, $id_offer) {
-        $query = (
-            "SELECT * FROM Likes WHERE user_id = :id_user AND offer_id = :id_offer"
-        );
+        $query = "SELECT * FROM Likes WHERE user_id = :id_user AND offer_id = :id_offer";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_user", $id_user, PDO::PARAM_INT);
         $stmt->bindValue(":id_offer", $id_offer, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        if($stmt) {
-            return true;
-        } else {
-            return false;
-        }
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Récupère la ligne
+
+        return $result !== false; // Retourne true si une ligne existe, sinon false
     }
+
 
 
 }

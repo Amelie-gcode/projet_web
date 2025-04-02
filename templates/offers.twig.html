@@ -116,26 +116,15 @@
                     <li class="nb-candidats" >46 candidats</li>
                 </ul>
 
-                {% if isLiked %}
-                <form class="fav-button-container" action="index.php/?uri=like/add" method="get" >
+                <form method="get" action="index.php" class="fav-button-container like-form" >
                     <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
-                        <i class="far fa-heart heart-icon"></i>
+                        <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
                     </button>
+                    <input type="hidden" name="uri" value="likes/{% if isLiked %}delete{% else %}add{% endif %}">
                     <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
-                    <input type="hidden" name="user_id" value="{{session.user_id}}">
                     <p class="nb-fav">53</p>
                 </form>
-                {% else %}
 
-                <form class="fav-button-container" action="index.php/?uri=like/delete" method="get" >
-                    <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
-                        <i class="far fa-heart heart-icon"></i>
-                    </button>
-                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
-                    <input type="hidden" name="user_id" value="{{session.user_id}}">
-                    <p class="nb-fav">53</p>
-                </form>
-                {%endif%}
 
                 <h3>Déscription du poste</h3>
             </header>
