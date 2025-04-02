@@ -59,6 +59,7 @@ header .nav-user {
 }
 .logo:hover {
     opacity: 0.8;
+    cursor: pointer;
 }
  .nav-user {
      position: relative;
@@ -91,7 +92,7 @@ header .nav-user {
     background-color: #fff1f1;
     border: 2px solid #6c0b0b;
     border-top: none;
-    min-width: 150px;
+    min-width: 160px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -112,7 +113,7 @@ header .nav-user {
     margin: 0;
     text-transform: uppercase;
     font-family: 'Nunito', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -212,7 +213,7 @@ header .nav-user {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     font-size: 13px;
-    /*text-transform: uppercase;*/
+    text-transform: uppercase;
 }
 
 
@@ -2595,9 +2596,9 @@ fieldset {
         justify-content: center;
     }
 
-    .logo {
+/*    .logo {
         display: none;
-    }
+    }*/
 
     .navbar-nav {
         left: 220px !important;
