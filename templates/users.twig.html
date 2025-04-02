@@ -7,8 +7,10 @@
 <h2 class="titre-etudiant"> GESTION DES COMPTES </h2>
 
 <form class="search-container" action="#" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="hidden" name="uri" value="user/index">
+    <button type="submit" class="search-icon-button">
+        <input type="hidden" name="uri" value="user/index">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
     <input type="text" name="research" placeholder="Recherche une entreprise !" value="{{ research ? research : '' }}">
 </form>
 

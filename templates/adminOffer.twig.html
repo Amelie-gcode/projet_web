@@ -5,6 +5,59 @@
 
 {% block content %}
 <main class="fav">
+    <form class="search-container" method="get">
+        <button type="submit" class="search-icon-button">
+            <input type="hidden" name="uri" value="offer/admin">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="research" placeholder="Recherche un stage !" value="{{ research ? research : '' }}">
+    </form>
+    <form class="filters-container" method="get">
+        <div class="filter">
+            <select name="domaines[]">
+                <option value="">Domaine</option>
+                {% for skill in skills %}
+                <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter">
+            <select name="domaines[]">
+                <option value="">Domaine</option>
+                {% for skill in skills %}
+                <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter">
+            <select name="domaines[]">
+                <option value="">Domaine</option>
+                {% for skill in skills %}
+                <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_alternance" name="filter_alternance" value="filter_alternance" class="custom-checkbox">
+            <label for="filter_alternance">Alternance</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_stage" name="filter_stage" value="filter_stage" class="custom-checkbox">
+            <label for="filter_stage">Stage</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_aime" name="filter_aime" value="filter_aime" class="custom-checkbox">
+            <label for="filter_aime">Plus aimé</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_moins_3mois" name="filter_moins_3mois" value="filter_moins_3mois" class="custom-checkbox">
+            <label for="filter_moins_3mois">- 3 mois</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_plus_3mois" name="filter_plus_3mois" value="filter_plus_3mois" class="custom-checkbox">
+            <label for="filter_plus_3mois">+ 3 mois</label>
+        </div>
+    </form>
     <section class="favoris">
         <h1 class="titre_fav">
             Gerer les offres
@@ -38,7 +91,7 @@
                 <footer>
                     <div class="date">
                         <p>publié le :</p>
-                        <time>{{offer.offer_start_date}}</time>
+                        <time>{{offer.offer_date}}</time>
                     </div>
                     <form class="btn-offer" action="index.php" method="get">
                         <input type="hidden" name="uri" value="offer/showForm">

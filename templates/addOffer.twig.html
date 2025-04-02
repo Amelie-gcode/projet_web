@@ -123,7 +123,8 @@
         </section>
 
         <footer class="offer-buttons">
-            <a href="index.php?uri=offer/admin" class="offer-back" role="button">Retour</a>
+            <input type="hidden" id="offerDate" name="offerDate" value="{{ offer.offer_date|default(now|date('Y-m-d')) }}" >
+            <a href="?uri=offer/admin" class="offer-back" role="button">Retour</a>
             {% if offer %}
             <input type="hidden" name="id" value="{{ offer.offer_id }}">
             <button type="submit" class="offer-submit">Modifier l'offre</button>

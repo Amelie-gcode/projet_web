@@ -29,8 +29,14 @@ class CompanyController extends Controller
 
     public function showAdminCompany()
     {
-        $company = $this->model->getAllCompany();
-        echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company]);
+        if (isset($_GET['research'])) {
+            $research = $_GET['research'];
+            $company = $this->model->getALLCompanyByResearch($research);
+            echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company], ['research' => $research]);
+        } else {
+            $company = $this->model->getAllCompany();
+            echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company], ['research' => '']);
+        }
     }
     public function showForm()
     {

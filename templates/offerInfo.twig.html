@@ -19,7 +19,7 @@
             </div>
 
             <ul class="principal-infos-offers">
-                <li><a href="">{{offer.company_name}}</a></li>
+                <li><a href="index.php?uri=company/show&company_id={{offer.company_id}}">{{offer.company_name}}</a></li>
                 <div class="company-grade">
                     <li><i class="fas fa-star favoris-icon"></i></li>
                     <li>{{offer.company_rate|default('Aucune évaluation')}}</li>
@@ -55,7 +55,7 @@
                 </aside>
                 <div class="date">
                     <p>publié le :</p>
-                    <time>{{offer.offer_start_date}}</time>
+                    <time>{{offer.offer_date}}</time>
                 </div>
             </address>
         </footer>
@@ -89,7 +89,7 @@
                     <footer>
                         <div class="date">
                             <p>publié le :</p>
-                            <time>{{offer.offer_start_date}}</time>
+                            <time>{{offer.offer_date}}</time>
                         </div>
                         <form action="index.php" method="get">
                             <input type="hidden" name="uri" value="offer/show">

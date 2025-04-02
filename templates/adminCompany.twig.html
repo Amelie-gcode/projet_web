@@ -4,7 +4,15 @@
 {% block title %}Administration Entreprises{% endblock %}
 
 {% block content %}
+
 <main class="gerer-entreprise">
+    <form class="search-container" action="#" method="get">
+        <button type="submit" class="search-icon-button">
+            <input type="hidden" name="uri" value="company/admin">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="research" placeholder="Recherche une entreprise !" value="{{ research ? research : '' }}">
+    </form>
     <section class="titre-entreprise">
         <h1 class="titre-entreprise">
             Gerer les entreprises

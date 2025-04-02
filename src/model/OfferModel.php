@@ -85,7 +85,7 @@ class OfferModel extends Model
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function addOffer($id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate, $offerLocation) {
+    public function addOffer($id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate, $offerLocation, $offerDate) {
         $query = (
         "INSERT INTO Offers (
             company_id,
@@ -97,7 +97,8 @@ class OfferModel extends Model
             offer_type,
             offer_start_date,
             offer_end_date,
-            offer_location
+            offer_location,
+            offer_date
         )
         VALUES (
                 :id_company,
@@ -109,7 +110,8 @@ class OfferModel extends Model
                 :offerType,
                 :offerStartDate,
                 :offerEndDate,
-                :offerLocation)"
+                :offerLocation,
+                :offerDate)"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);
@@ -122,6 +124,7 @@ class OfferModel extends Model
         $stmt->bindValue(":offerStartDate", $offerStartDate, PDO::PARAM_STR);
         $stmt->bindValue(":offerEndDate", $offerEndDate, PDO::PARAM_STR);
         $stmt->bindValue(":offerLocation", $offerLocation, PDO::PARAM_STR);
+        $stmt->bindValue(":offerDate", $offerDate, PDO::PARAM_STR);
         $stmt->execute();
 
         // Retourner l'ID de l'offre créée
@@ -134,7 +137,7 @@ class OfferModel extends Model
         $stmt->execute();
         return $stmt;
     }
-    public function updateOffer($offer_id,$id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate, $offerLocation) {
+    public function updateOffer($offer_id,$id_company, $offerTitle, $offerLongDescription,$offerShortDescription,$offerProfileDescription,$offerSalary, $offerType,$offerStartDate,$offerEndDate, $offerLocation, $offerDate) {
         $query = (
             "UPDATE Offers SET
                   company_id = :id_company,
@@ -146,7 +149,8 @@ class OfferModel extends Model
                   offer_type = :offerType,
                   offer_start_date = :offerStartDate,
                   offer_end_date = :offerEndDate,
-                  offer_location = :offerLocation
+                  offer_location = :offerLocation,
+                  offer_date = :offerDate
               WHERE offer_id = :id"
         );
         $stmt = $this->connection->pdo->prepare($query);
@@ -161,6 +165,7 @@ class OfferModel extends Model
         $stmt->bindValue(":offerEndDate", $offerEndDate, PDO::PARAM_STR);
         $stmt->bindValue(":id", $offer_id, PDO::PARAM_INT);
         $stmt->bindValue(":offerLocation", $offerLocation, PDO::PARAM_STR);
+        $stmt->bindValue(":offerDate", $offerDate, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt;
     }
@@ -172,5 +177,16 @@ class OfferModel extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function calculateOfferDuration($offer) {
+        if(!empty($offer['offer_start_date']) && !empty($offer['offer_end_date'])) {
+            $start = new \DateTime($offer['offer_start_date']);
+            $end = new \DateTime($offer['offer_end_date']);
+            $interval = $start->diff($end);
+            $totalDays = $interval->days;
+            return ceil($totalDays / 7);
+        } else {
+            return "N/A";
+        }
+    }
 
 }
