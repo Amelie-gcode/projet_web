@@ -13,36 +13,61 @@ class OfferModel extends Model
             $this->connection = $connection;
         }
     }
-    public function getAllOffers(){
-        $query="SELECT * FROM Offers";
-        $stmt = $this->connection->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    public function getAllOffers($limit = null, $offset = null) {
+        // 🔹 1️⃣ Récupérer le nombre total d'offres (sans pagination)
+        $queryCount = "SELECT COUNT(*) FROM Offers";
+        $stmtCount = $this->connection->pdo->prepare($queryCount);
+        $stmtCount->execute();
+        $totalOffers = $stmtCount->fetchColumn(); // Nombre total d'offres
 
-    public function getALLOffersByResearch($research, $skills, $filters)
-    {
-        $query = "SELECT DISTINCT o.* FROM Offers o"; // Utilisation de DISTINCT pour éviter les doublons
-        $params = []; // Tableau pour stocker les valeurs des paramètres
+        // 🔹 2️⃣ Construire la requête pour récupérer les offres avec pagination
+        $query = "SELECT * FROM Offers";
+        $params = [];
 
-        // 🔹 Si on a des skills, on ajoute un INNER JOIN avec la table Requires
-        if (!empty($skills)) {
-            $query .= " LEFT JOIN Requires r ON o.offer_id = r.offer_id";
+        if (!is_null($limit) && !is_null($offset)) {
+            $query .= " LIMIT :limit OFFSET :offset";
+            $params[':limit'] = (int) $limit;
+            $params[':offset'] = (int) $offset;
         }
 
-        $query .= " WHERE 1=1"; // Toujours vrai, permet d'ajouter dynamiquement des conditions avec AND
+        $stmt = $this->connection->pdo->prepare($query);
 
-        // 🔹 Recherche par mot-clé
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+        $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // 🔹 3️⃣ Retourner les offres et le total des offres
+        return [
+            'offers' => $offers,
+            'totalOffers' => $totalOffers
+        ];
+    }
+
+
+
+    public function getALLOffersByResearch($research, $skills, $filters, $limit = null, $offset = null)
+    {
+        $queryBase = " FROM Offers o";
+        $params = [];
+
+        if (!empty($skills)) {
+            $queryBase .= " LEFT JOIN Requires r ON o.offer_id = r.offer_id";
+        }
+
+        $queryBase .= " WHERE 1=1";
+
         if (!empty($research)) {
-            $query .= " AND (o.offer_title LIKE :research OR
-                          o.offer_location LIKE :research OR
-                          o.company_id IN (
-                              SELECT company_id FROM Companies WHERE company_name LIKE :research
-                          ))";
+            $queryBase .= " AND (o.offer_title LIKE :research OR
+                         o.offer_location LIKE :research OR
+                         o.company_id IN (
+                             SELECT company_id FROM Companies WHERE company_name LIKE :research
+                         ))";
             $params[':research'] = '%' . $research . '%';
         }
 
-        // 🔹 Filtrage par compétences
         if (!empty($skills)) {
             $placeholders = [];
             foreach ($skills as $index => $skill) {
@@ -51,32 +76,61 @@ class OfferModel extends Model
                 $params[$placeholder] = $skill;
             }
             if (!empty($placeholders)) {
-                $query .= " AND r.skill_id IN (" . implode(',', $placeholders) . ")";
+                $queryBase .= " AND r.skill_id IN (" . implode(',', $placeholders) . ")";
             }
         }
 
-        // 🔹 Filtres supplémentaires
         if (!empty($filters)) {
-            if ($filters['filter_alternance']) {
-                $query .= " AND o.offer_type = 'alternance'";
+            if (!empty($filters['filter_alternance'])) {
+                $queryBase .= " AND o.offer_type = 'alternance'";
             }
-            if ($filters['filter_stage']) {
-                $query .= " AND o.offer_type = 'stage'";
+            if (!empty($filters['filter_stage'])) {
+                $queryBase .= " AND o.offer_type = 'stage'";
             }
-            if ($filters['filter_moins_3mois']) {
-                $query .= " AND TIMESTAMPDIFF(MONTH, o.offer_start_date, o.offer_end_date) <= 3";
+            if (!empty($filters['filter_moins_3mois'])) {
+                $queryBase .= " AND TIMESTAMPDIFF(MONTH, o.offer_start_date, o.offer_end_date) <= 3";
             }
-            if ($filters['filter_plus_3mois']) {
-                $query .= " AND TIMESTAMPDIFF(MONTH, o.offer_start_date, o.offer_end_date) > 3";
+            if (!empty($filters['filter_plus_3mois'])) {
+                $queryBase .= " AND TIMESTAMPDIFF(MONTH, o.offer_start_date, o.offer_end_date) > 3";
             }
         }
 
-        // 🔹 Exécution de la requête préparée
-        $stmt = $this->connection->pdo->prepare($query);
-        $stmt->execute($params);
+        // 🔹 1️⃣ Récupération du nombre total d'offres (sans pagination)
+        $countQuery = "SELECT COUNT(DISTINCT o.offer_id) AS total" . $queryBase;
+        $countStmt = $this->connection->pdo->prepare($countQuery);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($params as $key => $value) {
+            $countStmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+
+        $countStmt->execute();
+        $totalOffers = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+        // 🔹 2️⃣ Récupération des offres avec pagination (si définie)
+        $query = "SELECT DISTINCT o.*" . $queryBase;
+
+        if (!is_null($limit) && !is_null($offset)) {
+            $query .= " LIMIT :limit OFFSET :offset";
+            $params[':limit'] = (int) $limit;
+            $params[':offset'] = (int) $offset;
+        }
+
+        $stmt = $this->connection->pdo->prepare($query);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
+        $offers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // 🔹 3️⃣ Retour des offres + total des offres
+        return [
+            'offers' => $offers,
+            'totalOffers' => $totalOffers
+        ];
     }
+
+
 
     function getOfferById($id) {
         $query = "SELECT * FROM Offers WHERE offer_id = :id";

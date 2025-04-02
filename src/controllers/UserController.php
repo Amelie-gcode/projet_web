@@ -13,6 +13,9 @@ class UserController extends Controller
         $this->templateEngine = $templateEngine;
     }
     public function showAllUsers(){
+        $limit = 2;
+        $page = $_GET['page'] ?? 1;
+        $offset = (int)($page - 1) * $limit;
         if (isset($_GET['research'])) {
             $research = $_GET['research'];
             $users = $this->model->getALLUsersByResearch($research);

@@ -17,6 +17,9 @@ class  OfferController extends Controller
     }
     public function showAllOffers()
     {
+        $limit = 2;
+        $page = $_GET['page'] ?? 1;
+        $offset = (int)($page - 1) * $limit;
 
         $filters = [
             "filter_alternance" => isset($_GET['filter_alternance']),
@@ -48,10 +51,16 @@ class  OfferController extends Controller
             }) : [];
 
 
-            $offers = $this->model->getALLOffersByResearch($research, $skills, $filters);
+            $result = $this->model->getALLOffersByResearch($research, $skills, $filters, $limit, $offset);
         } else {
-            $offers = $this->model->getAllOffers();
+            $result = $this->model->getAllOffers($limit, $offset);
         }
+
+        $offers = $result['offers'];
+
+        $totalOffers = $result['totalOffers'] ?? count($offers); // Assurer un total correct
+
+        $totalPages = ceil($totalOffers / $limit);
 
 
         // Récupérer les compétences pour chaque offre
@@ -117,6 +126,8 @@ class  OfferController extends Controller
             'skills' => $skills,
             'isLiked'=> $isLiked,
             'nbLike'=> $nbLike,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
     public function showOffer()
@@ -321,6 +332,10 @@ class  OfferController extends Controller
     }
 
     public function showAdminOffer(){
+        $limit = 2;
+        $page = $_GET['page'] ?? 1;
+        $offset = (int)($page - 1) * $limit;
+
         $filters = [
             "filter_alternance" => isset($_GET['filter_alternance']),
             "filter_stage" => isset($_GET['filter_stage']),
@@ -342,10 +357,17 @@ class  OfferController extends Controller
                 return !empty(trim($skill));
             }) : [];
 
-            $offers = $this->model->getALLOffersByResearch($research, $skills, $filters);
+
+            $result = $this->model->getALLOffersByResearch($research, $skills, $filters, $limit, $offset);
         } else {
-            $offers = $this->model->getAllOffers();
+            $result = $this->model->getAllOffers($limit, $offset);
         }
+
+        $offers = $result['offers'];
+
+        $totalOffers = $result['totalOffers'] ?? count($offers); // Assurer un total correct
+
+        $totalPages = ceil($totalOffers / $limit);
 
         // Ajouter les informations d'entreprise et compétences pour chaque offre
         foreach ($offers as &$offer) {
@@ -356,15 +378,7 @@ class  OfferController extends Controller
             $offer['company_email'] = $company ? $company['company_email'] : 'Email inconnue';
             $offer['company_rate'] = $companyRate ? $companyRate : 'Aucune évaluation';
 
-            if (!empty($offer['offer_start_date']) && !empty($offer['offer_end_date'])) {
-                $start = new \DateTime($offer['offer_start_date']);
-                $end = new \DateTime($offer['offer_end_date']);
-                $interval = $start->diff($end);
-                $totalDays = $interval->days;
-                $offer['duration'] = ceil($totalDays / 7);
-            } else {
-                $offer['duration'] = "N/A";
-            }
+            $offer['duration'] = $this->model->calculateOfferDuration($offer);
 
             $skillIds = $skillsModel->getSkillsByOffer($offer['offer_id']);
             $offer['skills'] = [];
@@ -382,7 +396,9 @@ class  OfferController extends Controller
             'offers' => $offers,
             'research' => $research ?? '',
             'session' => $_SESSION,
-            'skills' => $skills
+            'skills' => $skills,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 
