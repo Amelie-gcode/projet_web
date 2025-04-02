@@ -94,7 +94,7 @@
             </article>
             <article class="offer entreprise-case">
                 <header>
-                    <h1>EDF - Energie de france</h1>
+                    <h1>Socomec</h1>
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
@@ -115,7 +115,7 @@
             </article>
             <article class="offer entreprise-case">
                 <header>
-                    <h1>EDF - Energie de france</h1>
+                    <h1>CGI</h1>
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
@@ -137,7 +137,7 @@
             </article>
             <article class="offer entreprise-case">
                 <header>
-                    <h1>EDF - Energie de france</h1>
+                    <h1>Dalim-Sofware</h1>
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
@@ -158,7 +158,7 @@
             </article>
             <article class="offer entreprise-case">
                 <header>
-                    <h1>EDF - Energie de france</h1>
+                    <h1>ONF</h1>
                 </header>
                 <section class="offer-content">
                     <ul class="principal-infos-offers">
@@ -186,6 +186,39 @@
                 <!-- Ajoutez plus de liens de pagination ici -->
             </ul>
         </section>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const searchInput = document.querySelector(".search-container input");
+                const filterCheckboxes = document.querySelectorAll(".filters-container input[type='checkbox']");
+                const articles = document.querySelectorAll(".entreprise-case");
+
+                function filterOffers() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const activeFilters = Array.from(filterCheckboxes)
+                        .filter(checkbox => checkbox.checked)
+                        .map(checkbox => checkbox.value.toLowerCase());
+
+                    articles.forEach(article => {
+                        const title = article.querySelector("header h1").textContent.toLowerCase();
+                        const description = article.querySelector(".offer-content p").textContent.toLowerCase();
+                        const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+
+                        const tags = article.textContent.toLowerCase(); // Vérifie si l'article contient un mot-clé du filtre
+                        const matchesFilters = activeFilters.length === 0 || activeFilters.some(filter => tags.includes(filter));
+
+                        if (matchesSearch && matchesFilters) {
+                            article.style.display = "block";
+                        } else {
+                            article.style.display = "none";
+                        }
+                    });
+                }
+
+                searchInput.addEventListener("input", filterOffers);
+                filterCheckboxes.forEach(checkbox => checkbox.addEventListener("change", filterOffers));
+            });
+        </script>
 
 </main>
     <footer class="page-footer">

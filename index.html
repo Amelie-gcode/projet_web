@@ -496,14 +496,35 @@
     <div id="modal" class="modal">
         <div class="modal-content connexion_container">
             <span class="close-button">&times;</span>
-            <form class="connexion_box">
+            <form id="loginForm" class="connexion_box">
                 <h1 class="titre_connexion">Se connecter</h1>
-                <label for="identifant">Identifiant</label>
-                <input id="identifant" class="identifiant" type="text">
-                <label for="MDP">Mot de passe</label>
-                <input id="MDP" type="password">
+                <input id="identifiant" class="identifiant" type="text" placeholder="Identifiant" required>
+                <input id="password" type="password" placeholder="Mot de passe" required>
                 <button type="submit">Se connecter</button>
+                <p id="error" style="color: red"></p>
             </form>
+
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', async function(event) {
+                    event.preventDefault();
+
+                    const username = document.getElementById('identifiant').value;
+                    const password = document.getElementById('password').value;
+
+                    const response = await fetch('login.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `username=${username}&password=${password}`
+                    });
+
+                    const result = await response.text();
+                    if (result === 'success') {
+                        window.location.href = 'dashboard.php';  // Redirect to dashboard on successful login
+                    } else {
+                        document.getElementById('error').textContent = 'Identifiant ou mot de passe incorrect !'; // Error message
+                    }
+                });
+            </script>
         </div>
     </div>
 
