@@ -52,7 +52,9 @@ class EvaluationsModel extends Model
 
     public function averageScore($id_company) {
         $query = (
-            "SELECT AVG(evaluation_score) as moyenne FROM Evaluations WHERE company_id = :id_company"
+            "SELECT ROUND(AVG(evaluation_score), 1) AS moyenne 
+            FROM Evaluations 
+            WHERE company_id = :id_company;"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_company", $id_company, PDO::PARAM_INT);

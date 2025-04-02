@@ -88,7 +88,7 @@
                     <section>
                         <div class="date">
                             <p>publié le :</p>
-                            <time>{{offer.offer_start_date}}</time>
+                            <time>{{offer.offer_date}}</time>
                         </div>
                         <form action="#" method="get">
                             <input type="hidden" name="uri" value="offer/index">
@@ -149,7 +149,7 @@
                     </aside>
                     <div class="date">
                         <p>publié le :</p>
-                        <time>{{offerI.offer_start_date}}</time>
+                        <time>{{offerI.offer_date}}</time>
                     </div>
                     {% if session.user_id is defined %}
                     <form action="#" method="get">
