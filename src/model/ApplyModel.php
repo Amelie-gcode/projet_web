@@ -57,12 +57,12 @@ class ApplyModel extends Model
 
     }
     public function getNumberApplyByUser($id) {
-        $query = "SELECT COUNT(*) FROM Applications WHERE user_id = :id";
+        $query = "SELECT COUNT(*) as apply_count FROM Applications WHERE user_id = :id";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        $result= $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? (int)$result['apply_count'] : 0;
     }
     public function getNumberApplyByCompany($id_company) {
         $query = "SELECT COUNT(*) as count

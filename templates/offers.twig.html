@@ -115,7 +115,7 @@
                     <li>{{offerI.offer_location}}</li>
                     <li class="nb-candidats" >46 candidats</li>
                 </ul>
-
+            {% if session.user_id is defined and session.user_status == "Etudiant" %}
                 <form method="get" action="index.php" class="fav-button-container like-form" >
                     <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
                         <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
@@ -124,7 +124,24 @@
                     <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
                     <p class="nb-fav">{{nbLike}}</p>
                 </form>
-
+            {% elseif session.user_id is not defined %}
+                <form method="get" action="index.php" class="fav-button-container like-form" >
+                    <button type="submit" class="favorite-button user-items auth" aria-label="Ajouter aux favoris">
+                        <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                    </button>
+                    <input type="hidden" name="uri" value="likes/{% if isLiked %}delete{% else %}add{% endif %}">
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <p class="nb-fav">{{nbLike}}</p>
+                </form>
+            {%elseif session.user_statuts == "Pilote" or "Admin"%}
+                <form class="fav-button-container like-form" >
+                    <button  class="favorite-button" aria-label="Ajouter aux favoris">
+                        <i class=" far fa-heart heart-icon"></i>
+                    </button>
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <p class="nb-fav">{{nbLike}}</p>
+                </form>
+            {%endif%}
 
                 <h3>Déscription du poste</h3>
             </header>
