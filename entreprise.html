@@ -79,6 +79,7 @@
                     <ul class="principal-infos-offers">
                         <li>e-mail</li>
                         <li>telephone</li>
+                        <li>big data</li>
                     </ul>
                     <p> Description :: Rejoignez notre équipe pour un stage de 6 mois. Développez des fonctionnalités web avec React et Node.js sous la supervision de développeurs expérimentés. Idéal pour un étudiant motivé avec des compétences en HTML, CSS, et JavaScript.</p>
                     <footer>
@@ -100,6 +101,7 @@
                     <ul class="principal-infos-offers">
                         <li>e-mail</li>
                         <li>telephone</li>
+                        <li>big data</li>
                     </ul>
                     <p> Description :: Rejoignez notre équipe pour un stage de 6 mois. Développez des fonctionnalités web avec React et Node.js sous la supervision de développeurs expérimentés. Idéal pour un étudiant motivé avec des compétences en HTML, CSS, et JavaScript.</p>
                     <footer>
@@ -121,6 +123,7 @@
                     <ul class="principal-infos-offers">
                         <li>e-mail</li>
                         <li>telephone</li>
+                        <li>web</li>
                     </ul>
                     <p> Description :: Rejoignez notre équipe pour un stage de 6 mois. Développez des fonctionnalités web avec React et Node.js sous la supervision de développeurs expérimentés. Idéal pour un étudiant motivé avec des compétences en HTML, CSS, et JavaScript.</p>
                     <footer>
@@ -143,6 +146,7 @@
                     <ul class="principal-infos-offers">
                         <li>e-mail</li>
                         <li>telephone</li>
+                        <li>réseaux</li>
                     </ul>
                     <p> Description :: Rejoignez notre équipe pour un stage de 6 mois. Développez des fonctionnalités web avec React et Node.js sous la supervision de développeurs expérimentés. Idéal pour un étudiant motivé avec des compétences en HTML, CSS, et JavaScript.</p>
                     <footer>
@@ -164,6 +168,7 @@
                     <ul class="principal-infos-offers">
                         <li>e-mail</li>
                         <li>telephone</li>
+                        <li>web</li>
                     </ul>
                     <p> Description :: Rejoignez notre équipe pour un stage de 6 mois. Développez des fonctionnalités web avec React et Node.js sous la supervision de développeurs expérimentés. Idéal pour un étudiant motivé avec des compétences en HTML, CSS, et JavaScript.</p>
                     <footer>
@@ -197,27 +202,23 @@
                     const searchTerm = searchInput.value.toLowerCase();
                     const activeFilters = Array.from(filterCheckboxes)
                         .filter(checkbox => checkbox.checked)
-                        .map(checkbox => checkbox.value.toLowerCase());
+                        .map(checkbox => checkbox.nextElementSibling.textContent.toLowerCase().trim());
 
                     articles.forEach(article => {
                         const title = article.querySelector("header h1").textContent.toLowerCase();
                         const description = article.querySelector(".offer-content p").textContent.toLowerCase();
-                        const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
-
-                        const tags = article.textContent.toLowerCase(); // Vérifie si l'article contient un mot-clé du filtre
-                        const matchesFilters = activeFilters.length === 0 || activeFilters.some(filter => tags.includes(filter));
-
-                        if (matchesSearch && matchesFilters) {
-                            article.style.display = "block";
-                        } else {
-                            article.style.display = "none";
-                        }
+                        const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm); // Récupérer les mots-clés dans les <li>
+                        const keywords = Array.from(article.querySelectorAll(".principal-infos-offers li"))
+                            .map(li => li.textContent.toLowerCase().trim()); // Vérifier si l'un des filtres actifs correspond aux mots-clés de l'offre
+                        const matchesFilters = activeFilters.length === 0 || activeFilters.some(filter => keywords.includes(filter)); // Afficher ou masquer l'offre en fonction des filtres et de la recherche
+                        article.style.display = matchesSearch && matchesFilters ? "block" : "none";
                     });
                 }
 
                 searchInput.addEventListener("input", filterOffers);
                 filterCheckboxes.forEach(checkbox => checkbox.addEventListener("change", filterOffers));
             });
+
         </script>
 
 </main>

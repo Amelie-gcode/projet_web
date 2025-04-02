@@ -212,7 +212,7 @@ header .nav-user {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     font-size: 13px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 
