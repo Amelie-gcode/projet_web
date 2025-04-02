@@ -34,6 +34,7 @@ class UserController extends Controller
         }
         $user= $this->model->getUser($id);
         $applications=$applyModel->getApplyByUser($id);
+        $nbApply=$applyModel->getNumberApplyByUser($id) ;
         $offers = [];
         if (!empty($applications)) {
             foreach ($applications as $application) {
@@ -43,7 +44,7 @@ class UserController extends Controller
                 }
             }
         }
-        echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user, 'offers' => $offers]);
+        echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user, 'offers' => $offers, 'nbApply' => $nbApply]);
 
     }
     public function deleteUser(){
