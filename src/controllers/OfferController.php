@@ -25,7 +25,7 @@ class  OfferController extends Controller
             "filter_moins_3mois" => isset($_GET['filter_moins_3mois']),
             "filter_plus_3mois" => isset($_GET['filter_plus_3mois'])
         ];
-        var_dump($filters);
+
 
         if(isset($_GET['offer_id'])) {
             $id = $_GET['offer_id'];
@@ -107,6 +107,7 @@ class  OfferController extends Controller
         if (isset($_SESSION['user_id']) && isset($offerI['offer_id'])) {
             $isLiked = $likeModel->isLiked($_SESSION['user_id'], $offerI['offer_id']);
         }
+        $nbLike=$likeModel->nbLikesByOffers($offerI['offer_id']);
 
         echo $this->templateEngine->render('offers.twig.html', [
             'offers' => $offers,
@@ -115,6 +116,7 @@ class  OfferController extends Controller
             'session' => $_SESSION,
             'skills' => $skills,
             'isLiked'=> $isLiked,
+            'nbLike'=> $nbLike,
         ]);
     }
     public function showOffer()
@@ -147,12 +149,20 @@ class  OfferController extends Controller
                 $suggestedOffer['company_name'] = $company ? $company['company_name'] : 'Entreprise inconnue';
                 $suggestedOffer['duration'] = $this->model->calculateOfferDuration($suggestedOffer);
             }
+            $likeModel = new LikesModel(); // Assure-toi que LikeModel est bien inclus
+            $isLiked = false;
 
+            if (isset($_SESSION['user_id']) && isset($offer['offer_id'])) {
+                $isLiked = $likeModel->isLiked($_SESSION['user_id'], $offer['offer_id']);
+            }
+            $nbLike=$likeModel->nbLikesByOffers($offer['offer_id']);
 
             echo $this->templateEngine->render('offerInfo.twig.html', [
                 'offer' => $offer,
                 'offers' => $offers,
-                'session' => $_SESSION
+                'session' => $_SESSION,
+                'isLiked'=> $isLiked,
+                'nbLike'=> $nbLike,
             ]);
         } else {
             header('Location: index.php?uri=offer/all');

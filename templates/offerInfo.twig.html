@@ -10,12 +10,15 @@
         <header>
             <div class="offer-title-box">
                 <h2>{{offer.offer_title}}</h2>
-                <div class="fav-button-container fav-button-container-apply-page">
-                    <button type="button" class="favorite-button" aria-label="Ajouter aux favoris">
-                        <i class="far fa-heart heart-icon"></i>
-                    </button>
-                    <p class="nb-fav">53</p>
-                </div>
+                <form method="get" action="index.php" class="fav-button-container fav-button-container-apply-page">
+                        <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
+                            <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                        </button>
+                        <input type="hidden" name="uri" value="likes/{% if isLiked %}delete{% else %}add{% endif %}">
+                        <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                        <input type="hidden" name="page" value="offerInfo">
+                        <p class="nb-fav">{{nbLike}}</p>
+                </form>
             </div>
 
             <ul class="principal-infos-offers">

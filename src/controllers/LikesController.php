@@ -38,7 +38,12 @@ class LikesController extends controller
             $offer_id=$_GET['offer_id'];
             $this->model->addLike($user_id,$offer_id);
         }
-        header('Location: index.php?uri=offer/index');
+        if(isset($_GET['page'])){
+            header('Location: index.php?uri=offer/show&offer_id='.$offer_id);
+        }
+        else {
+            header('Location: index.php?uri=offer/index&offer_id=' . $offer_id);
+        }
     }
 
     public function deleteLike(){
@@ -47,7 +52,12 @@ class LikesController extends controller
             $offer_id=$_GET['offer_id'];
             $this->model->deleteLike($user_id,$offer_id);
         }
-        header('Location: index.php?uri=offer/index');
+        if(isset($_GET['page'])){
+            header('Location: index.php?uri=offer/show&offer_id='.$offer_id);
+        }
+        else {
+            header('Location: index.php?uri=offer/index&offer_id=' . $offer_id);
+        }
     }
     public function isLiked(){
         if(isset($_SESSION['user_id']) && isset($_POST['offer_id'])){

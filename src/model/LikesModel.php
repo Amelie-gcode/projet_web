@@ -61,13 +61,14 @@ class   LikesModel extends Model
 
     public function nbLikesByOffers($id_offer) {
         $query = (
-            "COUNT(*) FROM Likes WHERE offer_id = :id_offer"
+            "Select COUNT(*) as like_count FROM Likes WHERE offer_id = :id_offer"
         );
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_offer", $id_offer, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        return $stmt;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Récupération du résultat
+
+        return $result ? (int)$result['like_count'] : 0; // Assurer un retour en entier
     }
 
     public function isLiked($id_user, $id_offer) {
