@@ -75,16 +75,14 @@
     <form >
         <button class="action-bouton" type="submit" name="uri" value="user/showForm">Ajouter un compte </button>
     </form>
-
     <section>
         <ul class="pagination">
             {% if page > 1 %}
-            <br>
-            <a href="?uri=user/admin&page={{page - 1}}">Page précédente</a> <span> | </span>
+                <br>
+                <a href="?uri=user/index&page={{page - 1}}">Page précédente</a> <span> | </span>
             {%endif%}
             {%if page < totalPages %}
-            <a href="?uri=user/admin&page={{page + 1}}">Page suivante</a>
-            <!-- Ajoutez plus de liens de pagination ici -->
+                <a href="?uri=user/index&page={{page + 1}}">Page suivante</a>
             {% endif %}
         </ul>
     </section>

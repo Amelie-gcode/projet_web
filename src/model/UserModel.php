@@ -12,24 +12,66 @@ class UserModel extends Model
             $this->connection = $connection;
         }
     }
-    public function getAllUsers() {
+    public function getAllUsers($limit = null, $offset = null) {
+        $queryCount = "SELECT COUNT(*) FROM Users";
+        $stmtCount = $this->connection->pdo->prepare($queryCount);
+        $stmtCount->execute();
+        $totalUsers = $stmtCount->fetchColumn();
+
+
+        $params = [];
         $query="SELECT * FROM Users";
+        if (!is_null($limit) && !is_null($offset)) {
+            $query .= " LIMIT :limit OFFSET :offset";
+            $params[':limit'] = (int) $limit;
+            $params[':offset'] = (int) $offset;
+        }
+
         $stmt = $this->connection->pdo->prepare($query);
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, PDO::PARAM_INT);
+        }
         $stmt->execute();
-        return  $stmt->fetchall(PDO::FETCH_ASSOC);
+        $users= $stmt->fetchall(PDO::FETCH_ASSOC);
+        return [
+            'users' => $users,
+            'totalUsers' => $totalUsers
+        ];
     }
 
-    public function getALLUsersByResearch($research) {
+    public function getALLUsersByResearch($research, $limit = null, $offset = null) {
+
+        $queryCount = "SELECT COUNT(*) FROM Users";
+        $stmtCount = $this->connection->pdo->prepare($queryCount);
+        $stmtCount->execute();
+        $totalUsers = $stmtCount->fetchColumn();
+
+
         $query = (
             "SELECT * FROM Users WHERE
                 CONCAT(user_firstname, ' ', user_lastname) LIKE :research OR
                 CONCAT(user_lastname, ' ', user_firstname) LIKE :research OR
                 user_status LIKE :research"
         );
+        $params=[];
+        if (!is_null($limit) && !is_null($offset)) {
+            $query .= " LIMIT :limit OFFSET :offset";
+            $params[':limit'] = (int) $limit;
+            $params[':offset'] = (int) $offset;
+        }
         $stmt = $this->connection->pdo->prepare($query);
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
         $stmt->bindValue(':research', '%' . $research . '%');
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $users= $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return [
+            'users' => $users,
+            'totalUsers' => $totalUsers
+        ];
     }
 
     public function getUser($id) {

@@ -41,12 +41,16 @@
         </section>
         <section>
             <ul class="pagination">
-                <li><a href="?page=1">Page 1</a></li>
-                <li><a href="?page=2">Page 2</a></li>
-                <li><a href="?page=3">Page 3</a></li>
-                <!-- Ajoutez plus de liens de pagination ici -->
+                {% if page > 1 %}
+                <br>
+                <a href="?uri=company/index&page={{page - 1}}">Page précédente</a> <span> | </span>
+                {%endif%}
+                {%if page < totalPages %}
+                <a href="?uri=company/index&page={{page + 1}}">Page suivante</a>
+                {% endif %}
             </ul>
         </section>
+
     </main>
 <div id="modal" class="modal">
     <div class="modal-content connexion_container">

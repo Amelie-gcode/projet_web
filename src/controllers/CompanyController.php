@@ -17,26 +17,54 @@ class CompanyController extends Controller
 
     public function showAllCompany()
     {
+        $limit = 7;
+        $page = $_GET['page'] ?? 1;
+        $offset = (int)($page - 1) * $limit;
+
         if (isset($_GET['research'])) {
             $research = $_GET['research'];
-            $company = $this->model->getALLCompanyByResearch($research);
-            echo $this->templateEngine->render('company.twig.html', ['company' => $company], ['research' => $research]);
+            $result = $this->model->getALLCompanyByResearch($research, $limit, $offset);
         } else {
-            $company = $this->model->getAllCompany();
-            echo $this->templateEngine->render('company.twig.html', ['company' => $company], ['research' => '']);
+            $result = $this->model->getAllCompany( $limit, $offset);
+
         }
+        $company = $result['companies'];
+
+        $totalCompany = $result['totalCompanies'] ?? count($company); // Assurer un total correct
+
+        $totalPages = ceil($totalCompany / $limit);
+
+        echo $this->templateEngine->render('company.twig.html', [
+            'company' => $company,
+            'research' => $research ?? '',
+            'page' => $page,
+            'totalPages' => $totalPages]);
     }
 
     public function showAdminCompany()
     {
+        $limit = 7;
+        $page = $_GET['page'] ?? 1;
+        $offset = (int)($page - 1) * $limit;
+
         if (isset($_GET['research'])) {
             $research = $_GET['research'];
-            $company = $this->model->getALLCompanyByResearch($research);
-            echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company], ['research' => $research]);
+            $result = $this->model->getALLCompanyByResearch($research, $limit, $offset);
         } else {
-            $company = $this->model->getAllCompany();
-            echo $this->templateEngine->render('adminCompany.twig.html', ['company' => $company], ['research' => '']);
+            $result = $this->model->getAllCompany( $limit, $offset);
+
         }
+        $company = $result['companies'];
+
+        $totalCompany = $result['totalCompanies'] ?? count($company); // Assurer un total correct
+
+        $totalPages = ceil($totalCompany / $limit);
+
+        echo $this->templateEngine->render('adminCompany.twig.html', [
+            'company' => $company,
+            'research' => $research ?? '',
+            'page' => $page,
+            'totalPages' => $totalPages]);
     }
     public function showForm()
     {

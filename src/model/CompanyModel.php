@@ -14,26 +14,65 @@ class CompanyModel extends Model
         }
     }
 
-    public function getAllCompany() {
-        $query = (
-            "SELECT * FROM Companies"
-        );
+    public function getAllCompany($limit = null, $offset = null) {
+
+        $queryCount = "SELECT COUNT(*) FROM Companies";
+        $stmtCount = $this->connection->pdo->prepare($queryCount);
+        $stmtCount->execute();
+        $totalCompanies = $stmtCount->fetchColumn();
+
+        $params = [];
+        $query="SELECT * FROM Companies";
+        if (!is_null($limit) && !is_null($offset)) {
+            $query .= " LIMIT :limit OFFSET :offset";
+            $params[':limit'] = (int) $limit;
+            $params[':offset'] = (int) $offset;
+        }
 
         $stmt = $this->connection->pdo->prepare($query);
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, PDO::PARAM_INT);
+        }
         $stmt->execute();
-        return $stmt->fetchALL(PDO::FETCH_ASSOC);
+        $companies= $stmt->fetchall(PDO::FETCH_ASSOC);
+        return [
+            'companies' => $companies,
+            'totalCompanies' => $totalCompanies,
+        ];
     }
 
-    public function getALLCompanyByResearch ($research)
+    public function getALLCompanyByResearch ($research,$limit = null, $offset = null)
     {
+        $queryCount = "SELECT COUNT(*) FROM Companies";
+        $stmtCount = $this->connection->pdo->prepare($queryCount);
+        $stmtCount->execute();
+        $totalCompanies = $stmtCount->fetchColumn();
+
         $query = (
             "SELECT * FROM Companies WHERE
                 company_name LIKE :research"
         );
+
+        $params=[];
+
+        if (!is_null($limit) && !is_null($offset)) {
+            $query .= " LIMIT :limit OFFSET :offset";
+            $params[':limit'] = (int) $limit;
+            $params[':offset'] = (int) $offset;
+        }
         $stmt = $this->connection->pdo->prepare($query);
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
         $stmt->bindValue(':research', '%' . $research . '%');
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $companies= $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return [
+            'companies' => $companies,
+            'totalCompanies' => $totalCompanies
+        ];
     }
 
     public function getCompany($id) {

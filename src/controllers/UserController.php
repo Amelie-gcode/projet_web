@@ -13,42 +13,72 @@ class UserController extends Controller
         $this->templateEngine = $templateEngine;
     }
     public function showAllUsers(){
-        $limit = 2;
+        $limit = 21;
         $page = $_GET['page'] ?? 1;
         $offset = (int)($page - 1) * $limit;
         if (isset($_GET['research'])) {
             $research = $_GET['research'];
-            $users = $this->model->getALLUsersByResearch($research);
-            echo $this->templateEngine->render('users.twig.html', ['users' => $users, 'research' => $research]);
+            $result = $this->model->getALLUsersByResearch($research, $limit, $offset);
         } else {
-            $users = $this->model->getAllUsers();
-            echo $this->templateEngine->render('users.twig.html', ['users' => $users, 'research' => '']);
+            $result = $this->model->getAllUsers($limit, $offset);
         }
+        $users = $result['users'];
+
+        $totalUsers = $result['totalUsers'] ?? count($users); // Assurer un total correct
+
+        $totalPages = ceil($totalUsers / $limit);
+        echo $this->templateEngine->render('users.twig.html', [
+            'users' => $users,
+            'research' => $research ?? '',
+            'page' => $page,
+            'totalPages' => $totalPages]);
     }
     public function showUser(){
+        $applyModel = new ApplyModel();
+        $offerModel = new OfferModel();
+        $id = 0;
 
-        $applyModel=new ApplyModel();
-        $offerModel=new OfferModel();
-        $id=0;
-        if (isset($_GET['user_id']) ) {
+        if (isset($_GET['user_id'])) {
             $id = $_GET['user_id'];
-        } elseif ($_SESSION['user_status']=="Etudiant") {
-            $id =$_SESSION['user_id'];
+        } elseif (isset($_SESSION['user_status']) && $_SESSION['user_status'] == "Etudiant") {
+            $id = $_SESSION['user_id'];
         }
-        $user= $this->model->getUser($id);
-        $applications=$applyModel->getApplyByUser($id);
-        $nbApply=$applyModel->getNumberApplyByUser($id) ;
+
+        $user = $this->model->getUser($id);
+        $applications = $applyModel->getApplyByUser($id);
         $offers = [];
+        $nbApply = count($applications);
+
         if (!empty($applications)) {
             foreach ($applications as $application) {
                 $offer = $offerModel->getOfferById($application['offer_id']);
-                if ($offer) { // Vérifier si l'offre existe
+                if ($offer) {
+                    // Ajouter les informations de l'entreprise
+                    $companyModel = new \App\model\CompanyModel();
+                    $company = $companyModel->getCompany($offer['company_id']);
+                    $offer['company_name'] = $company ? $company['company_name'] : 'Entreprise inconnue';
+
+                    // Utiliser company_location du modèle de l'entreprise si disponible
+                    $offer['offer_location'] = $offer['offer_location'] ?? ($company ? $company['company_location'] ?? 'Lieu inconnu' : 'Lieu inconnu');
+
+                    // Ajouter la durée calculée avec la méthode existante
+                    $offer['duration'] = $offerModel->calculateOfferDuration($offer);
+
+                    // Ajouter les informations de candidature depuis l'objet application
+                    $offer['apply_date'] = $application['apply_date'] ?? date('Y-m-d');
+                    $offer['apply_status'] = $application['apply_status'] ?? 'En attente';
+
                     $offers[] = $offer;
                 }
             }
         }
-        echo $this->templateEngine->render('userInfo.twig.html', ['user' => $user, 'offers' => $offers, 'nbApply' => $nbApply]);
 
+        echo $this->templateEngine->render('userInfo.twig.html', [
+            'user' => $user,
+            'offers' => $offers,
+            'nbApply' => $nbApply,
+            'session' => $_SESSION
+        ]);
     }
     public function deleteUser(){
         if (isset($_GET['user_id'])) {

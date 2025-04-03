@@ -17,7 +17,7 @@ class  OfferController extends Controller
     }
     public function showAllOffers()
     {
-        $limit = 2;
+        $limit = 10;
         $page = $_GET['page'] ?? 1;
         $offset = (int)($page - 1) * $limit;
 
@@ -34,7 +34,7 @@ class  OfferController extends Controller
             $id = $_GET['offer_id'];
         }
         else {
-            $id = 1;
+            $id = 17;
         }
 
         $skillsModel = new SkillsModel();
@@ -154,7 +154,8 @@ class  OfferController extends Controller
             $offer['company_rate'] = $companyRate ?: 'Aucune évaluation';
 
             // Récupérer d'autres offres pour les suggestions
-            $offers = $this->model->getAllOffers();
+            $result = $this->model->getAllOffers();
+            $offers = $result['offers'];
             foreach($offers as &$suggestedOffer) {
                 $company = $companyModel->getCompany($suggestedOffer['company_id']);
                 $suggestedOffer['company_name'] = $company ? $company['company_name'] : 'Entreprise inconnue';
@@ -184,7 +185,8 @@ class  OfferController extends Controller
         $companyModel = new CompanyModel();
         $skillsModel = new SkillsModel();
 
-        $companies = $companyModel->getAllCompany();
+        $result = $companyModel->getAllCompany();
+        $companies = $result['companies'];
         $skills = $skillsModel->getSkills();
 
         if (isset($_GET['offer_id'])) {
@@ -332,7 +334,7 @@ class  OfferController extends Controller
     }
 
     public function showAdminOffer(){
-        $limit = 2;
+        $limit = 20;
         $page = $_GET['page'] ?? 1;
         $offset = (int)($page - 1) * $limit;
 
