@@ -113,7 +113,7 @@
                         <li>{{offerI.company_rate}}</li>
                     </div>
                     <li>{{offerI.offer_location}}</li>
-                    <li class="nb-candidats" >46 candidats</li>
+                    <li class="nb-candidats" >{{nbApply}}  candidats</li>
                 </ul>
             {% if session.user_id is defined and session.user_status == "Etudiant" %}
                 <form method="get" action="index.php" class="fav-button-container like-form" >

@@ -40,7 +40,8 @@ class  OfferController extends Controller
         $skillsModel = new SkillsModel();
         $companyModel = new CompanyModel();
         $evaluationsModel = new EvaluationsModel();
-
+        $applyModel = new ApplyModel();
+        $nbApply= $applyModel->getNumberApplyByOffer($id);
         $hasActiveFilters = in_array(true, $filters, true);
         $hasValidDomaines = isset($_GET['domaines']) && is_array($_GET['domaines']) && array_filter($_GET['domaines']);
 
@@ -127,7 +128,8 @@ class  OfferController extends Controller
             'isLiked'=> $isLiked,
             'nbLike'=> $nbLike,
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'nbApply'=> $nbApply
         ]);
     }
     public function showOffer()
@@ -140,6 +142,8 @@ class  OfferController extends Controller
                 header('Location: index.php?uri=offer/all');
                 return;
             }
+            $applyModel = new ApplyModel();
+            $nbApply= $applyModel->getNumberApplyByOffer($id);
 
             // Récupérer les informations de l'entreprise
             $companyModel = new CompanyModel();
@@ -175,6 +179,7 @@ class  OfferController extends Controller
                 'session' => $_SESSION,
                 'isLiked'=> $isLiked,
                 'nbLike'=> $nbLike,
+                'nbApply'=> $nbApply
             ]);
         } else {
             header('Location: index.php?uri=offer/all');
