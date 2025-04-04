@@ -82,17 +82,32 @@ class UserModel extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function addUser($name, $forname, $email, $password, $role) {
-        $query="INSERT INTO Users (user_lastname,user_firstname,user_email,user_password,user_status) VALUES (:name, :forname, :email, :password, :role)";
-        $stmt = $this->connection->pdo->prepare($query);
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-        $stmt->bindValue(":forname", $forname, PDO::PARAM_STR);
-        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
-        $stmt->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
-        $stmt->bindValue(":role", $role, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $queryCheck = "SELECT COUNT(*) FROM Users WHERE user_email = :email";
+        $stmtCheck = $this->connection->pdo->prepare($queryCheck);
+        $stmtCheck->bindValue(":email", $email, PDO::PARAM_STR);
+        $stmtCheck->execute();
+        $result = $stmtCheck->fetchColumn();
+
+        if ($result > 0) {
+            // L'email existe déjà, retourner une erreur ou un message
+            // Après avoir vérifié si l'email existe
+            $_SESSION['error_message'] = "Cet email est déjà utilisé.";
+
+        } else {
+
+            $query="INSERT INTO Users (user_lastname,user_firstname,user_email,user_password,user_status) VALUES (:name, :forname, :email, :password, :role)";
+            $stmt = $this->connection->pdo->prepare($query);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+            $stmt->bindValue(":forname", $forname, PDO::PARAM_STR);
+            $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+            $stmt->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
+            $stmt->bindValue(":role", $role, PDO::PARAM_STR);
+            $stmt->execute();
+            $_SESSION['success_message'] = "Utilisateur ajouté avec succès!";
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
     public function deleteUser($id) {
         $query= "DELETE  FROM Users WHERE user_id = :id";

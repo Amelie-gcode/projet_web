@@ -34,7 +34,7 @@ class  OfferController extends Controller
             $id = $_GET['offer_id'];
         }
         else {
-            $id = 17;
+            $id = 1;
         }
 
         $skillsModel = new SkillsModel();

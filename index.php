@@ -4,9 +4,16 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 session_start();
-//$_SESSION['user_id'] = 9;
-//$_SESSION['user_status'] = 'admin';
+if (isset($_SESSION['error_message'])) {
+    echo '<script>alert("' . addslashes($_SESSION['error_message']) . '");</script>';
+    unset($_SESSION['error_message']); // Supprimer après l'affichage
+}
 
+// Si un message de succès existe dans la session, afficher une alerte JavaScript
+if (isset($_SESSION['success_message'])) {
+    echo '<script>alert("' . addslashes($_SESSION['success_message']) . '");</script>';
+    unset($_SESSION['success_message']); // Supprimer après l'affichage
+}
 echo "<pre>";
 print_r($_GET);
 echo "</pre>";

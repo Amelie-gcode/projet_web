@@ -99,17 +99,29 @@ class CompanyModel extends Model
     }
 
     public function addCompany($name, $email, $phone, $description) {
-        $query = (
+        $queryCheck = "SELECT COUNT(*) FROM Companies WHERE company_name = :name";
+        $stmtCheck = $this->connection->pdo->prepare($queryCheck);
+        $stmtCheck->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmtCheck->execute();
+        $result = $stmtCheck->fetchColumn();
+        if ($result > 0) {
+            // L'email existe déjà, retourner une erreur ou un message
+            // Après avoir vérifié si l'email existe
+            $_SESSION['error_message'] = "Cet Entreprise existe deja .";
+
+        } else {
+            $query = (
             "INSERT INTO Companies (company_name, company_email,company_phone , company_description)
             VALUES (:name, :email, :phone, :description)"
-        );
-        $stmt = $this->connection->pdo->prepare($query);
-        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
-        $stmt->bindValue(":phone", $phone, PDO::PARAM_STR);
-        $stmt->bindValue(":description", $description, PDO::PARAM_STR);
-        $stmt->execute();
-        return $stmt;
+            );
+            $stmt = $this->connection->pdo->prepare($query);
+            $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+            $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+            $stmt->bindValue(":phone", $phone, PDO::PARAM_STR);
+            $stmt->bindValue(":description", $description, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt;
+        }
     }
 
     public function updateCompany($id, $name, $email, $phone, $description)

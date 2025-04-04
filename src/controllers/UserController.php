@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\model\ApplyModel;
 use App\model\OfferModel;
+use App\model\StudentsModel;
 use App\model\UserModel;
 
 class UserController extends Controller
@@ -36,6 +37,7 @@ class UserController extends Controller
     public function showUser(){
         $applyModel = new ApplyModel();
         $offerModel = new OfferModel();
+        $studentModel= new StudentsModel();
         $id = 0;
 
         if (isset($_GET['user_id'])) {
@@ -43,6 +45,7 @@ class UserController extends Controller
         } elseif (isset($_SESSION['user_status']) && $_SESSION['user_status'] == "Etudiant") {
             $id = $_SESSION['user_id'];
         }
+        $students=$studentModel->getStudent($id);
 
         $user = $this->model->getUser($id);
         $applications = $applyModel->getApplyByUser($id);
@@ -77,7 +80,8 @@ class UserController extends Controller
             'user' => $user,
             'offers' => $offers,
             'nbApply' => $nbApply,
-            'session' => $_SESSION
+            'session' => $_SESSION,
+            'students' => $students
         ]);
     }
     public function deleteUser(){
@@ -89,6 +93,7 @@ class UserController extends Controller
     }
     public function addUser(): void
     {
+        $studentModel = new StudentsModel();
         if (isset($_POST['name']) &&
             isset($_POST['forname']) &&
             isset($_POST['email']) &&
@@ -100,6 +105,12 @@ class UserController extends Controller
             $password = $_POST['password'];
             $status = $_POST['status'];
             $this->model->addUser($name,$forname, $email, $password, $status);
+            if($status == "Etudiant") {
+                $user= $this->model->getUserByEmail($email);
+                $id_user= $user['user_id'];
+                $studentModel->addStudent($id_user);
+            }
+
             }
         header('Location: ?uri=user/index');
     }

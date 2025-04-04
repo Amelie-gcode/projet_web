@@ -46,6 +46,8 @@ class ApplyModel extends Model
         return $stmt;
     }
     public function addApply($id_offer, $id_user, $date, $motivation) {
+
+
         $query="Insert into Applications (user_id,offer_id,application_date,application_cover_letter) values (:id_user, :id_offer, :date, :motivation)";
         $stmt = $this->connection->pdo->prepare($query);
         $stmt->bindValue(":id_user", $id_user, PDO::PARAM_INT);

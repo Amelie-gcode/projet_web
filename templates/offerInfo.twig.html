@@ -108,7 +108,7 @@
         </section>
     </section>
 
-
+{% if session.user_status == "Etudiant" %}
     <section class="form" id="formulaire">
         <h2>Envoyez votre candidature dès maintenant !</h2>
         <div class="form-container">
@@ -135,12 +135,15 @@
             </form>
         </div>
     </section>
-    </article>
+    {%endif%}
 </main>
+{%if session.user_status == "Etudiant"%}
 <div class="scrolling-form-box postuler-scrolling-form-box">
     <h2>{{offer.offer_title}}</h2>
     <button id="scrolling-form">Postule maintenant !</button>
 </div>
+{%endif%}
+
 <div id="modal" class="modal">
     <div class="modal-content connexion_container">
         <span class="close-button">&times;</span>

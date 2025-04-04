@@ -7,7 +7,7 @@
 <main>
   <div class="profile-container">
     <div class="profile-header">
-      <img src="../assets/image/user-profile.jpg" alt="Photo de profil">
+      <img src="/assets/image/user-profile.jpg" alt="Photo de profil">
       <h1>{{user.user_firstname}} {{user.user_lastname}}</h1>
     </div>
     <div class="profile-stats">
@@ -16,16 +16,18 @@
         <p>Candidatures</p>
       </div>
       <div>
-        <h3>20h</h3>
+        <h3>{{students.hours_per_week}}</h3>
         <p>Temps passé</p>
       </div>
       <div>
-        <h3>{% if user.user_status %}{{user.user_status}}{% else %}recherche{% endif %}</h3>
+        <h3>{{students.job_search_status}}</h3>
         <p>Statut</p>
       </div>
     </div>
-    {% if session.user_status == 'Pilote' or 'Admin' %}
-    <button class="back-button"> <a href="/index.php/?uri=user/index" >Retour </a></button>
+    {% if session.user_status == "Pilote" or session.user_status == "Admin" %}
+    <button class="back-button">
+      <a href="/index.php/?uri=user/index">Retour</a>
+    </button>
     {% endif %}
   </div>
   <section class="more-offer-container">

@@ -54,6 +54,7 @@ class ApplyController extends Controller
 
     public function addApply() {
 
+
         if (isset($_POST['id_offer']) &&
             isset($_POST['id_user']) &&
             isset($_POST['apply_date']) &&
@@ -62,39 +63,43 @@ class ApplyController extends Controller
             $id_user = $_POST['id_user'];
             $date = $_POST['apply_date'];
             $motivation = $_POST['motivation'];
-            $this->model->addApply($id_offer, $id_user, $date, $motivation);
+
+            if ($this->model->getApplyByOfferAndUser($id_offer, $id_user)) {
+                $_SESSION['error_message'] = "Vous avez déjà postulé à cette offre.";
+                header('Location: index.php/?uri=offer/show&offer_id=' . $id_offer);
+                exit();
+            }
 
             if(!isset($_FILES['cv']) || $_FILES['cv']['error'] != UPLOAD_ERR_OK) {
-                die("Erreur : Aucun fichier n'a été téléversé ou une erreur est survenue.");
+                $_SESSION['error_message'] = "Aucun fichier n'a été téléversé ou une erreur est survenue.";
+                header('Location: index.php/?uri=offer/show&offer_id='.$id_offer);
+                exit();
             }
             else{
                 $fileTmpPath = $_FILES['cv']['tmp_name'];
                 $fileType = mime_content_type($fileTmpPath);
                 if ($fileType!=='application/pdf') {
-                    echo "<h1>Le fichier n'est pas un fichier pdf</h1> " ;
-                    echo "<br>";
-                    die("erreur le fichier n'est pas un fichier pdf");
-                }
-                else{
-                    echo "<h1>Le fichier est un fichier pdf</h1>";
-                    echo "<br>";
+                    $_SESSION['error_message'] = "le fichier n'est pas un pdf ";
+                    header('Location: index.php/?uri=offer/show&offer_id='.$id_offer);
+                    exit();
                 }
 
                 if($_FILES['cv']['size']>2000000){
-                    echo "Le fichier est trop gros";
-                    die("erreur le fichier est trop gros");
+                    $_SESSION['error_message'] = "Fichier trop volumineux";
+                    header('Location: index.php/?uri=offer/show&offer_id='.$id_offer);
+                    exit();
                 }
-                echo "Le fichier est valide <br>";
-
                 $fileName = "CV_".$id_offer."_".$id_user.".pdf";
                 $destinationdir= 'CV/';
 
                 if(move_uploaded_file($fileTmpPath, $destinationdir.$fileName)){
-                    echo "Succès : Le fichier '" . htmlspecialchars($fileName) . "' a été téléversé avec succès.";
+                    $_SESSION['success_message'] = "Votre Candidature à bien été pris en compte";
+                    $this->model->addApply($id_offer, $id_user, $date, $motivation);
                 }
 
             }
         }
+
         header('Location: index.php/?uri=offer/index');
     }
     public function nbApplyByCompany()

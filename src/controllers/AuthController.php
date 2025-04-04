@@ -41,6 +41,7 @@ class AuthController extends Controller
                     error_log("Login successful for user ID: {$user['user_id']}");
                     header("Location: ?uri=offer/index");
                     $_SESSION['show_modal'] = 'false';
+                    $_SESSION['success_message']="Vous etes connecté";
                     exit();
                 } else {
                     error_log("Password verification failed for email: $email");
@@ -49,10 +50,9 @@ class AuthController extends Controller
                 }
             } else {
                 error_log("No user found with email: $email");
-                $_SESSION['login_error'] = "Aucun utilisateur trouvé avec cet email";
+                $_SESSION['error_message'] = "Aucun utilisateur trouvé avec cet email";
                 $_SESSION['show_modal'] = 'true';
             }
-
             // Redirection vers la page des offres avec message d'erreur dans la session
             header("Location: ?uri=offer/index");
             exit();
@@ -61,6 +61,7 @@ class AuthController extends Controller
 
     public function logout() {
         $_SESSION = array();
+        $_SESSION['success_message']="Vous etes deconnecté";
         session_destroy();
         header("Location: ?uri=offer/index");
         exit();
