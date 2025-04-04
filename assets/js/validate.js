@@ -117,6 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Validation function for offer form
+    // In the validateOfferForm function, add these validations:
+
     function validateOfferForm() {
         let isValid = true;
 
@@ -125,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'titre': 'Veuillez entrer un titre',
             'description-courte': 'Veuillez entrer une description courte',
             'description-longue': 'Veuillez entrer une description détaillée',
-            'profil': 'Veuillez décrire le profil recherché'
+            'profil': 'Veuillez décrire le profil recherché',
+            'location': 'Veuillez entrer un lieu' // Add location validation
         };
 
         // Check text fields
@@ -143,6 +146,30 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
+        // Check start date and end date
+        const startDate = document.getElementById('startDate');
+        if (startDate && startDate.value === '') {
+            showError(startDate, 'Veuillez sélectionner une date de début');
+            isValid = false;
+        }
+
+        const endDate = document.getElementById('endDate');
+        if (endDate && endDate.value === '') {
+            showError(endDate, 'Veuillez sélectionner une date de fin');
+            isValid = false;
+        }
+
+        // Check dates are in order (start date before end date)
+        if (startDate && endDate && startDate.value && endDate.value) {
+            const start = new Date(startDate.value);
+            const end = new Date(endDate.value);
+
+            if (start >= end) {
+                showError(endDate, 'La date de fin doit être après la date de début');
+                isValid = false;
+            }
+        }
+
         // Check salary (must be a number)
         const salaire = document.getElementById('salaire');
         if (salaire && !validateField(salaire, 'Veuillez entrer un salaire')) {
@@ -152,17 +179,8 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
-        // Check duration (must be a number)
-        const duree = document.getElementById('duree');
-        if (duree && !validateField(duree, 'Veuillez entrer une durée')) {
-            isValid = false;
-        } else if (duree && !/^\d+$/.test(duree.value)) {
-            showError(duree, 'La durée doit être un nombre entier positif');
-            isValid = false;
-        }
-
         // Check contract type (radio buttons)
-        const typeInputs = document.querySelectorAll('input[name="type"]');
+        const typeInputs = document.querySelectorAll('input[name="offerType"]');
         let typeSelected = false;
         typeInputs.forEach(input => {
             if (input.checked) {
@@ -176,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Check domains (at least one required)
-        const domainInputs = document.querySelectorAll('input[name="domaines[]"]');
+        const domainInputs = document.querySelectorAll('select[name="domaines[]"]');
         let domainFilled = false;
 
         domainInputs.forEach(input => {
@@ -186,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (domainInputs.length > 0 && !domainFilled) {
-            showError(domainInputs[0], 'Veuillez entrer au moins un domaine');
+            showError(domainInputs[0], 'Veuillez sélectionner au moins une compétence');
             isValid = false;
         }
 

@@ -160,11 +160,21 @@ header .nav-user {
     z-index: 1;
 }
 
-.search-container i {
+.search-icon-button {
     position: absolute;
     left: 20px;
-    pointer-events: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    color: inherit;
+    font-size: inherit;
+    z-index: 100000;
 }
+
 
 .search-container > input {
     border: 3px solid #951313;
@@ -174,6 +184,12 @@ header .nav-user {
     padding: 10px;
     padding-left: 50px;
     box-shadow: 1px 6px 15px rgba(0,0,0,0.3);
+}
+
+.search-container input {
+    font-size: 18px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
 }
 
 
@@ -193,7 +209,8 @@ header .nav-user {
     flex-wrap: wrap;
 }
 
-.filter {
+.filter,
+.filter select {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -201,6 +218,16 @@ header .nav-user {
     gap: 6px;
     border-radius: 10px;
     background-color: #951313;
+}
+
+.filter select {
+    padding: 0px;
+    border: none;
+    color: rgba(255, 255, 255);
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .filter:hover {
@@ -213,6 +240,32 @@ header .nav-user {
     font-weight: bold;
     font-size: 13px;
     text-transform: uppercase;
+}
+
+.custom-checkbox {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-checkbox:checked::after {
+    content: '✔';
+    color: #ffffff;
+    font-size: 16px;
+    position: absolute;
+    left: 3px;
+    top: -2px;
+}
+
+/* Quand la checkbox est cochée */
+.custom-checkbox:checked {
+    background-color: #951313; /* Couleur de la case cochée */
+    border: none;
 }
 
 
@@ -1552,6 +1605,7 @@ fieldset {
 
 .offer-form-group input[type="text"],
 .offer-form-group input[type="number"],
+.date-cre-offer,
 .offer-form-group select {
     width: 100%;
     padding: 12px;
@@ -1607,7 +1661,7 @@ fieldset {
     margin-bottom: 10px;
 }
 
-.domain-input input {
+.domain-input select {
     flex: 1;
     padding: 12px;
     border: 2px solid #ddd;
@@ -1805,10 +1859,8 @@ fieldset {
     margin-top: 5px;
 }
 
-.rating-stars {
-    color: #ffd700;
-    margin-top: 5px;
-}
+
+
 
 /* Section 2: Company Offers */
 
@@ -1888,14 +1940,27 @@ fieldset {
     font-weight: bold;
     color: #333;
 }
-
-.stars {
-    color: #ffd700;
-    font-size: 32px;
-    cursor: pointer;
+.rating-stars {
     display: flex;
-    gap: 8px;
+    gap: 5px;
+    cursor: pointer;
 }
+
+.rating-form .star {
+    font-size: 30px;
+    color: gray;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.star.fas {
+    color: gold; /* Étoile remplie */
+}
+
+.star.hovered {
+    color: gold;
+    transform: scale(1.2);
+}
+
 
 .comment-input {
     display: flex;
@@ -1942,6 +2007,14 @@ fieldset {
 .submit-rating:hover {
     background: #631313;
     transform: translateY(-2px);
+}
+.rating .star {
+    font-size: 40px;
+    color: gray;
+}
+
+.rating .star.filled {
+    color: gold;
 }
 
 
@@ -2204,6 +2277,7 @@ fieldset {
     align-items: center;
 }
 
+
 .user-avatar {
     width: 50px;
     height: 50px;
@@ -2228,8 +2302,8 @@ fieldset {
     align-items: center;
 }
 
-.star {
-    color: #FFD700;
+.stat-item , .star {
+    color: #FFD700; !important;
     font-size: 1.2rem;
     margin-right: 2px;
 }
@@ -2621,4 +2695,304 @@ fieldset {
         height: 40px;
         font-size: 1rem;
     }
+}
+
+
+/* --------------------- CGU -------------------------------------*/
+
+.cgu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.cgu-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cgu-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cgu-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.cgu-last-updated {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: #888;
+}
+
+.cgu-section {
+    margin-bottom: 30px;
+}
+
+.cgu-section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #eee;
+}
+
+.cgu-section-content {
+    line-height: 1.6;
+    color: #444;
+}
+
+.cgu-section-content p {
+    margin-bottom: 15px;
+}
+
+.cgu-section-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.cgu-section-content li {
+    margin-bottom: 8px;
+}
+
+.cgu-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #888;
+}
+
+
+/* --------------------- Cookies -------------------------------------*/
+
+.cookie-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.cookie-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cookie-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cookie-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.cookie-last-updated {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: #888;
+}
+
+.cookie-section {
+    margin-bottom: 30px;
+}
+
+.cookie-section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #eee;
+}
+
+.cookie-section-content {
+    line-height: 1.6;
+    color: #444;
+}
+
+.cookie-section-content p {
+    margin-bottom: 15px;
+}
+
+.cookie-section-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.cookie-section-content li {
+    margin-bottom: 8px;
+}
+
+.cookie-types {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.cookie-type {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.cookie-type-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cookie-type-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #8B0000;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cookie-banner-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.cookie-banner-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-banner-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-customize {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.btn-customize:hover {
+    background-color: #e1e1e1;
+}
+
+.btn-accept-all {
+    background-color: #8B0000;
+    color: white;
+}
+
+.btn-accept-all:hover {
+    background-color: #8B0000;
+}
+
+.cookie-preferences {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.preference-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.preference-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-save {
+    background-color: #8B0000;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #8B0000;
+}
+
+.cookie-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #888;
 }

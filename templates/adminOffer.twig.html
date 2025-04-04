@@ -1,0 +1,134 @@
+{# templates/adminOffer.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Administration offres{% endblock %}
+
+{% block content %}
+<main class="fav">
+    <form class="search-container" method="get">
+        <button type="submit" class="search-icon-button">
+            <input type="hidden" name="uri" value="offer/admin">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="research" placeholder="Recherche un stage !" value="{{ research ? research : '' }}">
+    </form>
+    <form class="filters-container" method="get">
+        <div class="filter">
+            <select name="domaines[]">
+                <option value="">Domaine</option>
+                {% for skill in skills %}
+                <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter">
+            <select name="domaines[]">
+                <option value="">Domaine</option>
+                {% for skill in skills %}
+                <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter">
+            <select name="domaines[]">
+                <option value="">Domaine</option>
+                {% for skill in skills %}
+                <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_alternance" name="filter_alternance" value="filter_alternance" class="custom-checkbox">
+            <label for="filter_alternance">Alternance</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_stage" name="filter_stage" value="filter_stage" class="custom-checkbox">
+            <label for="filter_stage">Stage</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_aime" name="filter_aime" value="filter_aime" class="custom-checkbox">
+            <label for="filter_aime">Plus aimé</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_moins_3mois" name="filter_moins_3mois" value="filter_moins_3mois" class="custom-checkbox">
+            <label for="filter_moins_3mois">- 3 mois</label>
+        </div>
+        <div class="filter">
+            <input type="checkbox" id="filter_plus_3mois" name="filter_plus_3mois" value="filter_plus_3mois" class="custom-checkbox">
+            <label for="filter_plus_3mois">+ 3 mois</label>
+        </div>
+    </form>
+    <section class="favoris">
+        <h1 class="titre_fav">
+            Gerer les offres
+        </h1>
+    </section>
+    <section class="offers-container favoris-offer-container">
+        {% for offer in offers %}
+        <article class="offer favoris-offer">
+            <header>
+                <h1>{{offer.offer_title}}</h1>
+            </header>
+            <section class="offer-content">
+                <ul class="principal-infos-offers">
+                    <li>{{offer.company_name}}</li>
+                    <li>{{offer.offer_location}}</li>
+
+                </ul>
+                <ul class="secondary-infos-offers">
+                    <li>{{offer.offer_salary}} €</li>
+                    <li>{{offer.offer_type}}</li>
+                    {% if offer.duration is defined and offer.duration != "N/A" %}
+                        <li>{{offer.duration}} semaines</li>
+                    {% endif %}
+                    {% if offer.skills is defined %}
+                        {% for skill in offer.skills %}
+                            <li>{{skill.skill_name}}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <p>{{offer.offer_short_description}}</p>
+                <footer>
+                    <div class="date">
+                        <p>publié le :</p>
+                        <time>{{offer.offer_date}}</time>
+                    </div>
+                    <form class="btn-offer" action="index.php" method="get">
+                        <input type="hidden" name="uri" value="offer/showForm">
+                        <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                        <button class="see-more" type="submit">Modifier</button>
+                        <button class="action-bouton" onclick="supprimer('index.php?uri=offer/delete&offer_id={{offer.offer_id}}')" type="button">Supprimer</button>
+                    </form>
+                </footer>
+            </section>
+        </article>
+        {% endfor %}
+    </section>
+    <form action="index.php" method="get">
+        <input type="hidden" name="uri" value="offer/showForm">
+        <button class="action-bouton ajout-offre" type="submit">+</button>
+    </form>
+    <section>
+        <ul class="pagination">
+            {% if page > 1 %}
+                <br>
+                <a href="?uri=offer/admin&page={{page - 1}}">Page précédente</a> <span> | </span>
+            {%endif%}
+            {%if page < totalPages %}
+                <a href="?uri=offer/admin&page={{page + 1}}">Page suivante</a>
+                <!-- Ajoutez plus de liens de pagination ici -->
+            {% endif %}
+        </ul>
+    </section>
+</main>
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'offre ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

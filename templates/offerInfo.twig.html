@@ -1,0 +1,168 @@
+{# templates/offerInfo.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Détails de l'offre{% endblock %}
+
+{% block content %}
+
+<main class="postuler-main">
+    <article class="principal-offer principal-offer-apply-page">
+        <header>
+            <div class="offer-title-box">
+                <h2>{{offer.offer_title}}</h2>
+                <form method="get" action="index.php" class="fav-button-container fav-button-container-apply-page">
+                        <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
+                            <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                        </button>
+                        <input type="hidden" name="uri" value="likes/{% if isLiked %}delete{% else %}add{% endif %}">
+                        <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                        <input type="hidden" name="page" value="offerInfo">
+                        <p class="nb-fav">{{nbLike}}</p>
+                </form>
+            </div>
+
+            <ul class="principal-infos-offers">
+                <li><a href="index.php?uri=company/show&company_id={{offer.company_id}}">{{offer.company_name}}</a></li>
+                <div class="company-grade">
+                    <li><i class="fas fa-star favoris-icon"></i></li>
+                    <li>{{offer.company_rate|default('Aucune évaluation')}}</li>
+                </div>
+                <li>{{offer.offer_location}}</li>
+                <li>{{nbApply}} candidats</li>
+            </ul>
+            <h3>Déscription du poste</h3>
+        </header>
+        <section class="offer-content">
+            <section class="offer-description">
+                <h4>En quoi cela consiste ?</h4>
+
+                <p>{{offer.offer_long_description}}</p>
+            </section>
+            <section class="offer-profil">
+                <h4>Profil rechercher</h4>
+                <p>{{offer.offer_profile_description}}</p>
+            </section>
+        </section>
+        <footer>
+            <address>
+                <h3>Contact</h3>
+                <aside class="contact-container">
+                    <div class="contact-info">
+                        <p>Email :</p>
+                        <p class="offer-email">{{offer.company_email|default('Email inconnu')}}</p>
+                    </div>
+                    <div class="contact-info">
+                        <p>Tel. :</p>
+                        <p class="offer-phone">{{offer.company_phone|default('Téléphone inconnu')}}</p>
+                    </div>
+                </aside>
+                <div class="date">
+                    <p>publié le :</p>
+                    <time>{{offer.offer_date}}</time>
+                </div>
+            </address>
+        </footer>
+    </article>
+    <section class="more-offer-container">
+        <h1 class="big-title">Découvrer d'autre offre !</h1>
+        <section class="more-offer">
+            {% for offer in offers|slice(0, 3) %}
+            <article class="offer">
+                <header>
+                    <h1>{{offer.offer_title}}</h1>
+                </header>
+                <section class="offer-content">
+                    <ul class="principal-infos-offers">
+                        <li>{{offer.company_name|default('Entreprise inconnue')}}</li>
+                        <li>{{offer.offer_location}}</li>
+                    </ul>
+                    <ul class="secondary-infos-offers">
+                        <li>{{offer.offer_salary|default('N/A')}} €</li>
+                        <li>{{offer.offer_type|default('N/A')}}</li>
+                            {% if offer.duration is defined and offer.duration != "N/A" %}
+                        <li>{{offer.duration}} semaines</li>
+                        {% endif %}
+                        {% if offer.skills is defined %}
+                            {% for skill in offer.skills %}
+                                <li>{{skill.skill_name}}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <p>{{offer.offer_short_description}}</p>
+                    <footer>
+                        <div class="date">
+                            <p>publié le :</p>
+                            <time>{{offer.offer_date}}</time>
+                        </div>
+                        <form action="index.php" method="get">
+                            <input type="hidden" name="uri" value="offer/show">
+                            <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                            {% if session.user_id is defined %}
+                                <button type="submit" class="see-more">détails de l'offre</button>
+                            {% endif %}
+                        </form>
+                    </footer>
+                </section>
+            </article>
+            {% endfor %}
+        </section>
+    </section>
+
+{% if session.user_status == "Etudiant" %}
+    <section class="form" id="formulaire">
+        <h2>Envoyez votre candidature dès maintenant !</h2>
+        <div class="form-container">
+
+            <form method="post" action="index.php/?uri=apply/add" enctype="multipart/form-data" >
+                <div class="message-group">
+                    <div class="form-field">
+                        <label for="motivation">Montrez votre motivation !!!!!</label>
+                        <textarea id="motivation" name="motivation" rows="4"></textarea>
+                    </div>
+                    <div class="form-field">
+                        <label for="cv" class="custom-file-label">Ajouter mon CV</label>
+                        <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="reset" value="Réinitialiser" class="btn-reset">
+                    <input type="hidden" name="apply_date" value="{{now|date('Y-m-d')}}">
+                    <input type="hidden" name="id_offer" value="{{offer.offer_id}}">
+                    <input type="hidden" name="id_user" value="{{session.user_id}}"> <!-- mettre un token machin truc -->
+                    <input type="submit" value="Postuler" class="btn-submit" >
+                </div>
+
+            </form>
+        </div>
+    </section>
+    {%endif%}
+</main>
+{%if session.user_status == "Etudiant"%}
+<div class="scrolling-form-box postuler-scrolling-form-box">
+    <h2>{{offer.offer_title}}</h2>
+    <button id="scrolling-form">Postule maintenant !</button>
+</div>
+{%endif%}
+
+<div id="modal" class="modal">
+    <div class="modal-content connexion_container">
+        <span class="close-button">&times;</span>
+        <form class="connexion_box" action="?uri=auth/login" method="post">
+            <h1 class="titre_connexion">Se connecter</h1>
+
+            {% if session.login_error is defined %}
+            <div class="error-message" style="color: red; text-align: center; margin-bottom: 0px;">
+                {{ session.login_error }}
+            </div>
+            {% endif %}
+
+            <label for="email">email</label>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required>
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

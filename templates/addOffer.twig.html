@@ -1,0 +1,137 @@
+{# templates/addOffer.twig.html #}
+{% extends 'baseForm.twig.html' %}
+
+{% block title %}{% if offer %}Modifier l'offre{% else %}Nouvelle offre{% endif %}{% endblock %}
+
+{% block content %}
+<main class="offer-creation">
+    <form class="offer-form" action="index.php?uri={% if offer %}offer/update{% else %}offer/add{% endif %}" method="post">
+        <header>
+            <h1>{% if offer %}Modifier l'offre{% else %}Créer une offre{% endif %}</h1>
+        </header>
+        <section class="offer-form-section">
+            <div class="offer-form-group">
+                <label for="titre">Titre de l'offre</label>
+                <input type="text" id="titre" name="offerTitle" value="{{ offer.offer_title|default('') }}">
+            </div>
+
+            <div class="offer-form-group">
+                <label for="entreprise">Entreprise</label>
+                <select id="entreprise" name="id_company">
+                    <option value="">Sélectionnez une entreprise</option>
+                    {% for company in companies %}
+                    <option value="{{ company.company_id }}" {% if offer and offer.company_id == company.company_id %}selected{% endif %}>
+                        {{ company.company_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </section>
+
+        <section class="additional-info">
+            <h2>Informations supplémentaires</h2>
+
+            <fieldset class="offer-form-section">
+                <div class="offer-form-group">
+                    <label for="salaire">Salaire (€)</label>
+                    <input type="text" id="salaire" name="offerSalary" value="{{ offer.offer_salary|default('') }}">
+                </div>
+
+                <div class="offer-form-group type-container">
+                    <fieldset>
+                        <legend>Type de contrat</legend>
+                        <div class="type-options">
+                            <label class="type-choice">
+                                <input type="radio" name="offerType" value="Stage" >
+                                <span>Stage</span>
+                            </label>
+                            <label class="type-choice">
+                                <input type="radio" name="offerType" value="Alternance">
+                                <span>Alternance</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="startDate">Date de début</label>
+                    <input type="date" id="startDate" name="offerStartDate" value="{{ offer.offer_start_date|default('') }}" class="date-cre-offer">
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="endDate">Date de fin</label>
+                    <input type="date" id="endDate" name="offerEndDate" value="{{ offer.offer_end_date|default('') }}" class="date-cre-offer">
+                </div>
+                <div class="offer-form-group">
+                    <label for="location">Lieu</label>
+                    <input type="text" id="location" name="offerLocation" value="{{ offer.offer_location|default('') }}">
+                </div>
+            </fieldset>
+
+            <fieldset class="domains-section">
+                <legend>Compétences requises</legend>
+                <div id="domains-container">
+                    {% if selectedSkills is defined and selectedSkills|length > 0 %}
+                    {% for skill_id in selectedSkills %}
+                    <div class="domain-input">
+                        <select name="domaines[]">
+                            <option value="">Sélectionnez une compétence</option>
+                            {% for skill in skills %}
+                            <option value="{{ skill.skill_id }}" {% if skill.skill_id == skill_id %}selected{% endif %}>
+                                {{ skill.skill_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <button type="button" class="remove-domain" {% if loop.index0 == 0 %}style="display: none;"{% endif %}>-</button>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="domain-input">
+                        <select name="domaines[]">
+                            <option value="">Sélectionnez une compétence</option>
+                            {% for skill in skills %}
+                            <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="button" class="remove-domain" style="display: none;">-</button>
+                    </div>
+                    {% endif %}
+                </div>
+                <button type="button" id="add-domain" class="add-domain">+</button>
+            </fieldset>
+        </section>
+
+        <section class="descriptions-section">
+            <h2>Descriptions</h2>
+            <fieldset>
+                <div class="offer-form-group">
+                    <label for="description-courte">Description courte (max 250 caractères)</label>
+                    <textarea id="description-courte" name="offerShortDescription" maxlength="250">{{ offer.offer_short_description|default('') }}</textarea>
+                    <span class="char-count" aria-live="polite">0/250</span>
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="description-longue">Description détaillée de l'offre</label>
+                    <textarea id="description-longue" name="offerLongDescription">{{ offer.offer_long_description|default('') }}</textarea>
+                </div>
+
+                <div class="offer-form-group">
+                    <label for="profil">Profil recherché</label>
+                    <textarea id="profil" name="offerProfileDescription">{{ offer.offer_profile_description|default('') }}</textarea>
+                </div>
+            </fieldset>
+        </section>
+
+        <footer class="offer-buttons">
+            <input type="hidden" id="offerDate" name="offerDate" value="{{ offer.offer_date|default(now|date('Y-m-d')) }}" >
+            <a href="?uri=offer/admin" class="offer-back" role="button">Retour</a>
+            {% if offer %}
+            <input type="hidden" name="id" value="{{ offer.offer_id }}">
+            <button type="submit" class="offer-submit">Modifier l'offre</button>
+            {% else %}
+            <button type="submit" class="offer-submit">Créer l'offre</button>
+            {% endif %}
+        </footer>
+    </form>
+</main>
+{% endblock %}

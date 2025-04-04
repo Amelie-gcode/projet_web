@@ -1,0 +1,100 @@
+{# templates/users.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Comptes{% endblock %}
+
+{% block content %}
+<h2 class="titre-etudiant"> GESTION DES COMPTES </h2>
+
+<form class="search-container" action="#" method="get">
+    <button type="submit" class="search-icon-button">
+        <input type="hidden" name="uri" value="user/index">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <input type="text" name="research" placeholder="Recherche une entreprise !" value="{{ research ? research : '' }}">
+</form>
+
+<main class="etudiant">
+    <section class="etudiant-tableau">
+        <table class ="tableau">
+            <thead>
+            <tr>
+                <th>PRENOM</th>
+                <th>NOM</th>
+                <th>E-MAIL</th>
+                <th>STATUT</th>
+                <th>ACTION</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if session.user_status == 'Pilote' %}
+                {% for user in users %}
+                    {% if user.user_status == 'Etudiant' %}
+                        <tr>
+                            <th>{{user.user_firstname}}</th>
+                            <th>{{user.user_lastname}} </th>
+                            <th>{{user.user_email}}</th>
+                            <th>{{user.user_status}}</th>
+                            <th>
+                                <form action="index.php" method="get">
+                                    <input type="hidden" name="user_id" value="{{user.user_id}}">
+                                    <button class="action-bouton" type="submit" name="uri" value="user/show">STATS</button>
+                                    <button class="action-bouton" type="submit" name="uri" value="user/showForm">MODIFIER</button>
+                                    <button class="action-bouton" onclick="supprimer('index.php?uri=user/delete&user_id={{user.user_id}}')" type="button">Supprimer</button>
+                                </form>
+                            </th>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for user in users %}
+                    {% if user.user_status != 'Admin' %}
+                        <tr>
+                            <th>{{user.user_firstname}}</th>
+                            <th>{{user.user_lastname}} </th>
+                            <th>{{user.user_email}}</th>
+                            <th>{{user.user_status}}</th>
+                            <th>
+                                <form action="index.php" method="get">
+                                    <input type="hidden" name="user_id" value="{{user.user_id}}">
+                                    {% if user.user_status == 'Etudiant' %}
+                                        <button class="action-bouton" type="submit" name="uri" value="user/show">STATS</button>
+                                    {% endif %}
+                                    <button class="action-bouton" type="submit" name="uri" value="user/showForm">MODIFIER</button>
+                                    <button class="action-bouton" onclick="supprimer('index.php?uri=user/delete&user_id={{user.user_id}}')" type="button">Supprimer</button>
+                                </form>
+                            </th>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            </tbody>
+        </table>
+    </section>
+    <form >
+        <button class="action-bouton" type="submit" name="uri" value="user/showForm">Ajouter un compte </button>
+    </form>
+    <section>
+        <ul class="pagination">
+            {% if page > 1 %}
+                <br>
+                <a href="?uri=user/index&page={{page - 1}}">Page précédente</a> <span> | </span>
+            {%endif%}
+            {%if page < totalPages %}
+                <a href="?uri=user/index&page={{page + 1}}">Page suivante</a>
+            {% endif %}
+        </ul>
+    </section>
+</main>
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'entreprise ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

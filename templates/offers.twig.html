@@ -1,0 +1,229 @@
+{# templates/offers.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Offres{% endblock %}
+
+{% block content %}
+
+
+<form class="search-container" method="get">
+    <button type="submit" class="search-icon-button">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <input type="text" name="research" placeholder="Recherche un stage !" value="{{ research ? research : '' }}">
+</form>
+<form class="filters-container" method="get">
+    <div class="filter">
+        <select name="domaines[]">
+            <option value="">Domaine</option>
+            {% for skill in skills %}
+            <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="filter">
+        <select name="domaines[]">
+            <option value="">Domaine</option>
+            {% for skill in skills %}
+            <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="filter">
+        <select name="domaines[]">
+            <option value="">Domaine</option>
+            {% for skill in skills %}
+            <option value="{{ skill.skill_id }}">{{ skill.skill_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter_alternance" name="filter_alternance" value="filter_alternance" class="custom-checkbox">
+        <label for="filter_alternance">Alternance</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter_stage" name="filter_stage" value="filter_stage" class="custom-checkbox">
+        <label for="filter_stage">Stage</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter_aime" name="filter_aime" value="filter_aime" class="custom-checkbox">
+        <label for="filter_aime">Plus aimé</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter_moins_3mois" name="filter_moins_3mois" value="filter_moins_3mois" class="custom-checkbox">
+        <label for="filter_moins_3mois">- 3 mois</label>
+    </div>
+    <div class="filter">
+        <input type="checkbox" id="filter_plus_3mois" name="filter_plus_3mois" value="filter_plus_3mois" class="custom-checkbox">
+        <label for="filter_plus_3mois">+ 3 mois</label>
+    </div>
+</form>
+<main class ="page_offre">
+    <section class="offers-container-principal">
+        <section class="rapid-offers-container">
+            {% for offer in offers %}
+            <article class="offer">
+                <header>
+                    <h1>{{offer.offer_title}}</h1>
+                </header>
+                <section class="offer-content">
+                    <ul class="principal-infos-offers">
+                        <li>{{offer.company_name}}</li>
+                        <li>{{offer.offer_location}}</li>
+                    </ul>
+                    <ul class="secondary-infos-offers">
+                        <li>{{ offer.offer_salary|default('N/A') }} €</li>
+                        <li>{{ offer.offer_type|default('N/A') }}</li>
+                        {% if offer.duration is defined and offer.duration != "N/A" %}
+
+                        <li>{{ offer.duration }} semaines</li>
+                        {% endif %}
+                        {% if offer.skills is defined %}
+                            {% for skill in offer.skills %}
+                                <li>{{ skill.skill_name }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <p>{{offer.offer_short_description}}</p>
+                    <section>
+                        <div class="date">
+                            <p>publié le :</p>
+                            <time>{{offer.offer_date}}</time>
+                        </div>
+                        <form action="#" method="get">
+                            <input type="hidden" name="uri" value="offer/index">
+                            <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                            <button type="submit" class="see-more">détails de l'offre</button>
+                        </form>
+                    </section>
+                </section>
+
+            </article>
+            {% endfor %}
+        </section>
+
+
+        <article class="principal-offer principal-offer-offer-page">
+            <header>
+                <h2>{{offerI.offer_title}}</h2>
+                <ul class="principal-infos-offers">
+                    <li><a href="index.php?uri=company/show&company_id={{offerI.company_id}}">{{offerI.company_name}}</a></li>
+                    <div class="company-grade">
+                        <li><i id="likeValue" class="fas fa-star favoris-icon"></i></li>
+                        <li>{{offerI.company_rate}}</li>
+                    </div>
+                    <li>{{offerI.offer_location}}</li>
+                    <li class="nb-candidats" >{{nbApply}}  candidats</li>
+                </ul>
+            {% if session.user_id is defined and session.user_status == "Etudiant" %}
+                <form method="get" action="index.php" class="fav-button-container like-form" >
+                    <button type="submit" class="favorite-button" aria-label="Ajouter aux favoris">
+                        <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                    </button>
+                    <input type="hidden" name="uri" value="likes/{% if isLiked %}delete{% else %}add{% endif %}">
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <p class="nb-fav">{{nbLike}}</p>
+                </form>
+            {% elseif session.user_id is not defined %}
+                <form method="get" action="index.php" class="fav-button-container like-form" >
+                    <button type="submit" class="favorite-button user-items auth" aria-label="Ajouter aux favoris">
+                        <i class="{% if isLiked %}fas{% else %}far{% endif %} fa-heart heart-icon"></i>
+                    </button>
+                    <input type="hidden" name="uri" value="likes/{% if isLiked %}delete{% else %}add{% endif %}">
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <p class="nb-fav">{{nbLike}}</p>
+                </form>
+            {%elseif session.user_statuts == "Pilote" or "Admin"%}
+                <form class="fav-button-container like-form" >
+                    <button  class="favorite-button" aria-label="Ajouter aux favoris">
+                        <i class=" far fa-heart heart-icon"></i>
+                    </button>
+                    <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                    <p class="nb-fav">{{nbLike}}</p>
+                </form>
+            {%endif%}
+
+                <h3>Déscription du poste</h3>
+            </header>
+            <section class="offer-content">
+                <section class="offer-description">
+                    <h4>En quoi cela consiste ?</h4>
+
+                    <p>{{offerI.offer_long_description}}</p>
+                </section>
+                <section class="offer-profil">
+                    <h4>Profil rechercher</h4>
+                    <p>{{offerI.offer_profile_description}}</p>
+                </section>
+            </section>
+            <footer>
+                <address>
+                    <h3>Contact</h3>
+                    <aside class="contact-container">
+                        <div class="contact-info">
+                            <p>Email :</p>
+                            <p class="offer-email">{{offerI.company_email}}</p>
+                        </div>
+                        <div class="contact-info">
+                            <p>Tel. :</p>
+                            <p class="offer-phone">{{offerI.company_phone}}</p>
+                        </div>
+                    </aside>
+                    <div class="date">
+                        <p>publié le :</p>
+                        <time>{{offerI.offer_date}}</time>
+                    </div>
+                    {% if session.user_id is defined %}
+                    <form action="#" method="get">
+                        <input type="hidden" name="uri" value="offer/show">
+                        <input type="hidden" name="offer_id" value="{{offerI.offer_id}}">
+                        <button type="submit" class="apply-button user-items">Postuler</button>
+                    </form>
+                    {% endif %}
+                    {% if session.user_id is not defined %}
+                        <button type="submit" class="apply-button user-items auth" >Postuler</button>
+                    {% endif %}
+                </address>
+            </footer>
+        </article>
+    </section>
+    <section>
+        <ul class="pagination">
+            {% if page > 1 %}
+                <br>
+                <a href="?page={{page - 1}}">Page précédente</a> <span> | </span>
+            {%endif%}
+            {%if page < totalPages %}
+                <a href="?page={{page + 1}}">Page suivante</a>
+                <!-- Ajoutez plus de liens de pagination ici -->
+            {% endif %}
+        </ul>
+    </section>
+
+</main>
+
+<button id="scrollToTop" style="display: none;">↑</button>
+
+
+
+<div id="modal" class="modal" data-show="{{ session.show_modal == 'true' ? 'true' : 'false' }}">
+    <div class="modal-content connexion_container">
+        <span class="close-button">&times;</span>
+        <form class="connexion_box" action="?uri=auth/login" method="post">
+            <h1 class="titre_connexion">Se connecter</h1>
+
+            {% if session.login_error is defined %}
+            <div class="error-message" style="color: red; text-align: center; margin-bottom: 0px;">
+                {{ session.login_error }}
+            </div>
+            {% endif %}
+
+            <label for="email">email</label>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required value="{{ cookie.email|default('') }}">
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required value="{{ cookie.password|default('') }}">
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

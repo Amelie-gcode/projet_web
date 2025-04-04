@@ -1,0 +1,186 @@
+{# templates/companyInfo.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %} Fiche Entreprise {% endblock %}
+
+{% block content %}
+<body>
+<h1 class="principal-title">Fiche entreprise</h1>
+<div class="company-profile">
+    <!-- Section 1: Company Info -->
+    <section class="company-info">
+        <div class="company-header">
+            <img src="/assets/image/company-logo.png" alt="Logo entreprise">
+            <h2>{{company.company_name}}</h2>
+        </div>
+        <div class="company-description">
+            <p>{{company.company_description}}</p>
+        </div>
+        <div class="company-stats">
+            <div class="stat-item">
+                <span class="stat-value">{{nbApply}}</span>
+                <span class="stat-label">Candidatures reçues</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">{{moyenne}}/5</span>
+                <span class="rating-stars">
+        {% for i in 1..5 %}
+            {% if moyenne >= i %}
+                <i class="fas fa-star"></i> {# Étoile pleine #}
+            {% elseif moyenne > i - 1 %}
+                <i class="fas fa-star-half-alt"></i> {# Demi-étoile #}
+            {% else %}
+                <i class="far fa-star"></i> {# Étoile vide #}
+            {% endif %}
+        {% endfor %}
+                </span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Section 2: Company Offers -->
+
+<h2 class="principal-title">Offres de l'entreprise</h2>
+<section class="company-offer-container">
+    <section class="company-offers">
+        {% for offer in offers %}
+        <article class="offer offer-company-offer">
+            <header>
+                <h1>{{offer.offer_title}}</h1>
+            </header>
+            <section class="offer-content">
+                <ul class="principal-infos-offers">
+                    <li>{{company.company_name|default('Entreprise inconnue')}}</li>
+                    <li>{{offer.offer_location}}</li>
+                </ul>
+                <ul class="secondary-infos-offers">
+                    <li>{{offer.offer_salary|default('N/A')}} €</li>
+                    <li>{{offer.offer_type|default('N/A')}}</li>
+                    {% if offer.duration is defined and offer.duration != "N/A" %}
+                        <li>{{offer.duration}} semaines</li>
+                    {% endif %}
+                    {% if offer.skills is defined %}
+                        {% for skill in offer.skills %}
+                            <li>{{skill.skill_name}}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <p>{{offer.offer_short_description}}</p>
+                <footer>
+                    <div class="date">
+                        <p>publié le :</p>
+                        <time>{{offer.offer_date}}</time>
+                    </div>
+                    <form action="index.php" method="get">
+                        <input type="hidden" name="uri" value="offer/show">
+                        <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+                        {% if session.user_id is defined %}
+                            <button type="submit" class="see-more">détails de l'offre</button>
+                        {% endif %}
+                    </form>
+                </footer>
+            </section>
+        </article>
+        {% endfor %}
+    </section>
+</section>
+
+
+<!-- Section 3: Rating Form -->
+{% if session.user_status == 'Pilote' or session.user_status == 'Admin' %}
+    <h2 class="principal-title">Évaluer l'entreprise</h2>
+    <section class="rating-section">
+        <form class="rating-form" action="index.php/?uri=evaluation/add" method="post">
+            <div class="rating-stars-input">
+                <div class="rating-stars">
+                    <i class="star far fa-star" data-value="1"></i>
+                    <i class="star far fa-star" data-value="2"></i>
+                    <i class="star far fa-star" data-value="3"></i>
+                    <i class="star far fa-star" data-value="4"></i>
+                    <i class="star far fa-star" data-value="5"></i>
+                </div>
+                <p>Note sélectionnée : <span id="selected-rating">0</span>/5</p>
+                <input type="hidden" name="rating" id="rating-value">
+            </div>
+            <div class="comment-input">
+                <label for="evaluation_comment">Votre commentaire :</label>
+                <textarea id="evaluation_comment"  name="evaluation_comment" rows="4" placeholder="Partagez votre expérience..."></textarea>
+            </div>
+            <input type="hidden" name="company_id" value="{{company.company_id}}">
+            <input type="hidden" name="user_id" value="{{session.user_id}}">
+            <input type="hidden" name="evaluation_date" value=" {{now|date('Y-m-d')}}">
+            <button type="submit" class="submit-rating">Envoyer</button>
+        </form>
+    </section>
+{% endif %}
+
+<!-- Section 4: Les Avis -->
+
+<!-- En-tête de la section -->
+<div>
+    <h2 class="principal-title">Les Avis</h2>
+</div>
+
+<section class="container">
+    <div class="comments-section">
+        <h3 class="form-title">Avis clients ({{ evaluations|length }})</h3>
+
+        <div class="comments-list">
+            {% for evaluation in evaluations %}
+            <!-- Commentaire -->
+            <div class="comment-card">
+                <div class="comment-header">
+                    <div class="user-info">
+                        <div class="user-avatar" id="user_avatar"> </div>
+                        <input type="hidden" class="firstname" value="{{users[evaluation.user_id].user_firstname}}">
+                        <input type="hidden" class="lastname" value="{{users[evaluation.user_id].user_lastname}}">
+                        <div>
+                            <div class="user-name">
+                                {{ users[evaluation.user_id].user_lastname }}
+                                {{ users[evaluation.user_id].user_firstname }}
+                            </div>
+                            <div class="comment-date">{{ evaluation.evaluation_date }}</div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        {% for i in 1..5 %}
+                        {% if i <= evaluation.evaluation_score %}
+                        <span class="star filled">★</span>
+                        {% else %}
+                        <span class="star">☆</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="comment-content">
+                    {{ evaluation.evaluation_comment }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div id="modal" class="modal">
+    <div class="modal-content connexion_container">
+        <span class="close-button">&times;</span>
+        <form class="connexion_box" action="?uri=auth/login" method="post">
+            <h1 class="titre_connexion">Se connecter</h1>
+
+            {% if session.login_error is defined %}
+            <div class="error-message" style="color: red; text-align: center; margin-bottom: 0px;">
+                {{ session.login_error }}
+            </div>
+            {% endif %}
+
+            <label for="email">email</label>
+            <input id="email" class="identifiant" type="email" name="email" placeholder="Email" required value="{{ cookie.email|default('') }}">
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" name="password" placeholder="mot de passe" required value="{{ cookie.password|default('') }}">
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
+</body>
+{% endblock %}

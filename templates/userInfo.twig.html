@@ -1,0 +1,76 @@
+{# templates/userInfo.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+<main>
+  <div class="profile-container">
+    <div class="profile-header">
+      <img src="/assets/image/user-profile.jpg" alt="Photo de profil">
+      <h1>{{user.user_firstname}} {{user.user_lastname}}</h1>
+    </div>
+    <div class="profile-stats">
+      <div>
+        <h3>{{nbApply}}</h3>
+        <p>Candidatures</p>
+      </div>
+      <div>
+        <h3>{{students.hours_per_week}}</h3>
+        <p>Temps passé</p>
+      </div>
+      <div>
+        <h3>{{students.job_search_status}}</h3>
+        <p>Statut</p>
+      </div>
+    </div>
+    {% if session.user_status == "Pilote" or session.user_status == "Admin" %}
+    <button class="back-button">
+      <a href="/index.php/?uri=user/index">Retour</a>
+    </button>
+    {% endif %}
+  </div>
+  <section class="more-offer-container">
+    <h1 class="big-title">Candidatures :</h1>
+    <section class="more-offer student-offer">
+      {% if offers|length > 0 %}
+      {% for offer in offers %}
+      <article class="offer">
+        <header>
+          <h1>{{offer.offer_title}}</h1>
+        </header>
+        <section class="offer-content">
+          <ul class="principal-infos-offers">
+            <li>{{offer.company_name|default('Entreprise inconnue')}}</li>
+            <li>{{offer.offer_location|default('Lieu inconnu')}}</li>
+          </ul>
+          <ul class="secondary-infos-offers">
+            <li>{{offer.offer_salary|default('N/A')}} €</li>
+            <li>{{offer.offer_type|default('N/A')}}</li>
+            {% if offer.duration is defined and offer.duration != "N/A" %}
+            <li>{{offer.duration}} semaines</li>
+            {% endif %}
+          </ul>
+          <p>{{offer.offer_short_description}}</p>
+          <footer>
+            <div class="date">
+              <p>Postulé le :</p>
+              <time>{{offer.apply_date|date('d/m/Y')|default('Date inconnue')}}</time>
+            </div>
+            <form action="index.php" method="get">
+              <input type="hidden" name="uri" value="apply/show">
+              <input type="hidden" name="offer_id" value="{{offer.offer_id}}">
+              <input type="hidden" name="user_id" value="{{user.user_id}}">
+              <button type="submit" class="see-more">voir candidature</button>
+            </form>
+          </footer>
+        </section>
+      </article>
+      {% endfor %}
+      {% else %}
+      <p class="no-offers">Aucune candidature trouvée</p>
+      {% endif %}
+    </section>
+  </section>
+</main>
+{% endblock %}

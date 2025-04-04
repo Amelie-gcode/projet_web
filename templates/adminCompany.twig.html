@@ -1,0 +1,72 @@
+{# templates/adminCompany.twig.html #}
+{% extends 'base.twig.html' %}
+
+{% block title %}Administration Entreprises{% endblock %}
+
+{% block content %}
+
+<main class="gerer-entreprise">
+    <form class="search-container" action="#" method="get">
+        <button type="submit" class="search-icon-button">
+            <input type="hidden" name="uri" value="company/admin">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="research" placeholder="Recherche une entreprise !" value="{{ research ? research : '' }}">
+    </form>
+    <section class="titre-entreprise">
+        <h1 class="titre-entreprise">
+            Gerer les entreprises
+        </h1>
+    </section>
+    <section class="offers-container entreprise-list">
+        {% for company in company %}
+
+            <article class="offer entreprise-case">
+                <header>
+                    <h1>{{company.company_name}}</h1>
+                </header>
+                <section class="offer-content">
+                    <ul class="principal-infos-offers">
+                        <li>{{company.company_email}}</li>
+                        <li>{{company.company_phone}}</li>
+                    </ul>
+                    <p> Description : {{company.company_description}}</p>
+                    <footer>
+                    <form class="btn-entreprise" action="index.php" method="get">
+                        <input type="hidden" name="company_id" value="{{company.company_id}}">
+                        <button class="see-more" type="submit" name="uri" value="company/show">voir plus</button>
+                        <button class="see-more" type="submit" name="uri" value="company/showForm">Modifier</button>
+                        <button class="action-bouton" onclick="supprimer('index.php?uri=company/delete&company_id={{company.company_id}}')" type="button">Supprimer</button>
+                    </form>
+                </footer>
+            </section>
+        </article>
+        </form>
+        {% endfor %}
+    </section>
+    <form>
+    <button class="action-bouton ajout-offre" type="submit" name="uri" value="company/showForm"> +</button>
+    </form>
+    <section>
+        <ul class="pagination">
+            {% if page > 1 %}
+            <br>
+            <a href="?uri=company/admin&page={{page - 1}}">Page précédente</a> <span> | </span>
+            {%endif%}
+            {%if page < totalPages %}
+            <a href="?uri=company/admin&page={{page + 1}}">Page suivante</a>
+            {% endif %}
+        </ul>
+    </section>
+</main>
+<div id="deleteConfirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+        <h3>Confirmation</h3>
+        <p>Souhaitez-vous supprimer l'entreprise ?</p>
+        <div class="confirm-modal-buttons">
+            <button id="confirmYes">Oui</button>
+            <button id="confirmNo">Non</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
