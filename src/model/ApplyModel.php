@@ -75,6 +75,13 @@ class ApplyModel extends Model
         $stmt->execute();
         return $stmt->fetch( PDO::FETCH_ASSOC)['count'] ?? 0;
     }
+    public function getNumberApplyByOffer($id_offer) {
+        $query = "SELECT COUNT(*) as count FROM Applications WHERE offer_id = :id";
+        $stmt = $this->connection->pdo->prepare($query);
+        $stmt->bindValue(":id", $id_offer, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch( PDO::FETCH_ASSOC)['count'] ?? 0;
+    }
 
 
 }
