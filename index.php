@@ -14,9 +14,7 @@ if (isset($_SESSION['success_message'])) {
     echo '<script>alert("' . addslashes($_SESSION['success_message']) . '");</script>';
     unset($_SESSION['success_message']); // Supprimer après l'affichage
 }
-echo "<pre>";
-print_r($_GET);
-echo "</pre>";
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -196,6 +194,10 @@ switch ($controllerName) {
                 break;
             case 'logout':
                 $authController->logout();
+                break;
+
+            case 'contact':
+                $authController->contact();
                 break;
         }
         break;

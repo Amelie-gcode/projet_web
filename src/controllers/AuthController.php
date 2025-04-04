@@ -66,4 +66,8 @@ class AuthController extends Controller
         header("Location: ?uri=offer/index");
         exit();
     }
+
+    public function contact(){
+        echo $this->templateEngine->render('contact.twig.html');
+    }
 }
